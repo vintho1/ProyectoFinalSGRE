@@ -74,10 +74,10 @@ public class EmpleadoViewController {
     }
 
     private void initDataBinding() {
+
+
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
-
         tcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().id()));
-
         tcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().email()));
 
     }
@@ -98,9 +98,7 @@ public class EmpleadoViewController {
     }
 
     private void crearEmpleado() {
-        //1. Capturar los datos
         EmpleadoDto empleadoDto = construirEmpleadoDto();
-        //2. Validar la información
         if(datosValidos(empleadoDto)){
             if(empleadoControllerService.agregarEmpleado(empleadoDto)){
                 listaEmpleadosDto.add(empleadoDto);
@@ -183,8 +181,8 @@ public class EmpleadoViewController {
 
     private EmpleadoDto construirEmpleadoDto() {
         return new EmpleadoDto(
-                txtNombre.getText(),
                 txtCedula.getText(),
+                txtNombre.getText(),
                 txtCorreo.getText()
 
         );
@@ -200,9 +198,9 @@ public class EmpleadoViewController {
         if(empleadoDto.nombre() == null || empleadoDto.nombre().equals(""))
             mensaje += "El nombre es invalido \n" ;
         if(empleadoDto.id() == null || empleadoDto.id() .equals(""))
-            mensaje += "El apellido es invalido \n" ;
+            mensaje += "El id es invalido \n" ;
         if(empleadoDto.email() == null || empleadoDto.email().equals(""))
-            mensaje += "El documento es invalido \n" ;
+            mensaje += "El email es invalido \n" ;
         if(mensaje.equals("")){
             return true;
         }else{

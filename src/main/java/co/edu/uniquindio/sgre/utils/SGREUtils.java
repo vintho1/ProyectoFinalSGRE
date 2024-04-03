@@ -9,11 +9,11 @@ public class SGREUtils {
         SGRE sgre = new SGRE();
 
         Empleado empleado = new Empleado();
-        empleado.setId("125454");
         empleado.setNombre("juan");
+        empleado.setId("125454");
         empleado.setEmail("juab@gmail.com");
         sgre.getListaEmpleados().add(empleado);
-        System.out.println("Información del banco creada");
+        System.out.println("Información inicializada del sgre creada");
         return sgre;
 
 
