@@ -1,15 +1,6 @@
 package co.edu.uniquindio.sgre.model;
 
-//import lombok.*;
-/*
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 
- */
 public class Usuario {
     private String id;
     private String nombre;
