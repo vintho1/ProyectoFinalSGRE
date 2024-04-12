@@ -6,9 +6,11 @@ import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.sgre.mapping.mappers.SGREMapper;
 import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.SGRE;
+import co.edu.uniquindio.sgre.utils.Persistencia;
 import co.edu.uniquindio.sgre.utils.SGREUtils;
 //import lombok.Setter;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryController {
@@ -30,9 +32,49 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     public ModelFactoryController() {
+        //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
-        cargarDatosBase();
+//        cargarDatosBase();
+//        salvarDatosPrueba();
+
+        //2. Cargar los datos de los archivos
+//		cargarDatosDesdeArchivos();
+
+        //3. Guardar y Cargar el recurso serializable binario
+//		cargarResourceBinario();
+//		guardarResourceBinario();
+
+        //4. Guardar y Cargar el recurso serializable XML
+//		guardarResourceXML();
+        cargarResourceXML();
+
+        //Siempre se debe verificar si la raiz del recurso es null
+
+        if(sgre == null){
+            cargarDatosBase();
+            guardarResourceXML();
+        }
+        registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
     }
+    private void cargarDatosDesdeArchivos() {
+        sgre = new SGRE();
+        try {
+            Persistencia.cargarDatosArchivos(sgre);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void salvarDatosPrueba() {
+        try {
+            Persistencia.guardarEmpleados(getSGRE().getListaEmpleados());
+           // Persistencia.guardarClientes(getSGRE().getListaClientes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     private void cargarDatosBase() {
         sgre = SGREUtils.inicializarDatos();
@@ -87,6 +129,25 @@ public class ModelFactoryController implements IModelFactoryController {
             e.printStackTrace();
             return false;
         }
+    }
+    private void cargarResourceXML() {
+        sgre = Persistencia.cargarRecursoBancoXML();
+    }
+
+    private void guardarResourceXML() {
+        Persistencia.guardarRecursoBancoXML(sgre);
+    }
+
+    private void cargarResourceBinario() {
+        sgre = Persistencia.cargarRecursoBancoBinario();
+    }
+
+    private void guardarResourceBinario() {
+        Persistencia.guardarRecursoBancoBinario(sgregi);
+    }
+
+    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
+        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
 
 

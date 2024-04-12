@@ -1,9 +1,10 @@
 module co.edu.uniquindio.sgre {
     requires javafx.controls;
     requires javafx.fxml;
-    // requires lombok;
     requires org.mapstruct;
     requires org.controlsfx.controls;
+    requires java.logging;
+    requires java.desktop;
 
     opens co.edu.uniquindio.sgre to javafx.fxml;
     exports co.edu.uniquindio.sgre;
@@ -15,4 +16,5 @@ module co.edu.uniquindio.sgre {
     exports co.edu.uniquindio.sgre.mapping.mappers;
     exports co.edu.uniquindio.sgre.model;
     opens co.edu.uniquindio.sgre.controller to javafx.fxml;
+
 }
