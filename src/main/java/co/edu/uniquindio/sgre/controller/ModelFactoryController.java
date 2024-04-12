@@ -143,7 +143,7 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     private void guardarResourceBinario() {
-        Persistencia.guardarRecursoBancoBinario(sgregi);
+        Persistencia.guardarRecursoBancoBinario(sgre);
     }
 
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
