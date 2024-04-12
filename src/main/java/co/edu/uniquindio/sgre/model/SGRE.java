@@ -2,10 +2,12 @@ package co.edu.uniquindio.sgre.model;
 
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
 import co.edu.uniquindio.sgre.model.services.ISGREService;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SGRE implements ISGREService {
+public class SGRE implements ISGREService, Serializable {
     private static final long serialVersionUID = 1L;
     ArrayList<Usuario> listaUsuarios = new ArrayList();
     ArrayList<Empleado> listaEmpleados = new ArrayList();
@@ -96,6 +98,90 @@ public class SGRE implements ISGREService {
 
         return empleadoEncontrado;
     }
+
+    public Usuario crearUsuario(String id, String nombre, String email) throws EmpleadoException {
+        Usuario nuevoUsuario = null;
+        boolean usuarioExiste = this.verificarEmpleadoExistente(id);
+        if (usuarioExiste) {
+            throw new EmpleadoException("El usuario con cedula: " + id + " ya existe");
+        } else {
+            nuevoUsuario = new Usuario();
+            nuevoUsuario.setNombre(nombre);
+            nuevoUsuario.setId(id);
+            nuevoUsuario.setEmail(email);
+            this.getListaUsuarios().add(nuevoUsuario);
+            return nuevoUsuario;
+        }
+    }
+
+    public void agregarUsuario(Usuario nuevoUsuario) throws EmpleadoException {
+        this.getListaUsuarios().add(nuevoUsuario);
+    }
+
+    public boolean verificarUsuarioExistente(String id) throws EmpleadoException {
+        if (this.empleadoExiste(id)) {
+            throw new EmpleadoException("El Usuario con cedula: " + id + " ya existe");
+        } else {
+            return false;
+        }
+    }
+
+    public boolean usuarioExiste(String id) {
+        boolean usuarioEncontrado = false;
+        Iterator var3 = this.getListaUsuarios().iterator();
+
+        while(var3.hasNext()) {
+            Empleado empleado = (Empleado)var3.next();
+            if (empleado.getId().equalsIgnoreCase(id)) {
+                usuarioEncontrado = true;
+                break;
+            }
+        }
+
+        return usuarioEncontrado;
+    }
+
+    public boolean actualizarUsuario(String id, Usuario usuario) throws EmpleadoException {
+        Usuario usuarioActual = this.obtenerUsuario(id);
+        if (usuarioActual == null) {
+            throw new EmpleadoException("El usuario a actualizar no existe");
+        } else {
+            usuarioActual.setId(usuario.getId());
+            usuarioActual.setNombre(usuario.getNombre());
+            usuarioActual.setEmail(usuario.getEmail());
+            return true;
+        }
+    }
+
+    public Boolean eliminarUsuario(String id) throws EmpleadoException {
+        Usuario usuario = null;
+        boolean flagExiste = false;
+        usuario = this.obtenerUsuario(id);
+        if (usuario == null) {
+            throw new EmpleadoException("El usuario a eliminar no existe");
+        } else {
+            this.getListaUsuarios().remove(usuario);
+            flagExiste = true;
+            return flagExiste;
+        }
+    }
+
+    public Usuario obtenerUsuario(String cedula) {
+        Usuario usuarioEncontrado = null;
+        Iterator var3 = this.getListaUsuarios().iterator();
+
+        while(var3.hasNext()) {
+            Usuario usuario = (Usuario) var3.next();
+            if (usuario.getId().equalsIgnoreCase(cedula)) {
+                usuarioEncontrado = usuario;
+                break;
+            }
+        }
+
+        return usuarioEncontrado;
+    }
+
+
 
     public ArrayList<Empleado> obtenerEmpleados() {
         return null;

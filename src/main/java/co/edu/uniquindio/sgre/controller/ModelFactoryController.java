@@ -3,6 +3,7 @@ package co.edu.uniquindio.sgre.controller;
 import co.edu.uniquindio.sgre.controller.service.IModelFactoryController;
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
+import co.edu.uniquindio.sgre.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.sgre.mapping.mappers.SGREMapper;
 import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.SGRE;
@@ -52,7 +53,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         if(sgre == null){
             cargarDatosBase();
-            guardarResourceXML();
+        //    guardarResourceXML();
         }
         registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
     }
@@ -149,6 +150,10 @@ public class ModelFactoryController implements IModelFactoryController {
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
+
+
+    // Usuario
+
 
 
 

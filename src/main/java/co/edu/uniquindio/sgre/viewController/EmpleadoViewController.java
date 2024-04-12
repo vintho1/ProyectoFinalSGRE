@@ -19,44 +19,44 @@ public class EmpleadoViewController {
     EmpleadoDto empleadoSeleccionado;
 
 
-        @FXML
-        private ResourceBundle resources;
+    @FXML
+    private ResourceBundle resources;
 
-        @FXML
-        private URL location;
+    @FXML
+    private URL location;
 
-        @FXML
-        private Button btnActualizar;
+    @FXML
+    private Button btnActualizar;
 
-        @FXML
-        private Button btnAgregar;
+    @FXML
+    private Button btnAgregar;
 
-        @FXML
-        private Button btnEliminar;
+    @FXML
+    private Button btnEliminar;
 
-        @FXML
-        private Button btnNuevo;
+    @FXML
+    private Button btnNuevo;
 
-        @FXML
-        private TableView<EmpleadoDto> tableEmpleados;
+    @FXML
+    private TableView<EmpleadoDto> tableEmpleados;
 
-        @FXML
-        private TableColumn<EmpleadoDto, String> tcCedula;
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcCedula;
 
-        @FXML
-        private TableColumn<EmpleadoDto, String> tcCorreo;
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcCorreo;
 
-        @FXML
-        private TableColumn<EmpleadoDto, String> tcNombre;
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcNombre;
 
-        @FXML
-        private TextField txtCedula;
+    @FXML
+    private TextField txtCedula;
 
-        @FXML
-        private TextField txtCorreo;
+    @FXML
+    private TextField txtCorreo;
 
-        @FXML
-        private TextField txtNombre;
+    @FXML
+    private TextField txtNombre;
 
 
     @FXML
@@ -171,13 +171,16 @@ public class EmpleadoViewController {
 
     @FXML
     void nuevoEmpleadoAction(ActionEvent event) {
-        txtNombre.setText("Ingrese el nombre");
-
-        txtCedula.setText("Ingrese el id");
-
-        txtCorreo.setText("Ingrese el correo");
-
+        limpiarCamposEmpleado();
+        establecerPromptText();
     }
+
+    private void establecerPromptText() {
+        txtNombre.setPromptText("Ingrese el nombre");
+        txtCedula.setPromptText("Ingrese la cedula");
+        txtCorreo.setPromptText("Ingrese el correo");
+    }
+
 
     private EmpleadoDto construirEmpleadoDto() {
         return new EmpleadoDto(
@@ -239,6 +242,6 @@ public class EmpleadoViewController {
     }
 
 
-    }
+}
 
 

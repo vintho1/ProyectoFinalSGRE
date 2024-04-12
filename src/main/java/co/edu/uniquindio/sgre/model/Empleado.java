@@ -2,6 +2,8 @@ package co.edu.uniquindio.sgre.model;
 
 //import lombok.*;
 
+import java.io.Serializable;
+
 /*@Getter
 @Setter
 @Builder
@@ -10,7 +12,9 @@ package co.edu.uniquindio.sgre.model;
 @ToString
 
  */
-public class Empleado {
+public class Empleado implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String id;
     private String nombre;
     private String email;

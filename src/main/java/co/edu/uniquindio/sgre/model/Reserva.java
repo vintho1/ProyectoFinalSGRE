@@ -2,6 +2,7 @@ package co.edu.uniquindio.sgre.model;
 
 //import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 /*
 @Getter
@@ -12,7 +13,9 @@ import java.time.LocalDate;
 @ToString
 
  */
-public class Reserva {
+public class Reserva implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String id;
     private String nombre;
     private String descripcion;

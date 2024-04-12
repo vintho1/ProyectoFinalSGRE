@@ -14,4 +14,6 @@ public interface IModelFactoryController {
     boolean actualizarEmpleado(String cedulaActual, EmpleadoDto empleadoDto);
 
 
+
+
 }
