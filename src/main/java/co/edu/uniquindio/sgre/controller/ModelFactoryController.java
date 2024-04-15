@@ -12,6 +12,7 @@ import co.edu.uniquindio.sgre.utils.SGREUtils;
 //import lombok.Setter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryController {
@@ -35,25 +36,26 @@ public class ModelFactoryController implements IModelFactoryController {
     public ModelFactoryController() {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
-//        cargarDatosBase();
-//        salvarDatosPrueba();
+    //   cargarDatosBase();
+     //   salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-//		cargarDatosDesdeArchivos();
+	//	cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
-//		cargarResourceBinario();
-//		guardarResourceBinario();
+	//cargarResourceBinario();
+		//guardarResourceBinario();
 
         //4. Guardar y Cargar el recurso serializable XML
-//		guardarResourceXML();
         cargarResourceXML();
+		guardarResourceXML();
+
 
         //Siempre se debe verificar si la raiz del recurso es null
 
         if(sgre == null){
-            cargarDatosBase();
-        //    guardarResourceXML();
+          //  cargarDatosBase();
+         //  guardarResourceXML();
         }
         registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
     }
@@ -74,6 +76,7 @@ public class ModelFactoryController implements IModelFactoryController {
             throw new RuntimeException(e);
         }
     }
+
 
 
 
@@ -100,10 +103,16 @@ public class ModelFactoryController implements IModelFactoryController {
             if(!sgre.verificarEmpleadoExistente(empleadoDto.id())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getSGRE().agregarEmpleado(empleado);
+                guardarResourceBinario();
+                guardarResourceXML();
+                guardarListaEmpleados(getSGRE().getListaEmpleados());
             }
             return true;
         }catch (EmpleadoException e){
             e.getMessage();
+            return false;
+        }catch (IOException e2){
+            e2.getMessage();
             return false;
         }
     }
@@ -113,6 +122,8 @@ public class ModelFactoryController implements IModelFactoryController {
         boolean flagExiste = false;
         try {
             flagExiste = getSGRE().eliminarEmpleado(cedula);
+            guardarResourceBinario();
+            guardarResourceXML();
         } catch (EmpleadoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -125,6 +136,8 @@ public class ModelFactoryController implements IModelFactoryController {
         try {
             Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
             getSGRE().actualizarEmpleado(cedulaActual, empleado);
+            guardarResourceBinario();
+            guardarResourceXML();
             return true;
         } catch (EmpleadoException e) {
             e.printStackTrace();
@@ -147,6 +160,9 @@ public class ModelFactoryController implements IModelFactoryController {
         Persistencia.guardarRecursoBancoBinario(sgre);
     }
 
+    private void guardarListaEmpleados(ArrayList<Empleado> listaEmpleados) throws  IOException{
+        Persistencia.guardarEmpleados(listaEmpleados);
+    }
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }

@@ -31,9 +31,9 @@ public class Persistencia {
     //bancoUq/src/main/resources/persistencia/archivoClientes.txt
 
     public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivoEmpleados.txt";
-    public static final String RUTA_ARCHIVO_USUARIOS = "/src/main/resources/persistencia/archivoUsuarios.txt";
+  //  public static final String RUTA_ARCHIVO_USUARIOS = "/src/main/resources/persistencia/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SGRELog.txt";
-    public static final String RUTA_ARCHIVO_MODELO_BANCO_BINARIO = "src/main/resources/persistencia/model.dat";
+    public static final String RUTA_ARCHIVO_MODELO_BANCO_BINARIO = "src/main/resources/persistencia/mod.dat";
     public static final String RUTA_ARCHIVO_MODELO_BANCO_XML = "src/main/resources/persistencia/model.xml";
 //	C:\td\persistencia
 
@@ -65,9 +65,9 @@ public class Persistencia {
         String contenido = "";
         for(Empleado empleado:listaEmpleados)
         {
-            contenido+= empleado.getNombre()+
-                    ","+empleado.getId()+
-                    ","+empleado.getEmail()+ "\n";
+            contenido+= empleado.getId()+
+                    "@@"+empleado.getNombre()+
+                    "@@"+empleado.getEmail()+ "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
     }
@@ -94,9 +94,9 @@ public class Persistencia {
         {
             linea = contenido.get(i);
             Empleado empleado = new Empleado();
-            empleado.setNombre(linea.split(",")[0]);
-            empleado.setId(linea.split(",")[1]);
-            empleado.setEmail(linea.split(",")[2]);
+            empleado.setId(linea.split("@@")[0]);
+            empleado.setNombre(linea.split("@@")[1]);
+            empleado.setEmail(linea.split("@@")[2]);
             empleados.add(empleado);
         }
         return empleados;

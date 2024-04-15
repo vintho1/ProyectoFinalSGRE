@@ -2,12 +2,14 @@ package co.edu.uniquindio.sgre.viewController;
 
 import co.edu.uniquindio.sgre.controller.EmpleadoController;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
+import co.edu.uniquindio.sgre.utils.Persistencia;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import co.edu.uniquindio.sgre.utils.SGREUtils;
 
 import java.net.URL;
 import java.util.Optional;
@@ -110,7 +112,7 @@ public class EmpleadoViewController {
         }else{
             mostrarMensaje("Notificación empleado", "Empleado no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
-
+        registrarAccionesSistema("Crear empleado", 1, "se creo en empleado "+empleadoDto);
     }
 
     @FXML
@@ -239,6 +241,9 @@ public class EmpleadoViewController {
             txtCorreo.setText(empleadoSeleccionado.email());
 
         }
+    }
+    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
+        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
 
 
