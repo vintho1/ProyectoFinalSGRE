@@ -301,6 +301,63 @@ public class Persistencia {
         }
     }
 
+    public static void actualizarEmpleadoBinario(String idEmpleado, Empleado empleadoActualizado) throws IOException {
+        SGRE sgre = cargarRecursoBancoBinario();
+        if (sgre != null) {
+            ArrayList<Empleado> empleados = sgre.getListaEmpleados();
+            for (int i = 0; i < empleados.size(); i++) {
+                if (empleados.get(i).getId().equals(idEmpleado)) {
+                    empleados.set(i, empleadoActualizado);
+                    guardarRecursoBancoBinario(sgre);
+                    System.out.println("Empleado actualizado correctamente en el archivo binario.");
+                    return;
+                }
+            }
+            System.out.println("No se encontró ningún empleado con el ID especificado en el archivo binario.");
+        } else {
+            System.out.println("No se pudo cargar el archivo binario.");
+        }
+    }
+
+    public static void actualizarEmpleadoXML(String idEmpleado, Empleado empleadoActualizado) throws IOException {
+        SGRE sgre = cargarRecursoBancoXML();
+        if (sgre != null) {
+            ArrayList<Empleado> empleados = sgre.getListaEmpleados();
+            for (int i = 0; i < empleados.size(); i++) {
+                if (empleados.get(i).getId().equals(idEmpleado)) {
+                    empleados.set(i, empleadoActualizado);
+                    guardarRecursoBancoXML(sgre);
+                    System.out.println("Empleado actualizado correctamente en el archivo XML.");
+                    return;
+                }
+            }
+            System.out.println("No se encontró ningún empleado con el ID especificado en el archivo XML.");
+        } else {
+            System.out.println("No se pudo cargar el archivo XML.");
+        }
+    }
+
+    public static void actualizarEmpleadoTxt(String idEmpleado, Empleado empleadoActualizado) throws IOException {
+        ArrayList<Empleado> empleados = cargarEmpleados();
+        boolean empleadoEncontrado = false;
+
+        for (int i = 0; i < empleados.size(); i++) {
+            if (empleados.get(i).getId().equals(idEmpleado)) {
+                empleados.set(i, empleadoActualizado);
+                empleadoEncontrado = true;
+                break;
+            }
+        }
+
+        if (empleadoEncontrado) {
+            guardarEmpleados(empleados);
+            System.out.println("Empleado actualizado correctamente en el archivo de texto.");
+        } else {
+            System.out.println("No se encontró ningún empleado con el ID especificado en el archivo de texto.");
+        }
+    }
+
+
 
 
 

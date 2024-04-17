@@ -2,6 +2,7 @@ package co.edu.uniquindio.sgre.viewController;
 
 import co.edu.uniquindio.sgre.controller.EmpleadoController;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
+import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.utils.Persistencia;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -148,32 +149,43 @@ public class EmpleadoViewController {
         actualizarEmpleado();
     }
     private void actualizarEmpleado() {
-        boolean clienteActualizado = false;
-        //1. Capturar los datos
-        String cedulaActual = empleadoSeleccionado.id();
-        EmpleadoDto empleadoDto = construirEmpleadoDto();
-        //2. verificar el empleado seleccionado
-        if(empleadoSeleccionado != null){
-            //3. Validar la información
-            if(datosValidos(empleadoSeleccionado)){
-                clienteActualizado = empleadoControllerService.actualizarEmpleado(cedulaActual,empleadoDto);
-                if(clienteActualizado){
-                    listaEmpleadosDto.remove(empleadoSeleccionado);
-                    listaEmpleadosDto.add(empleadoDto);
-                    tableEmpleados.refresh();
-                    mostrarMensaje("Notificación empleado", "Empleado actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                    limpiarCamposEmpleado();
-                }else{
-                    mostrarMensaje("Notificación empleado", "Empleado no actualizado", "El empleado no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                }
-            }else{
-                mostrarMensaje("Notificación empleado", "Empleado no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+        boolean empleadoActualizado = false;
+
+        Empleado empleadoActualizad = new Empleado(
+                txtCedula.getText(),
+                txtNombre.getText(),
+                txtCorreo.getText()
+        );
+
+        if (empleadoSeleccionado != null) {
+            try {
+
+                Persistencia.actualizarEmpleadoBinario(empleadoSeleccionado.id(), empleadoActualizad);
+                Persistencia.actualizarEmpleadoXML(empleadoSeleccionado.id(), empleadoActualizad);
+                Persistencia.actualizarEmpleadoTxt(empleadoSeleccionado.id(),empleadoActualizad);
+                listaEmpleadosDto.remove(empleadoSeleccionado);
+                listaEmpleadosDto.add(new EmpleadoDto(
+                        empleadoActualizad.getId(),
+                        empleadoActualizad.getNombre(),
+                        empleadoActualizad.getEmail()
+                ));
+                tableEmpleados.refresh();
+
+                mostrarMensaje("Notificación empleado", "Empleado actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+
+                limpiarCamposEmpleado();
+            } catch (IOException e) {
+                e.printStackTrace();
+
+                mostrarMensaje("Notificación empleado", "Empleado no actualizado", "El empleado no se ha actualizado correctamente", Alert.AlertType.ERROR);
             }
+        } else {
 
+            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Por favor, seleccione un empleado de la lista", Alert.AlertType.WARNING);
         }
-        registrarAccionesSistema("Actualizar empleado", 1, "se actualizo el empleado "+empleadoDto);
+       
+        registrarAccionesSistema("Actualizar empleado", 1, "Se actualizó el empleado " + empleadoActualizado);
     }
-
 
     @FXML
     void nuevoEmpleadoAction(ActionEvent event) {
