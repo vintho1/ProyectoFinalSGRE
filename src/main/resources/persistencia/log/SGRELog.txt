@@ -152,3 +152,73 @@ abr. 14, 2024 6:14:49 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegi
 INFO: se creo en empleado EmpleadoDto[id=99900, nombre=yyyyy, email=camdun@gmail.com],Crear empleado,2024-04-14
 abr. 14, 2024 6:15:08 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesión,Inicio de sesión,2024-04-14
+abr. 15, 2024 7:57:30 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 7:58:41 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 7:59:27 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:00:23 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:00:41 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=125474, nombre=maria, email=cam21dun@gmail.com],Crear empleado,2024-04-15
+abr. 15, 2024 8:01:36 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:02:14 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=1254, nombre=maria, email=cam21dun@gmail.com],Crear empleado,2024-04-15
+abr. 15, 2024 8:02:20 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=12547, nombre=maria, email=cam21dun@gmail.com],Crear empleado,2024-04-15
+abr. 15, 2024 8:02:55 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:03:10 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=12547489, nombre=jose, email=cam21dun@gmail.com],Crear empleado,2024-04-15
+abr. 15, 2024 8:04:16 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:04:36 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=12475, nombre=sofia, email=cam21dun@gmail.com],Crear empleado,2024-04-15
+abr. 15, 2024 8:05:31 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:06:40 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:07:12 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 15, 2024 8:07:36 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=12547979, nombre=maria, email=cam21dun@gmail.com],Crear empleado,2024-04-15
+abr. 15, 2024 8:08:19 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-15
+abr. 16, 2024 12:02:59 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:03:16 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se actualizo el empleado EmpleadoDto[id=1254, nombre=camilaa, email=cam21dun@gmail.com],Actualizar empleado,2024-04-16
+abr. 16, 2024 12:03:36 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se elimino el  empleado null,Eliminar empleado,2024-04-16
+abr. 16, 2024 12:04:43 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:04:50 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se elimino el  empleado true,Eliminar empleado,2024-04-16
+abr. 16, 2024 12:39:57 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:44:59 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:45:24 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=1254878, nombre=maria, email=cam21dun@gmail.com],Crear empleado,2024-04-16
+abr. 16, 2024 12:45:45 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se actualizo el empleado EmpleadoDto[id=1254878, nombre=sofia, email=cam21dun@gmail.com],Actualizar empleado,2024-04-16
+abr. 16, 2024 12:46:21 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:48:39 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:49:04 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=125466, nombre=maria, email=cam21dun@gmail.com],Crear empleado,2024-04-16
+abr. 16, 2024 12:49:42 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:50:04 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se elimino el  empleado null,Eliminar empleado,2024-04-16
+abr. 16, 2024 12:50:41 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:51:00 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se elimino el  empleado null,Eliminar empleado,2024-04-16
+abr. 16, 2024 12:51:14 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 12:51:22 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se elimino el  empleado null,Eliminar empleado,2024-04-16

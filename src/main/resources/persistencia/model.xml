@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.10" class="java.beans.XMLDecoder">
+<java version="17.0.8.1" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.sgre.model.SGRE" id="SGRE0">
   <void property="listaEmpleados">
    <void method="add">
@@ -38,71 +38,6 @@
      </void>
      <void property="nombre">
       <string>camila</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>camdun@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>125</string>
-     </void>
-     <void property="nombre">
-      <string>maria</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>camdun@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>89798</string>
-     </void>
-     <void property="nombre">
-      <string>maria</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>camdun@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>333</string>
-     </void>
-     <void property="nombre">
-      <string>soi</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>camdun@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>999</string>
-     </void>
-     <void property="nombre">
-      <string>uyjgj</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>camdun@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>99900</string>
-     </void>
-     <void property="nombre">
-      <string>yyyyy</string>
      </void>
     </object>
    </void>

@@ -137,6 +137,7 @@ public class EmpleadoViewController {
         }else{
             mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
         }
+        registrarAccionesSistema("Eliminar empleado", 1, "se elimino el  empleado "+empleadoSeleccionado);
     }
 
 
@@ -168,6 +169,7 @@ public class EmpleadoViewController {
             }
 
         }
+        registrarAccionesSistema("Actualizar empleado", 1, "se actualizo el empleado "+empleadoDto);
     }
 
 

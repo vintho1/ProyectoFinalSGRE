@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="563.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.EmpleadoViewController">
+<AnchorPane prefHeight="563.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.EmpleadoViewController">
     <children>
         <SplitPane dividerPositions="0.5078347578347577" layoutX="4.0" layoutY="8.0" orientation="VERTICAL" prefHeight="563.0" prefWidth="738.0">
             <items>
@@ -26,7 +26,7 @@
                         <Button fx:id="btnNuevo" layoutX="44.0" layoutY="236.0" mnemonicParsing="false" onAction="#nuevoEmpleadoAction" prefHeight="27.0" prefWidth="100.0" text="Nuevo" />
                         <Button fx:id="btnAgregar" layoutX="298.0" layoutY="236.0" mnemonicParsing="false" onAction="#agregarEmpleadoAction" prefHeight="27.0" prefWidth="100.0" text="Agregar" />
                         <Separator layoutX="13.0" layoutY="217.0" prefHeight="2.0" prefWidth="711.0" />
-                  <Label layoutX="298.0" layoutY="30.0" text="Registro de Usuario">
+                  <Label layoutX="298.0" layoutY="30.0" text="Registro de Empleado">
                      <font>
                         <Font size="14.0" />
                      </font>
