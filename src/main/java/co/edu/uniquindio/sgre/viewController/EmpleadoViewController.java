@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import co.edu.uniquindio.sgre.utils.SGREUtils;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -121,25 +122,23 @@ public class EmpleadoViewController {
     }
     private void eliminarEmpleado() {
         boolean empleadoEliminado = false;
-        if(empleadoSeleccionado != null){
-            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")){
-                empleadoEliminado = empleadoControllerService.eliminarEmpleado(empleadoSeleccionado.id());
-                if(empleadoEliminado == true){
-                    listaEmpleadosDto.remove(empleadoSeleccionado);
-                    empleadoSeleccionado = null;
-                    tableEmpleados.getSelectionModel().clearSelection();
-                    limpiarCamposEmpleado();
-                    mostrarMensaje("Notificación empleado", "Empleado eliminado", "El empleado se ha eliminado con éxito", Alert.AlertType.INFORMATION);
-                }else{
-                    mostrarMensaje("Notificación empleado", "Empleado no eliminado", "El empleado no se puede eliminar", Alert.AlertType.ERROR);
-                }
+        if (empleadoSeleccionado != null) {
+            try {
+                Persistencia.eliminarEmpleado(empleadoSeleccionado.id());
+                listaEmpleadosDto.remove(empleadoSeleccionado);
+                empleadoSeleccionado = null;
+                tableEmpleados.getSelectionModel().clearSelection();
+                limpiarCamposEmpleado();
+                mostrarMensaje("Notificación empleado", "Empleado eliminado", "El empleado se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarMensaje("Notificación empleado", "Error al eliminar empleado", "Hubo un error al intentar eliminar el empleado", Alert.AlertType.ERROR);
             }
-        }else{
-            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
+        } else {
+            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Por favor, seleccione un empleado de la lista", Alert.AlertType.WARNING);
         }
-        registrarAccionesSistema("Eliminar empleado", 1, "se elimino el  empleado "+empleadoSeleccionado);
+        registrarAccionesSistema("Eliminar empleado", 1, "se elimino el empleado ");
     }
-
 
     @FXML
     void actualizarEmpleadoAction(ActionEvent event) {

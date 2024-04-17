@@ -222,3 +222,7 @@ abr. 16, 2024 12:51:14 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarReg
 INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
 abr. 16, 2024 12:51:22 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: se elimino el  empleado null,Eliminar empleado,2024-04-16
+abr. 16, 2024 7:38:07 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-04-16
+abr. 16, 2024 7:38:14 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se elimino el empleado null,Eliminar empleado,2024-04-16

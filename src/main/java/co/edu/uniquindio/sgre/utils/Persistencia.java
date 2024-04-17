@@ -234,6 +234,31 @@ public class Persistencia {
 
 
 
+    ///////////////////////////////////////////////////////////////
+
+
+    public static void eliminarEmpleado(String idEmpleado) throws IOException {
+        ArrayList<Empleado> empleados = cargarEmpleados();
+        Empleado empleadoAEliminar = null;
+        for (Empleado empleado : empleados) {
+            if (empleado.getId().equals(idEmpleado)) {
+                empleadoAEliminar = empleado;
+                break;
+            }
+        }
+        if (empleadoAEliminar != null) {
+            empleados.remove(empleadoAEliminar);
+            guardarEmpleados(empleados);
+            System.out.println("Empleado eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró ningún empleado con el ID especificado.");
+        }
+    }
+
+
+
+
+
 
 
 
