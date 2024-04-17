@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8.1" class="java.beans.XMLDecoder">
+<java version="17.0.10" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.sgre.model.SGRE" id="SGRE0">
   <void property="listaEmpleados">
    <void method="add">
@@ -38,6 +38,32 @@
      </void>
      <void property="nombre">
       <string>camila</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="email">
+      <string>cam21dun@gmail.com</string>
+     </void>
+     <void property="id">
+      <string>125443</string>
+     </void>
+     <void property="nombre">
+      <string>maria</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="email">
+      <string>cam21dun@gmail.com</string>
+     </void>
+     <void property="id">
+      <string>125443346793</string>
+     </void>
+     <void property="nombre">
+      <string>pablo</string>
      </void>
     </object>
    </void>

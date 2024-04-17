@@ -37,7 +37,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
      //  cargarDatosBase();
-     //  salvarDatosPrueba();
+      // salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
 		cargarDatosDesdeArchivos();
