@@ -255,6 +255,53 @@ public class Persistencia {
         }
     }
 
+    public static void eliminarEmpleadoBinario(String idEmpleado) throws IOException {
+        SGRE sgre = cargarRecursoBancoBinario();
+        if (sgre != null) {
+            ArrayList<Empleado> empleados = sgre.getListaEmpleados();
+            Empleado empleadoAEliminar = null;
+            for (Empleado empleado : empleados) {
+                if (empleado.getId().equals(idEmpleado)) {
+                    empleadoAEliminar = empleado;
+                    break;
+                }
+            }
+            if (empleadoAEliminar != null) {
+                empleados.remove(empleadoAEliminar);
+                guardarRecursoBancoBinario(sgre);
+                System.out.println("Empleado eliminado correctamente del archivo binario.");
+            } else {
+                System.out.println("No se encontró ningún empleado con el ID especificado en el archivo binario.");
+            }
+        } else {
+            System.out.println("No se pudo cargar el archivo binario.");
+        }
+    }
+
+    public static void eliminarEmpleadoXML(String idEmpleado) throws IOException {
+        SGRE sgre = cargarRecursoBancoXML();
+        if (sgre != null) {
+            ArrayList<Empleado> empleados = sgre.getListaEmpleados();
+            Empleado empleadoAEliminar = null;
+            for (Empleado empleado : empleados) {
+                if (empleado.getId().equals(idEmpleado)) {
+                    empleadoAEliminar = empleado;
+                    break;
+                }
+            }
+            if (empleadoAEliminar != null) {
+                empleados.remove(empleadoAEliminar);
+                guardarRecursoBancoXML(sgre);
+                System.out.println("Empleado eliminado correctamente del archivo XML.");
+            } else {
+                System.out.println("No se encontró ningún empleado con el ID especificado en el archivo XML.");
+            }
+        } else {
+            System.out.println("No se pudo cargar el archivo XML.");
+        }
+    }
+
+
 
 
 

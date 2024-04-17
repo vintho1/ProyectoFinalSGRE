@@ -54,19 +54,6 @@
      </void>
     </object>
    </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>cam21dun@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>125443346793</string>
-     </void>
-     <void property="nombre">
-      <string>pablo</string>
-     </void>
-    </object>
-   </void>
   </void>
  </object>
 </java>

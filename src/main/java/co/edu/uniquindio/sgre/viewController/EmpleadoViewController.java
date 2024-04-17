@@ -125,6 +125,9 @@ public class EmpleadoViewController {
         if (empleadoSeleccionado != null) {
             try {
                 Persistencia.eliminarEmpleado(empleadoSeleccionado.id());
+                Persistencia.eliminarEmpleadoBinario(empleadoSeleccionado.id());
+                Persistencia.eliminarEmpleadoXML(empleadoSeleccionado.id());
+
                 listaEmpleadosDto.remove(empleadoSeleccionado);
                 empleadoSeleccionado = null;
                 tableEmpleados.getSelectionModel().clearSelection();
