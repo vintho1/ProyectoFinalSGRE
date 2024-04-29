@@ -9,10 +9,8 @@ public class Usuario implements Serializable {
     private String id;
     private String nombre;
     private String email;
-
-    public static UsuarioBuilder builder() {
-        return new UsuarioBuilder();
-    }
+    private String usuario;
+    private String contrasenia;
 
     public String getId() {
         return this.id;
@@ -38,49 +36,42 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public Usuario(String id, String nombre, String email) {
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Usuario(String id, String nombre, String email, String usuario, String contrasenia) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
     }
 
     public Usuario() {
     }
 
+    @Override
     public String toString() {
-        String var10000 = this.getId();
-        return "Usuario(id=" + var10000 + ", nombre=" + this.getNombre() + ", email=" + this.getEmail() + ")";
+        return "Usuario{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                '}';
     }
 
-    public static class UsuarioBuilder {
-        private String id;
-        private String nombre;
-        private String email;
-
-        UsuarioBuilder() {
-        }
-
-        public UsuarioBuilder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public UsuarioBuilder nombre(String nombre) {
-            this.nombre = nombre;
-            return this;
-        }
-
-        public UsuarioBuilder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Usuario build() {
-            return new Usuario(this.id, this.nombre, this.email);
-        }
-
-        public String toString() {
-            return "Usuario.UsuarioBuilder(id=" + this.id + ", nombre=" + this.nombre + ", email=" + this.email + ")";
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.sgre.model;
 
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
+import co.edu.uniquindio.sgre.exceptions.UsuarioException;
 import co.edu.uniquindio.sgre.model.services.ISGREService;
 
 import java.io.Serializable;
@@ -16,6 +17,9 @@ public class SGRE implements ISGREService, Serializable {
 
     public SGRE() {
     }
+
+
+    ///////Crud empleado /////////////
 
     public Empleado crearEmpleado(String id, String nombre, String email) throws EmpleadoException {
         Empleado nuevoEmpleado = null;
@@ -98,29 +102,36 @@ public class SGRE implements ISGREService, Serializable {
 
         return empleadoEncontrado;
     }
+    public ArrayList<Empleado> obtenerEmpleados() {
+        return null;
+    }
 
-    public Usuario crearUsuario(String id, String nombre, String email) throws EmpleadoException {
+    ////////////Crud usuario///////////////
+
+    public Usuario crearUsuario(String id, String nombre, String email, String usuario, String contrasenia) throws UsuarioException {
         Usuario nuevoUsuario = null;
-        boolean usuarioExiste = this.verificarEmpleadoExistente(id);
+        boolean usuarioExiste = this.verificarUsuarioExistente(id);
         if (usuarioExiste) {
-            throw new EmpleadoException("El usuario con cedula: " + id + " ya existe");
+            throw new UsuarioException("El usuario con cedula: " + id + " ya existe");
         } else {
             nuevoUsuario = new Usuario();
             nuevoUsuario.setNombre(nombre);
             nuevoUsuario.setId(id);
             nuevoUsuario.setEmail(email);
+            nuevoUsuario.setUsuario(usuario);
+            nuevoUsuario.setContrasenia(contrasenia);
             this.getListaUsuarios().add(nuevoUsuario);
             return nuevoUsuario;
         }
     }
 
-    public void agregarUsuario(Usuario nuevoUsuario) throws EmpleadoException {
+    public void agregarUsuario(Usuario nuevoUsuario) throws UsuarioException {
         this.getListaUsuarios().add(nuevoUsuario);
     }
 
-    public boolean verificarUsuarioExistente(String id) throws EmpleadoException {
+    public boolean verificarUsuarioExistente(String id) throws UsuarioException {
         if (this.empleadoExiste(id)) {
-            throw new EmpleadoException("El Usuario con cedula: " + id + " ya existe");
+            throw new UsuarioException("El Usuario con cedula: " + id + " ya existe");
         } else {
             return false;
         }
@@ -141,24 +152,26 @@ public class SGRE implements ISGREService, Serializable {
         return usuarioEncontrado;
     }
 
-    public boolean actualizarUsuario(String id, Usuario usuario) throws EmpleadoException {
+    public boolean actualizarUsuario(String id, Usuario usuario) throws UsuarioException {
         Usuario usuarioActual = this.obtenerUsuario(id);
         if (usuarioActual == null) {
-            throw new EmpleadoException("El usuario a actualizar no existe");
+            throw new UsuarioException("El usuario a actualizar no existe");
         } else {
             usuarioActual.setId(usuario.getId());
             usuarioActual.setNombre(usuario.getNombre());
             usuarioActual.setEmail(usuario.getEmail());
+            usuarioActual.setUsuario(usuario.getUsuario());
+            usuarioActual.setContrasenia(usuario.getContrasenia());
             return true;
         }
     }
 
-    public Boolean eliminarUsuario(String id) throws EmpleadoException {
+    public Boolean eliminarUsuario(String id) throws UsuarioException {
         Usuario usuario = null;
         boolean flagExiste = false;
         usuario = this.obtenerUsuario(id);
         if (usuario == null) {
-            throw new EmpleadoException("El usuario a eliminar no existe");
+            throw new UsuarioException("El usuario a eliminar no existe");
         } else {
             this.getListaUsuarios().remove(usuario);
             flagExiste = true;
@@ -181,11 +194,10 @@ public class SGRE implements ISGREService, Serializable {
         return usuarioEncontrado;
     }
 
-
-
-    public ArrayList<Empleado> obtenerEmpleados() {
+    public ArrayList<Usuario> obtenerUsuario() {
         return null;
     }
+
 
     public ArrayList<Usuario> getListaUsuarios() {
         return this.listaUsuarios;

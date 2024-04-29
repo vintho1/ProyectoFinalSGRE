@@ -2,11 +2,13 @@ package co.edu.uniquindio.sgre.controller;
 
 import co.edu.uniquindio.sgre.controller.service.IModelFactoryController;
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
+import co.edu.uniquindio.sgre.exceptions.UsuarioException;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.sgre.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.sgre.mapping.mappers.SGREMapper;
 import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.SGRE;
+import co.edu.uniquindio.sgre.model.Usuario;
 import co.edu.uniquindio.sgre.utils.Persistencia;
 import co.edu.uniquindio.sgre.utils.SGREUtils;
 //import lombok.Setter;
@@ -144,6 +146,62 @@ public class ModelFactoryController implements IModelFactoryController {
             return false;
         }
     }
+
+    /////////////
+
+    @Override
+    public List<UsuarioDto> obtenerUsuario() {
+        return  mapper.getUsuariosDto(sgre.getListaUsuarios());
+    }
+
+    @Override
+    public boolean agregarUsuario(UsuarioDto usuarioDto) {
+        try{
+            if(!sgre.verificarUsuarioExistente(usuarioDto.id())) {
+                Usuario usuario = mapper.usuarioToUsuarioDto(usuarioDto);
+                getSGRE().agregarUsuario(usuario);
+                guardarResourceBinario();
+                guardarResourceXML();
+                guardarListaEmpleados(getSGRE().getListaEmpleados());
+            }
+            return true;
+        }catch (IOException e2){
+            e2.getMessage();
+            return false;
+        } catch (UsuarioException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean eliminarUsuario(String cedula) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getSGRE().eliminarUsuario(cedula);
+            guardarResourceBinario();
+            guardarResourceXML();
+        } catch (UsuarioException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarUsuario(String cedulaActual, UsuarioDto usuarioDto) {
+        try {
+            Usuario usuario = mapper.usuarioToUsuarioDto(usuarioDto);
+            getSGRE().actualizarUsuario(cedulaActual, usuario);
+            guardarResourceBinario();
+            guardarResourceXML();
+            return true;
+        } catch (UsuarioException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     private void cargarResourceXML() {
         sgre = Persistencia.cargarRecursoBancoXML();
     }

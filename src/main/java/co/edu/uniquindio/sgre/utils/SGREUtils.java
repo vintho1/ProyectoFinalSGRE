@@ -28,7 +28,6 @@ public class SGREUtils {
 
 
 
-
         System.out.println("Información inicializada del sgre creada");
         return sgre;
 
