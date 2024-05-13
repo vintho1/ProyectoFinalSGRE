@@ -264,3 +264,65 @@ abr. 16, 2024 8:45:30 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegi
 INFO: Se actualizó el empleado false,Actualizar empleado,2024-04-16
 abr. 28, 2024 10:03:21 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesión,Inicio de sesión,2024-04-28
+may. 05, 2024 11:18:37 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:19:25 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:22:26 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:25:51 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:26:20 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado UsuarioDto[id=7333, nombre=camila, email=ttefrfef, usuario=ede, contrasenia=123],Crear empleado,2024-05-05
+may. 05, 2024 11:27:34 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:30:18 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:34:02 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:40:14 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 11:40:45 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado UsuarioDto[id=123333, nombre=lola, email=dhi@gmail.com, usuario=user, contrasenia=123],Crear empleado,2024-05-05
+may. 05, 2024 12:29:00 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 12:31:35 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 12:57:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 1:28:39 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 4:43:15 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 7:00:15 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 7:32:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 7:33:12 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: se creo en empleado EmpleadoDto[id=12344, nombre=sofia, email=jvduj@jdlkqwnd, usuario=sofi, contrasenia=123],Crear empleado,2024-05-05
+may. 05, 2024 8:14:51 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 8:15:30 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 8:23:26 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 8:25:23 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 9:24:50 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 9:30:25 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 05, 2024 9:40:11 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-05
+may. 08, 2024 11:05:46 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-08
+may. 08, 2024 11:40:16 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-08
+may. 08, 2024 12:14:30 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-08
+may. 08, 2024 12:21:06 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-08
+may. 08, 2024 12:28:24 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-08
+may. 13, 2024 10:53:26 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-13

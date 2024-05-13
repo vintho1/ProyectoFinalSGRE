@@ -6,8 +6,7 @@ package co.edu.uniquindio.sgre.utils;
 //import co.edu.uniquindio.banco.bancouq.model.*;
 
 import co.edu.uniquindio.sgre.exceptions.UsuarioException;
-import co.edu.uniquindio.sgre.model.Empleado;
-import co.edu.uniquindio.sgre.model.SGRE;
+import co.edu.uniquindio.sgre.model.*;
 
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
@@ -31,11 +30,15 @@ public class Persistencia {
     //bancoUq/src/main/resources/persistencia/archivoClientes.txt
 
     public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivoEmpleados.txt";
-  //  public static final String RUTA_ARCHIVO_USUARIOS = "/src/main/resources/persistencia/archivoUsuarios.txt";
+    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SGRELog.txt";
     public static final String RUTA_ARCHIVO_MODELO_BANCO_BINARIO = "src/main/resources/persistencia/mod.dat";
     public static final String RUTA_ARCHIVO_MODELO_BANCO_XML = "src/main/resources/persistencia/model.xml";
-//	C:\td\persistencia
+    public static final String RUTA_ARCHIVO_EVENTOS = "src/main/resources/co/edu/uniquindio/sgre/registroEvento.fxml";
+    public static final String RUTA_ARCHIVO_EVENTOS_BINARIO = "src/main/resources/persistencia/archivoEventos.dat";
+    public static final String RUTA_ARCHIVO_RESERVA_BINARIO = "src/main/resources/persistencia/archivoReservas.dat";
+
+    //	C:\td\persistencia
 
 
 
@@ -46,13 +49,19 @@ public class Persistencia {
         if(empleadosCargados.size() > 0)
             sgre.getListaEmpleados().addAll(empleadosCargados);
 
-        //cargar archivo transcciones
+        ArrayList<Usuario> usuariosCargados = cargarUsuarios();
+        if(usuariosCargados.size() > 0)
+            sgre.getListaUsuarios().addAll(usuariosCargados);
 
-        //cargar archivo empleados
+        ArrayList<Evento> eventosCargados = cargarEventos();
+        if (eventosCargados.size() > 0)
+            sgre.getListaEventos().addAll(eventosCargados);
 
-        //cargar archivo prestamo
-
+        ArrayList<Reserva> reservasCargadas = cargarReservas();
+        if (reservasCargadas.size() > 0)
+            sgre.getListaReservas().addAll(reservasCargadas);
     }
+
 
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
@@ -67,9 +76,24 @@ public class Persistencia {
         {
             contenido+= empleado.getId()+
                     "@@"+empleado.getNombre()+
-                    "@@"+empleado.getEmail()+ "\n";
+                    "@@"+empleado.getEmail()+
+                    "@@"+empleado.getUsuario()+
+                    "@@"+empleado.getContrasenia()+"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
+    }
+
+    public static void guardarUsuarios(ArrayList<Usuario> listaUsuarios) throws IOException {
+        String contenido = "";
+        for(Usuario usuario:listaUsuarios)
+        {
+            contenido+= usuario.getId()+
+                    "@@"+usuario.getNombre()+
+                    "@@"+usuario.getEmail()+
+                    "@@"+usuario.getUsuario()+
+                    "@@"+usuario.getContrasenia()+"\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_USUARIOS, contenido, false);
     }
 
 
@@ -97,6 +121,23 @@ public class Persistencia {
             empleado.setId(linea.split("@@")[0]);
             empleado.setNombre(linea.split("@@")[1]);
             empleado.setEmail(linea.split("@@")[2]);
+            empleados.add(empleado);
+        }
+        return empleados;
+    }
+    public static ArrayList<Usuario> cargarUsuarios() throws FileNotFoundException, IOException {
+        ArrayList<Usuario> empleados =new ArrayList<Usuario>();
+        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_USUARIOS);
+        String linea="";
+        for (int i = 0; i < contenido.size(); i++)
+        {
+            linea = contenido.get(i);
+            Usuario empleado = new Usuario();
+            empleado.setId(linea.split("@@")[0]);
+            empleado.setNombre(linea.split("@@")[1]);
+            empleado.setEmail(linea.split("@@")[2]);
+            empleado.setUsuario(linea.split("@@")[3]);
+            empleado.setContrasenia(linea.split("@@")[4]);
             empleados.add(empleado);
         }
         return empleados;
@@ -253,6 +294,25 @@ public class Persistencia {
             System.out.println("No se encontró ningún empleado con el ID especificado.");
         }
     }
+    public static void eliminarUsuario(String id) throws IOException {
+        ArrayList<Usuario> usuarios = cargarUsuarios();
+        Usuario usuarioAEliminar = null;
+        for (Usuario empleado : usuarios) {
+            if (empleado.getId().equals(id)) {
+                usuarioAEliminar = empleado;
+                break;
+            }
+        }
+        if (usuarioAEliminar != null) {
+            usuarios.remove(usuarioAEliminar);
+            guardarUsuarios(usuarios);
+            System.out.println("Empleado eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró ningún empleado con el ID especificado.");
+        }
+
+
+    }
 
     public static void eliminarEmpleadoBinario(String idEmpleado) throws IOException {
         SGRE sgre = cargarRecursoBancoBinario();
@@ -267,6 +327,28 @@ public class Persistencia {
             }
             if (empleadoAEliminar != null) {
                 empleados.remove(empleadoAEliminar);
+                guardarRecursoBancoBinario(sgre);
+                System.out.println("Empleado eliminado correctamente del archivo binario.");
+            } else {
+                System.out.println("No se encontró ningún empleado con el ID especificado en el archivo binario.");
+            }
+        } else {
+            System.out.println("No se pudo cargar el archivo binario.");
+        }
+    }
+    public static void eliminarUsuarioBinario(String id){
+        SGRE sgre = cargarRecursoBancoBinario();
+        if (sgre != null) {
+            ArrayList<Usuario> empleados = sgre.getListaUsuarios();
+            Usuario usuarioAEliminar = null;
+            for (Usuario empleado : empleados) {
+                if (empleado.getId().equals(id)) {
+                    usuarioAEliminar = empleado;
+                    break;
+                }
+            }
+            if (usuarioAEliminar != null) {
+                empleados.remove(usuarioAEliminar);
                 guardarRecursoBancoBinario(sgre);
                 System.out.println("Empleado eliminado correctamente del archivo binario.");
             } else {
@@ -299,6 +381,28 @@ public class Persistencia {
             System.out.println("No se pudo cargar el archivo XML.");
         }
     }
+    public static void eliminarUsuarioXML(String id){
+        SGRE sgre = cargarRecursoBancoXML();
+        if (sgre != null) {
+            ArrayList<Usuario> empleados = sgre.getListaUsuarios();
+            Usuario usuarioAEliminar = null;
+            for (Usuario empleado : empleados) {
+                if (empleado.getId().equals(id)) {
+                    usuarioAEliminar = empleado;
+                    break;
+                }
+            }
+            if (usuarioAEliminar != null) {
+                empleados.remove(usuarioAEliminar);
+                guardarRecursoBancoXML(sgre);
+                System.out.println("Empleado eliminado correctamente del archivo XML.");
+            } else {
+                System.out.println("No se encontró ningún empleado con el ID especificado en el archivo XML.");
+            }
+        } else {
+            System.out.println("No se pudo cargar el archivo XML.");
+        }
+    }
 
     public static void actualizarEmpleadoBinario(String idEmpleado, Empleado empleadoActualizado) throws IOException {
         SGRE sgre = cargarRecursoBancoBinario();
@@ -317,6 +421,24 @@ public class Persistencia {
             System.out.println("No se pudo cargar el archivo binario.");
         }
     }
+    public static void actualizarUsuarioBinario(String id, Usuario empleadoActualizado){
+        SGRE sgre = cargarRecursoBancoBinario();
+        if (sgre != null) {
+            ArrayList<Usuario> empleados = sgre.getListaUsuarios();
+            for (int i = 0; i < empleados.size(); i++) {
+                if (empleados.get(i).getId().equals(id)) {
+                    empleados.set(i, empleadoActualizado);
+                    guardarRecursoBancoBinario(sgre);
+                    System.out.println("Empleado actualizado correctamente en el archivo binario.");
+                    return;
+                }
+            }
+            System.out.println("No se encontró ningún empleado con el ID especificado en el archivo binario.");
+        } else {
+            System.out.println("No se pudo cargar el archivo binario.");
+        }
+
+    }
 
     public static void actualizarEmpleadoXML(String idEmpleado, Empleado empleadoActualizado) throws IOException {
         SGRE sgre = cargarRecursoBancoXML();
@@ -324,6 +446,23 @@ public class Persistencia {
             ArrayList<Empleado> empleados = sgre.getListaEmpleados();
             for (int i = 0; i < empleados.size(); i++) {
                 if (empleados.get(i).getId().equals(idEmpleado)) {
+                    empleados.set(i, empleadoActualizado);
+                    guardarRecursoBancoXML(sgre);
+                    System.out.println("Empleado actualizado correctamente en el archivo XML.");
+                    return;
+                }
+            }
+            System.out.println("No se encontró ningún empleado con el ID especificado en el archivo XML.");
+        } else {
+            System.out.println("No se pudo cargar el archivo XML.");
+        }
+    }
+    public static void actualizarUsuarioXML(String idUsuario, Usuario empleadoActualizado){
+        SGRE sgre = cargarRecursoBancoXML();
+        if (sgre != null) {
+            ArrayList<Usuario> empleados = sgre.getListaUsuarios();
+            for (int i = 0; i < empleados.size(); i++) {
+                if (empleados.get(i).getId().equals(idUsuario)) {
                     empleados.set(i, empleadoActualizado);
                     guardarRecursoBancoXML(sgre);
                     System.out.println("Empleado actualizado correctamente en el archivo XML.");
@@ -353,19 +492,138 @@ public class Persistencia {
             System.out.println("Empleado actualizado correctamente en el archivo de texto.");
         } else {
             System.out.println("No se encontró ningún empleado con el ID especificado en el archivo de texto.");
+
+
         }
     }
 
+        public static void actualizarUsuarioTxt(String idUsuario, Usuario empleadoActualizado) throws IOException {
+            ArrayList<Usuario> empleados = cargarUsuarios();
+            boolean empleadoEncontrado = false;
+
+            for (int i = 0; i < empleados.size(); i++) {
+                if (empleados.get(i).getId().equals(idUsuario)) {
+                    empleados.set(i, empleadoActualizado);
+                    empleadoEncontrado = true;
+                    break;
+                }
+            }
+
+            if (empleadoEncontrado) {
+                guardarUsuarios(empleados);
+                System.out.println("Empleado actualizado correctamente en el archivo de texto.");
+            } else {
+                System.out.println("No se encontró ningún empleado con el ID especificado en el archivo de texto.");
+            }
+
+    }
+
+    public static ArrayList<Evento> cargarEventos() throws IOException {
+        ArrayList<Evento> eventos = new ArrayList<>();
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO_EVENTOS_BINARIO))) {
+            eventos = (ArrayList<Evento>) objectInputStream.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return eventos;
+    }
 
 
+    public static void guardarEventos(ArrayList<Evento> listaEventos) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(RUTA_ARCHIVO_EVENTOS_BINARIO))) {
+            oos.writeObject(listaEventos);
+        }
+    }
 
+    public static void eliminarEvento(String idEvento) throws IOException {
+        ArrayList<Evento> eventos = cargarEventos();
+        Evento eventoAEliminar = null;
+        for (Evento evento : eventos) {
+            if (evento.getId().equals(idEvento)) {
+                eventoAEliminar = evento;
+                break;
+            }
+        }
+        if (eventoAEliminar != null) {
+            eventos.remove(eventoAEliminar);
+            guardarEventos(eventos);
+            System.out.println("Evento eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró ningún evento con el ID especificado.");
+        }
+    }
 
+    public static void actualizarEvento(String idEvento, Evento eventoActualizado) throws IOException {
+        ArrayList<Evento> eventos = cargarEventos();
+        for (int i = 0; i < eventos.size(); i++) {
+            if (eventos.get(i).getId().equals(idEvento)) {
+                eventos.set(i, eventoActualizado);
+                guardarEventos(eventos);
+                System.out.println("Evento actualizado correctamente.");
+                return;
+            }
+        }
+        System.out.println("No se encontró ningún evento con el ID especificado.");
+    }
 
+    public static ArrayList<Reserva> cargarReservas() throws IOException {
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(RUTA_ARCHIVO_RESERVA_BINARIO))) {
+            reservas = (ArrayList<Reserva>) ois.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return reservas;
+    }
 
+    public static void guardarReservas(ArrayList<Reserva> listaReservas) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(RUTA_ARCHIVO_RESERVA_BINARIO))) {
+            oos.writeObject(listaReservas);
+        }
+    }
 
+    public static void eliminarReserva(String idReserva) throws IOException {
+        ArrayList<Reserva> reservas = cargarReservas();
+        Reserva reservaAEliminar = null;
+        for (Reserva reserva : reservas) {
+            if (reserva.getId().equals(idReserva)) {
+                reservaAEliminar = reserva;
+                break;
+            }
+        }
+        if (reservaAEliminar != null) {
+            reservas.remove(reservaAEliminar);
+            guardarReservas(reservas);
+            System.out.println("Reserva eliminada correctamente.");
+        } else {
+            System.out.println("No se encontró ninguna reserva con el ID especificado.");
+        }
+    }
 
-
-
+    public static void actualizarReserva(String idReserva, Reserva reservaActualizada) throws IOException {
+        ArrayList<Reserva> reservas = cargarReservas();
+        for (int i = 0; i < reservas.size(); i++) {
+            if (reservas.get(i).getId().equals(idReserva)) {
+                reservas.set(i, reservaActualizada);
+                guardarReservas(reservas);
+                System.out.println("Reserva actualizada correctamente.");
+                return;
+            }
+        }
+        System.out.println("No se encontró ninguna reserva con el ID especificado.");
+    }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -61,6 +61,10 @@ public class EmpleadoViewController {
 
     @FXML
     private TextField txtNombre;
+    @FXML
+    private TextField txtUser;
+    @FXML
+    private TextField txtContrasenia;
 
 
     @FXML
@@ -167,7 +171,9 @@ public class EmpleadoViewController {
                 listaEmpleadosDto.add(new EmpleadoDto(
                         empleadoActualizad.getId(),
                         empleadoActualizad.getNombre(),
-                        empleadoActualizad.getEmail()
+                        empleadoActualizad.getEmail(),
+                        empleadoActualizad.getUsuario(),
+                        empleadoActualizad.getContrasenia()
                 ));
                 tableEmpleados.refresh();
 
@@ -204,7 +210,9 @@ public class EmpleadoViewController {
         return new EmpleadoDto(
                 txtCedula.getText(),
                 txtNombre.getText(),
-                txtCorreo.getText()
+                txtCorreo.getText(),
+                txtUser.getText(),
+                txtContrasenia.getText()
 
         );
     }

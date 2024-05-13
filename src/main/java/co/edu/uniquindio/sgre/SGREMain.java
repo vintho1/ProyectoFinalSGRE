@@ -1,5 +1,6 @@
 package co.edu.uniquindio.sgre;
 
+import co.edu.uniquindio.sgre.viewController.InicioViewController;
 import co.edu.uniquindio.sgre.viewController.SGREViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +25,9 @@ public class SGREMain extends Application {
     public void mostrarVentanaPrincipal() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/co/edu/uniquindio/sgre/sgre.fxml"));
+            loader.setLocation(getClass().getResource("/co/edu/uniquindio/sgre/inicio.fxml"));
             AnchorPane rootLayout = loader.load();
-            SGREViewController sgreViewController = loader.getController();
+            InicioViewController sgreViewController = loader.getController();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();

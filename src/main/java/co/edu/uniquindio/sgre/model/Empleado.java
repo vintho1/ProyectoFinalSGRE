@@ -18,8 +18,31 @@ public class Empleado implements Serializable {
     private String id;
     private String nombre;
     private String email;
+    private String usuario;
+    private String contrasenia;
+    private Evento evento;
+    private RolEmpleado rolEmpleado;
+
+    public Empleado(String id, String nombre, String email, String usuario, String contrasenia, Evento evento, RolEmpleado rolEmpleado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+        this.evento = evento;
+        this.rolEmpleado = rolEmpleado;
+    }
+
     public static EmpleadoBuilder builder() {
         return new EmpleadoBuilder();
+    }
+
+    public RolEmpleado getRolEmpleado() {
+        return rolEmpleado;
+    }
+
+    public void setRolEmpleado(RolEmpleado rolEmpleado) {
+        this.rolEmpleado = rolEmpleado;
     }
 
     public String getId() {
@@ -44,6 +67,30 @@ public class Empleado implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     public Empleado(String id, String nombre, String email) {

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="655.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.SGREViewController">
+<AnchorPane fx:id="ventana" prefHeight="655.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.SGREViewController">
     <children>
         <TabPane layoutX="8.0" layoutY="8.0" prefHeight="642.0" prefWidth="865.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -16,12 +16,46 @@
                                 <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
                                     <items>
                                         <fx:include source="registroEmpleado.fxml" />
+
                                     </items>
                                 </SplitPane>
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
+            <Tab text="Usuario">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="registroUsuario.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Reseva">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                      <items>
+                          <fx:include source="registroReserva.fxml" />
+                      </items>
+                  </SplitPane>
+              </content>
+            </Tab>
+            <Tab text="Evento">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                      <items>
+                          <fx:include source="registroEvento.fxml" />
+                      </items>
+                  </SplitPane>
+              </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>

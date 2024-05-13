@@ -3,20 +3,40 @@ package co.edu.uniquindio.sgre.model;
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
 import co.edu.uniquindio.sgre.exceptions.UsuarioException;
 import co.edu.uniquindio.sgre.model.services.ISGREService;
+import co.edu.uniquindio.sgre.viewController.SessionManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.time.LocalDate;
+
+import static co.edu.uniquindio.sgre.utils.SGREUtils.inicializarDatos;
 
 public class SGRE implements ISGREService, Serializable {
     private static final long serialVersionUID = 1L;
+    private static SGRE sgre;
     ArrayList<Usuario> listaUsuarios = new ArrayList();
     ArrayList<Empleado> listaEmpleados = new ArrayList();
     ArrayList<Evento> listaEventos = new ArrayList();
     ArrayList<Reserva> listaReservas = new ArrayList();
+    ArrayList<Admin> listaAdmins = new ArrayList();
+
+
+
 
     public SGRE() {
+        listaAdmins = new ArrayList<>();
+        listaAdmins.add(new Admin("Camila", "123"));
     }
+
+
+    public static SGRE getInstance() throws EmpleadoException {
+        if (sgre == null) {
+            sgre = inicializarDatos();
+        }
+        return sgre;
+    }
+
 
 
     ///////Crud empleado /////////////
@@ -130,7 +150,7 @@ public class SGRE implements ISGREService, Serializable {
     }
 
     public boolean verificarUsuarioExistente(String id) throws UsuarioException {
-        if (this.empleadoExiste(id)) {
+        if (this.usuarioExiste(id)) {
             throw new UsuarioException("El Usuario con cedula: " + id + " ya existe");
         } else {
             return false;
@@ -179,13 +199,13 @@ public class SGRE implements ISGREService, Serializable {
         }
     }
 
-    public Usuario obtenerUsuario(String cedula) {
+    public Usuario obtenerUsuario(String user) {
         Usuario usuarioEncontrado = null;
         Iterator var3 = this.getListaUsuarios().iterator();
 
         while(var3.hasNext()) {
             Usuario usuario = (Usuario) var3.next();
-            if (usuario.getId().equalsIgnoreCase(cedula)) {
+            if (usuario.getUsuario().equalsIgnoreCase(user)) {
                 usuarioEncontrado = usuario;
                 break;
             }
@@ -193,6 +213,170 @@ public class SGRE implements ISGREService, Serializable {
 
         return usuarioEncontrado;
     }
+
+    public Usuario obtenerUsuario2(String nombreUsuario) {
+        Usuario usuarioEncontrado = null;
+        Iterator var3 = this.getListaUsuarios().iterator();
+
+        while(var3.hasNext()) {
+            Usuario usuario = (Usuario) var3.next();
+            if (usuario.getUsuario().equalsIgnoreCase(nombreUsuario)) {
+                usuarioEncontrado = usuario;
+                break;
+            }
+        }
+
+        return usuarioEncontrado;
+    }
+
+    public boolean verificarClienteAdministrador(String cedula, String contrasena) throws EmpleadoException {
+        if (cedula.isEmpty()) {
+            throw new EmpleadoException("Usuario vacío");
+        }
+        if (contrasena.isEmpty()) {
+            throw new EmpleadoException("Contraseña vacía");
+        }
+
+        Admin admin = obtenerAdministrador(cedula);
+        if (admin != null && admin.getContrasenia().equals(contrasena)) {
+            return true;
+        }
+
+        Usuario usuario = obtenerUsuario(cedula);
+        if (usuario != null && usuario.getContrasenia().equals(contrasena)) {
+            return true;
+        }
+
+        Empleado empleado = obtenerEmpleado(cedula);
+        return empleado != null && empleado.getContrasenia().equals(contrasena);
+    }
+
+
+    public Admin obtenerAdministrador(String user) {
+        return listaAdmins.stream()
+                .filter(admin -> admin.getUsuario().equals(user))
+                .findFirst()
+                .orElse(null);
+    }
+
+    ////
+
+    public Evento crearEvento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado) {
+        Evento nuevoEvento = new Evento(id, nombre, descripcion, fecha, capMax, empleadoAsignado, new ArrayList<>());
+        this.getListaEventos().add(nuevoEvento);
+        return nuevoEvento;
+    }
+
+    public void agregarEvento(Evento nuevoEvento) {
+        this.getListaEventos().add(nuevoEvento);
+    }
+
+    public boolean verificarEventoExistente(String id) {
+        return this.eventoExiste(id);
+    }
+
+    public boolean eventoExiste(String id) {
+        return this.getListaEventos().stream().anyMatch(evento -> evento.getId().equalsIgnoreCase(id));
+    }
+
+    public boolean actualizarEvento(String id, Evento evento) {
+        Evento eventoActual = this.obtenerEvento(id);
+        if (eventoActual != null) {
+            eventoActual.setId(evento.getId());
+            eventoActual.setNombre(evento.getNombre());
+            eventoActual.setDescripcion(evento.getDescripcion());
+            eventoActual.setFecha(evento.getFecha());
+            eventoActual.setCapMax(evento.getCapMax());
+            eventoActual.setEmpleadoAsignado(evento.getEmpleadoAsignado());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean eliminarEvento(String id) {
+        Iterator<Evento> iterator = this.getListaEventos().iterator();
+        while (iterator.hasNext()) {
+            Evento evento = iterator.next();
+            if (evento.getId().equalsIgnoreCase(id)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Evento obtenerEvento(String id) {
+        return this.getListaEventos().stream().filter(evento -> evento.getId().equalsIgnoreCase(id)).findFirst().orElse(null);
+    }
+
+    public ArrayList<Evento> obtenerEventos() {
+        return this.getListaEventos();
+    }
+
+
+    ///////
+
+    public Reserva crearReserva(String id, Usuario usuario, Evento evento, LocalDate fecha, Estado estado) throws EmpleadoException {
+        Reserva nuevaReserva = null;
+        boolean reservaExiste = this.verificarReservaExistente(id);
+        if (reservaExiste) {
+            throw new EmpleadoException("La reserva con ID: " + id + " ya existe");
+        } else {
+            nuevaReserva = new Reserva(id, usuario, evento, fecha, estado);
+            this.getListaReservas().add(nuevaReserva);
+            return nuevaReserva;
+        }
+    }
+
+    public void agregarReserva(Reserva nuevaReserva) throws EmpleadoException {
+        if (verificarReservaExistente(nuevaReserva.getId())) {
+            throw new EmpleadoException("La reserva con ID: " + nuevaReserva.getId() + " ya existe");
+        }
+        this.getListaReservas().add(nuevaReserva);
+    }
+
+    public boolean verificarReservaExistente(String id) {
+        return this.reservaExiste(id);
+    }
+
+    public boolean reservaExiste(String id) {
+        return this.getListaReservas().stream().anyMatch(reserva -> reserva.getId().equalsIgnoreCase(id));
+    }
+
+    public boolean actualizarReserva(String id, Reserva reserva) {
+        Iterator<Reserva> iterator = this.getListaReservas().iterator();
+        while (iterator.hasNext()) {
+            Reserva reservaActual = iterator.next();
+            if (reservaActual.getId().equalsIgnoreCase(id)) {
+                iterator.remove();
+                this.getListaReservas().add(reserva);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarReserva(String id) {
+        Iterator<Reserva> iterator = this.getListaReservas().iterator();
+        while (iterator.hasNext()) {
+            Reserva reserva = iterator.next();
+            if (reserva.getId().equalsIgnoreCase(id)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Reserva obtenerReserva(String id) {
+        return this.getListaReservas().stream().filter(reserva -> reserva.getId().equalsIgnoreCase(id)).findFirst().orElse(null);
+    }
+
+    public ArrayList<Reserva> obtenerReservas() {
+        return this.getListaReservas();
+    }
+
+
 
     public ArrayList<Usuario> obtenerUsuario() {
         return null;
@@ -215,6 +399,14 @@ public class SGRE implements ISGREService, Serializable {
         return this.listaReservas;
     }
 
+    public ArrayList<Admin> getListaAdmins() {
+        return listaAdmins;
+    }
+
+    public void setListaAdmins(ArrayList<Admin> listaAdmins) {
+        this.listaAdmins = listaAdmins;
+    }
+
     public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
@@ -230,4 +422,6 @@ public class SGRE implements ISGREService, Serializable {
     public void setListaReservas(ArrayList<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
+
+
 }

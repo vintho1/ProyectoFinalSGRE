@@ -2,6 +2,7 @@ package co.edu.uniquindio.sgre.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Usuario implements Serializable {
 
@@ -11,6 +12,8 @@ public class Usuario implements Serializable {
     private String email;
     private String usuario;
     private String contrasenia;
+    ArrayList<Reserva> listaReservas = new ArrayList();
+
 
     public String getId() {
         return this.id;
@@ -50,6 +53,14 @@ public class Usuario implements Serializable {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public ArrayList<Reserva> getListaReservas() {
+        return listaReservas;
+    }
+
+    public void setListaReservas(ArrayList<Reserva> listaReservas) {
+        this.listaReservas = listaReservas;
     }
 
     public Usuario(String id, String nombre, String email, String usuario, String contrasenia) {

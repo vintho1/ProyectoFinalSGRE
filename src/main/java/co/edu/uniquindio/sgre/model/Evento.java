@@ -4,6 +4,8 @@ package co.edu.uniquindio.sgre.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 /*@Getter
 @Setter
 @Builder
@@ -16,111 +18,92 @@ public class Evento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String id;
-    private Empleado empleado;
-    private Evento evento;
-    private LocalDate fechaSolicitud;
-    private Estado estado;
-    public static EventoBuilder builder() {
-        return new EventoBuilder();
+    private String nombre;
+    private String descripcion;
+    private LocalDate fecha;
+    private String capMax;
+    private Empleado empleadoAsignado;
+    ArrayList<Reserva> listaReservas = new ArrayList();
+
+    public Evento() {
+    }
+
+    public Evento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado, ArrayList<Reserva> listaReservas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.capMax = capMax;
+        this.empleadoAsignado = empleadoAsignado;
+        this.listaReservas = listaReservas;
     }
 
     public String getId() {
-        return this.id;
-    }
-
-    public Empleado getEmpleado() {
-        return this.empleado;
-    }
-
-    public Evento getEvento() {
-        return this.evento;
-    }
-
-    public LocalDate getFechaSolicitud() {
-        return this.fechaSolicitud;
-    }
-
-    public Estado getEstado() {
-        return this.estado;
+        return id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setFechaSolicitud(LocalDate fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Evento(String id, Empleado empleado, Evento evento, LocalDate fechaSolicitud, Estado estado) {
-        this.id = id;
-        this.empleado = empleado;
-        this.evento = evento;
-        this.fechaSolicitud = fechaSolicitud;
-        this.estado = estado;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    public Evento() {
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
+    public String getCapMax() {
+        return capMax;
+    }
+
+    public void setCapMax(String capMax) {
+        this.capMax = capMax;
+    }
+
+    public Empleado getEmpleadoAsignado() {
+        return empleadoAsignado;
+    }
+
+    public void setEmpleadoAsignado(Empleado empleadoAsignado) {
+        this.empleadoAsignado = empleadoAsignado;
+    }
+
+    public ArrayList<Reserva> getListaReservas() {
+        return listaReservas;
+    }
+
+    public void setListaReservas(ArrayList<Reserva> listaReservas) {
+        this.listaReservas = listaReservas;
+    }
+
+    @Override
     public String toString() {
-        String var10000 = this.getId();
-        return "Evento(id=" + var10000 + ", empleado=" + this.getEmpleado() + ", evento=" + this.getEvento() + ", fechaSolicitud=" + this.getFechaSolicitud() + ", estado=" + this.getEstado() + ")";
-    }
-
-    public static class EventoBuilder {
-        private String id;
-        private Empleado empleado;
-        private Evento evento;
-        private LocalDate fechaSolicitud;
-        private Estado estado;
-
-        EventoBuilder() {
-        }
-
-        public EventoBuilder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public EventoBuilder empleado(Empleado empleado) {
-            this.empleado = empleado;
-            return this;
-        }
-
-        public EventoBuilder evento(Evento evento) {
-            this.evento = evento;
-            return this;
-        }
-
-        public EventoBuilder fechaSolicitud(LocalDate fechaSolicitud) {
-            this.fechaSolicitud = fechaSolicitud;
-            return this;
-        }
-
-        public EventoBuilder estado(Estado estado) {
-            this.estado = estado;
-            return this;
-        }
-
-        public Evento build() {
-            return new Evento(this.id, this.empleado, this.evento, this.fechaSolicitud, this.estado);
-        }
-
-        public String toString() {
-            return "Evento.EventoBuilder(id=" + this.id + ", empleado=" + this.empleado + ", evento=" + this.evento + ", fechaSolicitud=" + this.fechaSolicitud + ", estado=" + this.estado + ")";
-        }
+        return "Evento{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha=" + fecha +
+                ", capMax='" + capMax + '\'' +
+                ", empleadoAsignado=" + empleadoAsignado +
+                ", listaReservas=" + listaReservas +
+                '}';
     }
 }

@@ -17,144 +17,70 @@ public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String id;
-    private String nombre;
-    private String descripcion;
+    private Usuario usuario;
+    private Evento evento;
     private LocalDate fecha;
-    private String capMax;
-    private Empleado empleadoAsignado;
-    private Reserva reservaAsignada;
+    private Estado estado;
 
-    public static ReservaBuilder builder() {
-        return new ReservaBuilder();
+    public Reserva() {
+    }
+
+    public Reserva(String id, Usuario usuario, Evento evento, LocalDate fecha, Estado estado) {
+        this.id = id;
+        this.usuario = usuario;
+        this.evento = evento;
+        this.fecha = fecha;
+        this.estado = estado;
     }
 
     public String getId() {
-        return this.id;
-    }
-
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public String getDescripcion() {
-        return this.descripcion;
-    }
-
-    public LocalDate getFecha() {
-        return this.fecha;
-    }
-
-    public String getCapMax() {
-        return this.capMax;
-    }
-
-    public Empleado getEmpleadoAsignado() {
-        return this.empleadoAsignado;
-    }
-
-    public Reserva getReservaAsignada() {
-        return this.reservaAsignada;
+        return id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
     }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public void setCapMax(String capMax) {
-        this.capMax = capMax;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setEmpleadoAsignado(Empleado empleadoAsignado) {
-        this.empleadoAsignado = empleadoAsignado;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
-    public void setReservaAsignada(Reserva reservaAsignada) {
-        this.reservaAsignada = reservaAsignada;
-    }
-
-    public Reserva(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado, Reserva reservaAsignada) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.capMax = capMax;
-        this.empleadoAsignado = empleadoAsignado;
-        this.reservaAsignada = reservaAsignada;
-    }
-
-    public Reserva() {
-    }
-
+    @Override
     public String toString() {
-        String var10000 = this.getId();
-        return "Reserva(id=" + var10000 + ", nombre=" + this.getNombre() + ", descripcion=" + this.getDescripcion() + ", fecha=" + this.getFecha() + ", capMax=" + this.getCapMax() + ", empleadoAsignado=" + this.getEmpleadoAsignado() + ", reservaAsignada=" + this.getReservaAsignada() + ")";
-    }
-
-    public static class ReservaBuilder {
-        private String id;
-        private String nombre;
-        private String descripcion;
-        private LocalDate fecha;
-        private String capMax;
-        private Empleado empleadoAsignado;
-        private Reserva reservaAsignada;
-
-        ReservaBuilder() {
-        }
-
-        public ReservaBuilder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public ReservaBuilder nombre(String nombre) {
-            this.nombre = nombre;
-            return this;
-        }
-
-        public ReservaBuilder descripcion(String descripcion) {
-            this.descripcion = descripcion;
-            return this;
-        }
-
-        public ReservaBuilder fecha(LocalDate fecha) {
-            this.fecha = fecha;
-            return this;
-        }
-
-        public ReservaBuilder capMax(String capMax) {
-            this.capMax = capMax;
-            return this;
-        }
-
-        public ReservaBuilder empleadoAsignado(Empleado empleadoAsignado) {
-            this.empleadoAsignado = empleadoAsignado;
-            return this;
-        }
-
-        public ReservaBuilder reservaAsignada(Reserva reservaAsignada) {
-            this.reservaAsignada = reservaAsignada;
-            return this;
-        }
-
-        public Reserva build() {
-            return new Reserva(this.id, this.nombre, this.descripcion, this.fecha, this.capMax, this.empleadoAsignado, this.reservaAsignada);
-        }
-
-        public String toString() {
-            return "Reserva.ReservaBuilder(id=" + this.id + ", nombre=" + this.nombre + ", descripcion=" + this.descripcion + ", fecha=" + this.fecha + ", capMax=" + this.capMax + ", empleadoAsignado=" + this.empleadoAsignado + ", reservaAsignada=" + this.reservaAsignada + ")";
-        }
+        return "Reserva{" +
+                "id='" + id + '\'' +
+                ", usuario=" + usuario +
+                ", evento=" + evento +
+                ", fecha=" + fecha +
+                ", estado=" + estado +
+                '}';
     }
 }

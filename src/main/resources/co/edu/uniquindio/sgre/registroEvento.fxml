@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="563.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.RegistroEventoController">
+   <children>
+      <GridPane layoutX="61.0" layoutY="69.0" prefHeight="180.0" prefWidth="254.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Id:" />
+            <Label text="Nombre:" GridPane.rowIndex="1" />
+            <Label text="Descripcion:" GridPane.rowIndex="2" />
+            <Label text="Fecha:" GridPane.rowIndex="3" />
+            <Label text="Cap max:" GridPane.rowIndex="4" />
+            <Label text="Empleado Encargado:" GridPane.rowIndex="5" />
+            <TextField GridPane.columnIndex="1" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <Label layoutX="315.0" layoutY="14.0" text="Registro de Evento">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TableView layoutX="406.0" layoutY="69.0" prefHeight="125.0" prefWidth="226.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="id" />
+            <TableColumn prefWidth="75.0" text="Usuario" />
+            <TableColumn prefWidth="75.0" text="Fecha" />
+         </columns>
+      </TableView>
+      <Button layoutX="639.0" layoutY="119.0" mnemonicParsing="false" text="Agregar reserva" />
+      <Button layoutX="159.0" layoutY="270.0" mnemonicParsing="false" text="Agregar" />
+      <TableView layoutX="406.0" layoutY="219.0" prefHeight="125.0" prefWidth="226.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="id" />
+            <TableColumn prefWidth="75.0" text="Usuario" />
+            <TableColumn prefWidth="75.0" text="Fecha" />
+         </columns>
+      </TableView>
+      <Label layoutX="468.0" layoutY="49.0" text="Reservas disponibles">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="639.0" layoutY="270.0" mnemonicParsing="false" text="Eliminar reserva" />
+      <Label layoutX="455.0" layoutY="194.0" text="Reservas añadidas">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="63.0" layoutY="354.0" prefHeight="5.0" prefWidth="606.0" />
+      <Label layoutX="343.0" layoutY="359.0" text="Consulta">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TableView layoutX="88.0" layoutY="386.0" prefHeight="163.0" prefWidth="226.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Id" />
+          <TableColumn prefWidth="75.0" text="nombre" />
+            <TableColumn prefWidth="75.0" text="capacidad" />
+        </columns>
+      </TableView>
+      <GridPane layoutX="455.0" layoutY="401.0" prefHeight="134.0" prefWidth="76.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" text="Actualizar" />
+            <Button mnemonicParsing="false" text="Cancelar" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" text="Eliminar" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
