@@ -326,3 +326,19 @@ may. 08, 2024 12:28:24 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarReg
 INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-08
 may. 13, 2024 10:53:26 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:00:18 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:06:00 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:10:34 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:12:00 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:43:29 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:51:55 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:52:08 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 13, 2024 7:52:28 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-13

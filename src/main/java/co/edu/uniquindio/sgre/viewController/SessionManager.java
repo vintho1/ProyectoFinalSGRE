@@ -1,15 +1,17 @@
 package co.edu.uniquindio.sgre.viewController;
 
 import co.edu.uniquindio.sgre.model.Admin;
+import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.Usuario;
 
 public class SessionManager {
     private static SessionManager instance;
     private Usuario usuarioActivo;
     private Admin adminActivo;
+    private Empleado empleadoActivo;
 
     private SessionManager() {
-        // Constructor privado para evitar la creación de instancias externas
+
     }
 
     public static SessionManager getInstance() {
@@ -19,9 +21,20 @@ public class SessionManager {
         return instance;
     }
 
+    public void setEmpleado(Empleado empleado) {
+        this.empleadoActivo = empleado;
+    }
+
+    public Empleado getEmpleado() {
+        return empleadoActivo;
+    }
+
+
     public void setUsuario(Usuario usuario) {
         this.usuarioActivo = usuario;
     }
+
+
 
     public Usuario getUsuario() {
         return usuarioActivo;

@@ -34,19 +34,25 @@ public class LoginViewController {
 
     public LoginViewController() throws EmpleadoException {
     }
-
+/*
     @FXML
     void inicioSesionEvent(ActionEvent event) {
         String usuario = txtUser.getText();
         String contrasenia = txtContrasenia.getText();
 
+
+        System.out.println("Usuario: " + usuario);
+        System.out.println("Contraseña: " + contrasenia);
+
         try {
             if (sgre.verificarClienteAdministrador(usuario, contrasenia)) {
-                // Credenciales correctas, redireccionar a la ventana principal
+                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+            } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
+
                 mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
                 new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
             } else {
-                // Credenciales incorrectas, mostrar mensaje de error
                 mostrarAlerta("Error", "Credenciales incorrectas");
             }
         } catch (EmpleadoException e) {
@@ -56,9 +62,45 @@ public class LoginViewController {
         }
     }
 
+ */
+
+    @FXML
+    void inicioSesionEvent(ActionEvent event) {
+        String usuario = txtUser.getText();
+        String contrasenia = txtContrasenia.getText();
+
+        if (usuario.isEmpty() || contrasenia.isEmpty()) {
+            mostrarAlerta("Error", "Por favor ingresa usuario y contraseña");
+            return;
+        }
+
+        System.out.println("Usuario: " + usuario);
+        System.out.println("Contraseña: " + contrasenia);
+
+        try {
+            if (sgre.verificarAdmin(usuario, contrasenia)) {
+                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+            } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
+                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+            } else if (sgre.verificarUser(usuario, contrasenia)){
+                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+            }
+            else {
+                mostrarAlerta("Error", "Credenciales incorrectas");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 
     private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);
         alert.showAndWait();

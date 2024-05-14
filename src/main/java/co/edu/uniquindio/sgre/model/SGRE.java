@@ -228,7 +228,7 @@ public class SGRE implements ISGREService, Serializable {
 
         return usuarioEncontrado;
     }
-
+/*
     public boolean verificarClienteAdministrador(String cedula, String contrasena) throws EmpleadoException {
         if (cedula.isEmpty()) {
             throw new EmpleadoException("Usuario vacío");
@@ -248,8 +248,53 @@ public class SGRE implements ISGREService, Serializable {
         }
 
         Empleado empleado = obtenerEmpleado(cedula);
-        return empleado != null && empleado.getContrasenia().equals(contrasena);
+        if (empleado != null && empleado.getContrasenia().equals(contrasena)) {
+            return true;
+        }
+        return false;
     }
+    public boolean verificarEmpleado(String usuario, String contrasenia) {
+
+        for (Empleado empleado : listaEmpleados) {
+            if (empleado.getUsuario().equals(usuario) && empleado.getContrasenia().equals(contrasenia)) {
+                return true;
+            }
+        }
+        return false; // Credenciales inválidas
+    }
+
+ */
+
+    public boolean verificarAdmin(String usuario, String contrasenia) {
+        for (Admin admin : listaAdmins) {
+            if (admin.getUsuario().equals(usuario) && admin.getContrasenia().equals(contrasenia)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarUser(String usuario, String contrasenia) {
+        for (Usuario user : listaUsuarios) {
+            if (user.getUsuario().equals(usuario) && user.getContrasenia().equals(contrasenia)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarEmpleado(String usuario, String contrasenia) {
+        for (Empleado empleado : listaEmpleados) {
+            if (empleado.getUsuario().equals(usuario) && empleado.getContrasenia().equals(contrasenia)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
 
 
     public Admin obtenerAdministrador(String user) {
@@ -262,7 +307,7 @@ public class SGRE implements ISGREService, Serializable {
     ////
 
     public Evento crearEvento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado) {
-        Evento nuevoEvento = new Evento(id, nombre, descripcion, fecha, capMax, empleadoAsignado, new ArrayList<>());
+        Evento nuevoEvento = new Evento(id, nombre, descripcion, fecha, capMax, empleadoAsignado);
         this.getListaEventos().add(nuevoEvento);
         return nuevoEvento;
     }

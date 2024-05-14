@@ -83,6 +83,11 @@ public class SGREUtils {
         admin1.setContrasenia("321");
         sgre.getListaAdmins().add(admin1);
 
+        Admin admin2 = new Admin();
+        admin2.setUsuario("camila");
+        admin2.setContrasenia("321");
+        sgre.getListaAdmins().add(admin2);
+
 
         System.out.println("Información inicializada del sgre creada");
         return sgre;

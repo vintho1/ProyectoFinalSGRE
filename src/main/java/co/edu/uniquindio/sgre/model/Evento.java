@@ -23,19 +23,19 @@ public class Evento implements Serializable {
     private LocalDate fecha;
     private String capMax;
     private Empleado empleadoAsignado;
-    ArrayList<Reserva> listaReservas = new ArrayList();
+   // ArrayList<Reserva> listaReservas = new ArrayList();
 
     public Evento() {
     }
 
-    public Evento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado, ArrayList<Reserva> listaReservas) {
+    public Evento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.capMax = capMax;
         this.empleadoAsignado = empleadoAsignado;
-        this.listaReservas = listaReservas;
+    //    this.listaReservas = listaReservas;
     }
 
     public String getId() {
@@ -86,13 +86,15 @@ public class Evento implements Serializable {
         this.empleadoAsignado = empleadoAsignado;
     }
 
-    public ArrayList<Reserva> getListaReservas() {
+ /*   public ArrayList<Reserva> getListaReservas() {
         return listaReservas;
     }
 
     public void setListaReservas(ArrayList<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
+
+  */
 
     @Override
     public String toString() {
@@ -103,7 +105,7 @@ public class Evento implements Serializable {
                 ", fecha=" + fecha +
                 ", capMax='" + capMax + '\'' +
                 ", empleadoAsignado=" + empleadoAsignado +
-                ", listaReservas=" + listaReservas +
+          //      ", listaReservas=" + listaReservas +
                 '}';
     }
 }
