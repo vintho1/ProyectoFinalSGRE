@@ -342,3 +342,7 @@ may. 13, 2024 7:52:08 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegi
 INFO: inicioSesión,Inicio de sesión,2024-05-13
 may. 13, 2024 7:52:28 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesión,Inicio de sesión,2024-05-13
+may. 14, 2024 9:50:07 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-14
+may. 14, 2024 9:50:54 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creo el evento EventoDto[id=12344, nombre=hola, descripcion=si es, fecha=2024-05-15, capMax=2, empleadoAsignadoId=1254],Crear evento,2024-05-14

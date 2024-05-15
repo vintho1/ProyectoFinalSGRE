@@ -213,6 +213,7 @@ public class ModelFactoryController implements IModelFactoryController {
             if (!sgre.verificarEventoExistente(eventoDto.id())) {
                 Evento evento = mapper.eventoDtoToEvento(eventoDto);
                 getSGRE().agregarEvento(evento);
+
                 guardarResourceBinario();
                 guardarResourceXML();
                 guardarListaEventos(getSGRE().getListaEventos());
@@ -342,6 +343,8 @@ public class ModelFactoryController implements IModelFactoryController {
     private void guardarResourceBinario() {
         Persistencia.guardarRecursoBancoBinario(sgre);
     }
+
+
 
     private void guardarListaEmpleados(ArrayList<Empleado> listaEmpleados) throws  IOException{
         Persistencia.guardarEmpleados(listaEmpleados);

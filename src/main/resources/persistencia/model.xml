@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8.1" class="java.beans.XMLDecoder">
+<java version="17.0.10" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.sgre.model.SGRE" id="SGRE0">
+  <void property="listaAdmins">
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Admin">
+     <void property="contrasenia">
+      <string>321</string>
+     </void>
+     <void property="usuario">
+      <string>admin</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Admin">
+     <void property="contrasenia">
+      <string>321</string>
+     </void>
+     <void property="usuario">
+      <string>camila</string>
+     </void>
+    </object>
+   </void>
+  </void>
   <void property="listaEmpleados">
    <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
+    <object class="co.edu.uniquindio.sgre.model.Empleado" id="Empleado0">
+     <void property="contrasenia">
+      <string>1</string>
+     </void>
      <void property="email">
       <string>juab@gmail.com</string>
      </void>
@@ -13,10 +38,16 @@
      <void property="nombre">
       <string>juan</string>
      </void>
+     <void property="usuario">
+      <string>emple</string>
+     </void>
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
+    <object class="co.edu.uniquindio.sgre.model.Empleado" id="Empleado1">
+     <void property="contrasenia">
+      <string>12</string>
+     </void>
      <void property="email">
       <string>ana@gmail.com</string>
      </void>
@@ -26,10 +57,16 @@
      <void property="nombre">
       <string>ana</string>
      </void>
+     <void property="usuario">
+      <string>emplea</string>
+     </void>
     </object>
    </void>
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="contrasenia">
+      <string>123</string>
+     </void>
      <void property="email">
       <string>cam21dun@gmail.com</string>
      </void>
@@ -39,41 +76,127 @@
      <void property="nombre">
       <string>camila</string>
      </void>
+     <void property="usuario">
+      <string>empleado</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaEventos">
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Evento" id="Evento0">
+     <void property="capMax">
+      <string>100</string>
+     </void>
+     <void property="descripcion">
+      <string>Conferencia sobre los últimos avances en tecnología.</string>
+     </void>
+     <void property="empleadoAsignado">
+      <object idref="Empleado0"/>
+     </void>
+     <void property="id">
+      <string>1</string>
+     </void>
+     <void property="nombre">
+      <string>Conferencia de Tecnología</string>
+     </void>
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>jvduj@jdlkqwnd</string>
+    <object class="co.edu.uniquindio.sgre.model.Evento" id="Evento1">
+     <void property="capMax">
+      <string>50</string>
+     </void>
+     <void property="descripcion">
+      <string>Taller práctico sobre programación en Java.</string>
+     </void>
+     <void property="empleadoAsignado">
+      <object idref="Empleado1"/>
+     </void>
+     <void property="id">
+      <string>2</string>
+     </void>
+     <void property="nombre">
+      <string>Taller de Programación</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Evento">
+     <void property="capMax">
+      <string>2</string>
+     </void>
+     <void property="descripcion">
+      <string>si es</string>
      </void>
      <void property="id">
       <string>12344</string>
      </void>
      <void property="nombre">
-      <string>sofia</string>
+      <string>hola</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaReservas">
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Reserva">
+     <void property="estado">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.sgre.model.Estado</class>
+       <string>APROBADA</string>
+      </object>
+     </void>
+     <void property="evento">
+      <object idref="Evento0"/>
+     </void>
+     <void property="id">
+      <string>11</string>
+     </void>
+     <void property="usuario">
+      <object class="co.edu.uniquindio.sgre.model.Usuario" id="Usuario0">
+       <void property="contrasenia">
+        <string>123</string>
+       </void>
+       <void property="email">
+        <string>camil@gmail.com</string>
+       </void>
+       <void property="id">
+        <string>125454</string>
+       </void>
+       <void property="nombre">
+        <string>camila</string>
+       </void>
+       <void property="usuario">
+        <string>edo</string>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Reserva">
+     <void property="estado">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.sgre.model.Estado</class>
+       <string>PENDIENTE</string>
+      </object>
+     </void>
+     <void property="evento">
+      <object idref="Evento1"/>
+     </void>
+     <void property="id">
+      <string>22</string>
+     </void>
+     <void property="usuario">
+      <object idref="Usuario0"/>
      </void>
     </object>
    </void>
   </void>
   <void property="listaUsuarios">
    <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Usuario">
-     <void property="contrasenia">
-      <string>123</string>
-     </void>
-     <void property="email">
-      <string>camil@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>125454</string>
-     </void>
-     <void property="nombre">
-      <string>camila</string>
-     </void>
-     <void property="usuario">
-      <string>edo</string>
-     </void>
-    </object>
+    <object idref="Usuario0"/>
    </void>
   </void>
  </object>

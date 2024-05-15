@@ -66,7 +66,7 @@ public class SGREUtils {
         reserva1.setUsuario(usuario);
         reserva1.setFecha(LocalDate.now());
         reserva1.setEstado(Estado.APROBADA);
-        evento1.getListaReservas().add(reserva1);
+       // evento1.getListaReservas().add(reserva1);
         sgre.getListaReservas().add(reserva1);
 
         Reserva reserva2 = new Reserva();
@@ -75,7 +75,7 @@ public class SGREUtils {
         reserva2.setUsuario(usuario);
         reserva2.setFecha(LocalDate.now().plusDays(1));
         reserva2.setEstado(Estado.PENDIENTE);
-        evento2.getListaReservas().add(reserva2);
+       // evento2.getListaReservas().add(reserva2);
         sgre.getListaReservas().add(reserva2);
 
         Admin admin1 = new Admin();
