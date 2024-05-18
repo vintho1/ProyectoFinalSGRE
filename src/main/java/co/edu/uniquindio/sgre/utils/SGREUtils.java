@@ -79,8 +79,8 @@ public class SGREUtils {
         sgre.getListaReservas().add(reserva2);
 
         Admin admin1 = new Admin();
-        admin1.setUsuario("admin");
-        admin1.setContrasenia("321");
+        admin1.setUsuario("1");
+        admin1.setContrasenia("1");
         sgre.getListaAdmins().add(admin1);
 
         Admin admin2 = new Admin();

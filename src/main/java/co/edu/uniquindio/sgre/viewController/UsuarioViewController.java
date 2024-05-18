@@ -97,28 +97,29 @@ public class UsuarioViewController {
     private void listenerSelection() {
         tableUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             usuarioSeleccionado = newSelection;
-            mostrarInformacionEmpleado(usuarioSeleccionado);
+            mostrarInformacionusuario(usuarioSeleccionado);
         });
     }
     @FXML
     void agregarUsuarioAction(ActionEvent event) {
-        crearEmpleado();
+        crearusuario();
     }
 
-    private void crearEmpleado() {
+    private void crearusuario() {
         UsuarioDto usuarioDto = construirUsuarioDto();
         if(datosValidos(usuarioDto)){
             if(usuarioControllerService.agregarUsuario(usuarioDto)){
                 listaUsuariosDto.add(usuarioDto);
-                mostrarMensaje("Notificación empleado", "Usuario creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
+                mostrarMensaje("Notificación usuario", "Usuario creado", "El usuario se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposUsuario();
             }else{
-                mostrarMensaje("Notificación empleado", "Usuario no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación usuario", "Usuario no creado", "El usuario no se ha creado con éxito", Alert.AlertType.ERROR);
             }
         }else{
-            mostrarMensaje("Notificación empleado", "Usuario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificación usuario", "Usuario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
-        registrarAccionesSistema("Crear empleado", 1, "se creo en empleado "+usuarioDto);
+        registrarAccionesSistema("Crear usuario", 1, "se creo en usuario con id: " + usuarioDto.id() + ", nombre: " + usuarioDto.nombre());
+
     }
 
     @FXML
@@ -126,7 +127,7 @@ public class UsuarioViewController {
         eliminarUsuario();
     }
     private void eliminarUsuario() throws IOException {
-        boolean empleadoEliminado = false;
+        boolean usuarioEliminado = false;
         if (usuarioSeleccionado != null) {
 
             Persistencia.eliminarUsuario(usuarioSeleccionado.id());
@@ -139,11 +140,11 @@ public class UsuarioViewController {
             usuarioSeleccionado = null;
             tableUsuarios.getSelectionModel().clearSelection();
             limpiarCamposUsuario();
-            mostrarMensaje("Notificación empleado", "Usuario eliminado", "El empleado se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+            mostrarMensaje("Notificación usuario", "Usuario eliminado", "El usuario se ha eliminado con éxito", Alert.AlertType.INFORMATION);
         } else {
-            mostrarMensaje("Notificación empleado", "Usuario no seleccionado", "Por favor, seleccione un empleado de la lista", Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación usuario", "Usuario no seleccionado", "Por favor, seleccione un usuario de la lista", Alert.AlertType.WARNING);
         }
-        registrarAccionesSistema("Eliminar empleado", 1, "se elimino el empleado ");
+        registrarAccionesSistema("Eliminar usuario", 1, "se elimino el usuario ");
     }
 
     @FXML
@@ -151,7 +152,7 @@ public class UsuarioViewController {
         actualizarUsuario();
     }
     private void actualizarUsuario() throws IOException {
-        boolean empleadoActualizado = false;
+        boolean usuarioActualizado = false;
 
         Usuario usuarioActualizad = new Usuario(
                 txtCedula.getText(),
@@ -182,15 +183,15 @@ public class UsuarioViewController {
 
             tableUsuarios.refresh();
 
-            mostrarMensaje("Notificación empleado", "Usuario actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+            mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito", Alert.AlertType.INFORMATION);
 
             limpiarCamposUsuario();
         } else {
 
-            mostrarMensaje("Notificación empleado", "Usuario no seleccionado", "Por favor, seleccione un empleado de la lista", Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación usuario", "Usuario no seleccionado", "Por favor, seleccione un usuario de la lista", Alert.AlertType.WARNING);
         }
 
-        registrarAccionesSistema("Actualizar empleado", 1, "Se actualizó el empleado " + empleadoActualizado);
+        registrarAccionesSistema("Actualizar usuario", 1, "Se actualizó el usuario " + usuarioActualizado);
     }
 
     @FXML
@@ -263,7 +264,7 @@ public class UsuarioViewController {
             return false;
         }
     }
-    private void mostrarInformacionEmpleado(UsuarioDto usuarioSeleccionado) {
+    private void mostrarInformacionusuario(UsuarioDto usuarioSeleccionado) {
         if(usuarioSeleccionado != null){
             txtNombre.setText(usuarioSeleccionado.nombre());
             txtCedula.setText(usuarioSeleccionado.id());

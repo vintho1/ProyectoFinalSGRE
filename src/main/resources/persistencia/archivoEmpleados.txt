@@ -1,3 +1,5 @@
-125454@@juan@@juab@gmail.com@@emple@@1
-12545445345@@ana@@ana@gmail.com@@emplea@@12
-1254@@camila@@cam21dun@gmail.com@@empleado@@123
+125454@@juan@@juab@gmail.com@@null@@null
+12545445345@@ana@@ana@gmail.com@@null@@null
+1254@@camila@@cam21dun@gmail.com@@null@@null
+1122@@karen@@karen@gmail.com@@null@@null
+111@@sofia@@sofia@gmail.com@@null@@null

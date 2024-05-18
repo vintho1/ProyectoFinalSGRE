@@ -38,16 +38,17 @@ public class ModelFactoryController implements IModelFactoryController {
     public ModelFactoryController() {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
-       cargarDatosBase();
-       salvarDatosPrueba();
+      // cargarDatosBase();
+      // salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
-	    //	cargarDatosDesdeArchivos();
+        cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
 	    //cargarResourceBinario();
 	    //	guardarResourceBinario();
         //  guardarResourceBinarioEventos();
+        guardarResourceBinarioEventos();
         guardarResourceBinarioReservas();
 
         //4. Guardar y Cargar el recurso serializable XML
@@ -73,6 +74,9 @@ public class ModelFactoryController implements IModelFactoryController {
         try {
             Persistencia.guardarEmpleados(getSGRE().getListaEmpleados());
             Persistencia.guardarUsuarios(getSGRE().getListaUsuarios());
+            Persistencia.guardarEventos(getSGRE().getListaEventos());
+            Persistencia.guardarReservas(getSGRE().getListaReservas());
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -215,6 +219,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSGRE().agregarEvento(evento);
 
                 guardarResourceBinario();
+
                 guardarResourceXML();
                 guardarListaEventos(getSGRE().getListaEventos());
             }
@@ -252,9 +257,7 @@ public class ModelFactoryController implements IModelFactoryController {
         }
     }
 
-    private void guardarListaEventos(ArrayList<Evento> listaEventos) throws IOException {
-        Persistencia.guardarEventos(listaEventos);
-    }
+
 
     private void guardarResourceBinarioEventos() {
         try {
@@ -331,6 +334,11 @@ public class ModelFactoryController implements IModelFactoryController {
     private void cargarResourceXML() {
         sgre = Persistencia.cargarRecursoBancoXML();
     }
+  /*  private void cargarEventos() throws IOException {
+        sgre=Persistencia.cargarEventos();
+    }
+
+   */
 
     private void guardarResourceXML() {
         Persistencia.guardarRecursoBancoXML(sgre);
@@ -352,6 +360,9 @@ public class ModelFactoryController implements IModelFactoryController {
 
     private void guardarListaUsuario(ArrayList<Usuario> listaUsuario) throws  IOException{
         Persistencia.guardarUsuarios(listaUsuario);
+    }
+    private void guardarListaEventos(ArrayList<Evento> listaEventos) throws IOException {
+        Persistencia.guardarEventos(listaEventos);
     }
 
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.sgre;
 
 import co.edu.uniquindio.sgre.viewController.InicioViewController;
+import co.edu.uniquindio.sgre.viewController.RegistroEventoViewController;
 import co.edu.uniquindio.sgre.viewController.SGREViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

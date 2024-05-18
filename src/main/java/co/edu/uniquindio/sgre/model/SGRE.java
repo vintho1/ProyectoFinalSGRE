@@ -162,7 +162,7 @@ public class SGRE implements ISGREService, Serializable {
         Iterator var3 = this.getListaUsuarios().iterator();
 
         while(var3.hasNext()) {
-            Empleado empleado = (Empleado)var3.next();
+            Usuario empleado = (Usuario) var3.next();
             if (empleado.getId().equalsIgnoreCase(id)) {
                 usuarioEncontrado = true;
                 break;

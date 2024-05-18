@@ -34,7 +34,6 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SGRELog.txt";
     public static final String RUTA_ARCHIVO_MODELO_BANCO_BINARIO = "src/main/resources/persistencia/mod.dat";
     public static final String RUTA_ARCHIVO_MODELO_BANCO_XML = "src/main/resources/persistencia/model.xml";
-    public static final String RUTA_ARCHIVO_EVENTOS = "src/main/resources/co/edu/uniquindio/sgre/registroEvento.fxml";
     public static final String RUTA_ARCHIVO_EVENTOS_BINARIO = "src/main/resources/persistencia/archivoEventos.dat";
     public static final String RUTA_ARCHIVO_RESERVA_BINARIO = "src/main/resources/persistencia/archivoReservas.dat";
 
@@ -54,12 +53,17 @@ public class Persistencia {
             sgre.getListaUsuarios().addAll(usuariosCargados);
 
         ArrayList<Evento> eventosCargados = cargarEventos();
-        if (eventosCargados.size() > 0)
+        if (eventosCargados.size() > 0) {
             sgre.getListaEventos().addAll(eventosCargados);
-
+            System.out.println("Eventos cargados exitosamente: " + eventosCargados.size());
+        } else {
+            System.out.println("No se encontraron eventos para cargar.");
+        }
         ArrayList<Reserva> reservasCargadas = cargarReservas();
         if (reservasCargadas.size() > 0)
             sgre.getListaReservas().addAll(reservasCargadas);
+
+
     }
 
 
@@ -527,6 +531,7 @@ public class Persistencia {
         }
         return eventos;
     }
+
 
 
     public static void guardarEventos(ArrayList<Evento> listaEventos) throws IOException {

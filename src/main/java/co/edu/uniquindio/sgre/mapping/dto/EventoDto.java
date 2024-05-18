@@ -1,5 +1,7 @@
 package co.edu.uniquindio.sgre.mapping.dto;
 
+import co.edu.uniquindio.sgre.model.Empleado;
+
 import java.time.LocalDate;
 
 public record EventoDto (
@@ -8,6 +10,6 @@ public record EventoDto (
         String descripcion,
         LocalDate fecha,
         String capMax,
-        String empleadoAsignadoId) {
+        Empleado empleadoAsignadoId) {
 
         }

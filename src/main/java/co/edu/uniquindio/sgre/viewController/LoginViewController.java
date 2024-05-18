@@ -79,7 +79,7 @@ public class LoginViewController {
 
         try {
             if (sgre.verificarAdmin(usuario, contrasenia)) {
-                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+                //    mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
                 new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
             } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
                 mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
