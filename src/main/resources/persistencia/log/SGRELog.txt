@@ -566,3 +566,5 @@ may. 17, 2024 10:31:38 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarReg
 INFO: se creo en empleado EmpleadoDto[id=111, nombre=sofia, email=sofia@gmail.com, usuario=sof, contrasenia=111],Crear empleado,2024-05-17
 may. 17, 2024 10:32:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesión,Inicio de sesión,2024-05-17
+may. 17, 2024 10:50:04 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-17

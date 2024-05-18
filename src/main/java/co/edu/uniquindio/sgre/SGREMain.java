@@ -6,6 +6,7 @@ import co.edu.uniquindio.sgre.viewController.SGREViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -20,6 +21,9 @@ public class SGREMain extends Application {
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
         this.primaryStage.setTitle("SGRE");
+        Image icon = new Image(getClass().getResourceAsStream("/persistencia/imagenes/logo.jpg"));
+        stage.getIcons().add(icon);
+        stage.setResizable(false);
         mostrarVentanaPrincipal();
     }
 
@@ -31,6 +35,7 @@ public class SGREMain extends Application {
             InicioViewController sgreViewController = loader.getController();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
