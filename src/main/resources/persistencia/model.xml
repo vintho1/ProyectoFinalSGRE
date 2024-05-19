@@ -41,32 +41,6 @@
      </void>
     </object>
    </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>karen@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>1122</string>
-     </void>
-     <void property="nombre">
-      <string>karen</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Empleado">
-     <void property="email">
-      <string>sofia@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>111</string>
-     </void>
-     <void property="nombre">
-      <string>sofia</string>
-     </void>
-    </object>
-   </void>
   </void>
   <void property="listaEventos">
    <void method="add">
@@ -142,32 +116,16 @@
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Evento">
      <void property="capMax">
-      <string>453</string>
+      <string>44</string>
      </void>
      <void property="descripcion">
-      <string>es buena</string>
+      <string>Taller práctico 3</string>
      </void>
      <void property="id">
       <string>3</string>
      </void>
      <void property="nombre">
-      <string>taller22</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Evento">
-     <void property="capMax">
-      <string>453</string>
-     </void>
-     <void property="descripcion">
-      <string>es buena</string>
-     </void>
-     <void property="id">
-      <string>4</string>
-     </void>
-     <void property="nombre">
-      <string>taller3</string>
+      <string>Taller 3</string>
      </void>
     </object>
    </void>
@@ -309,44 +267,6 @@
      </void>
      <void property="usuario">
       <string>edo</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Usuario">
-     <void property="contrasenia">
-      <string>111</string>
-     </void>
-     <void property="email">
-      <string>lolal@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>111</string>
-     </void>
-     <void property="nombre">
-      <string>lola</string>
-     </void>
-     <void property="usuario">
-      <string>use</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.sgre.model.Usuario">
-     <void property="contrasenia">
-      <string>111</string>
-     </void>
-     <void property="email">
-      <string>lolal@gmail.com</string>
-     </void>
-     <void property="id">
-      <string>222</string>
-     </void>
-     <void property="nombre">
-      <string>lolas</string>
-     </void>
-     <void property="usuario">
-      <string>user</string>
      </void>
     </object>
    </void>

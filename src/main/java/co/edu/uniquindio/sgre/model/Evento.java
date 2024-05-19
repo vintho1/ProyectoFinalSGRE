@@ -38,6 +38,13 @@ public class Evento implements Serializable {
     //    this.listaReservas = listaReservas;
     }
 
+    public Evento(String id, String nombre, String capMax) {
+        this.id = id;
+        this.nombre = nombre;
+        this.capMax = capMax;
+
+    }
+
     public String getId() {
         return id;
     }

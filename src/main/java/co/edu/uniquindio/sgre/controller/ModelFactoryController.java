@@ -39,7 +39,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
       // cargarDatosBase();
-      // salvarDatosPrueba();
+       //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
         cargarDatosDesdeArchivos();
@@ -287,8 +287,10 @@ public class ModelFactoryController implements IModelFactoryController {
             if (!sgre.verificarReservaExistente(reservaDto.id())) {
                 Reserva reserva = mapper.reservaDtoToReserva(reservaDto);
                 sgre.agregarReserva(reserva);
+
                 guardarResourceBinario();
                 guardarResourceXML();
+
                 guardarListaReservas(sgre.getListaReservas());
             }
             return true;

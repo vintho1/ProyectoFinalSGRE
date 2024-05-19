@@ -34,36 +34,6 @@ public class LoginViewController {
 
     public LoginViewController() throws EmpleadoException {
     }
-/*
-    @FXML
-    void inicioSesionEvent(ActionEvent event) {
-        String usuario = txtUser.getText();
-        String contrasenia = txtContrasenia.getText();
-
-
-        System.out.println("Usuario: " + usuario);
-        System.out.println("Contraseña: " + contrasenia);
-
-        try {
-            if (sgre.verificarClienteAdministrador(usuario, contrasenia)) {
-                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
-                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
-            } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
-
-                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
-                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
-            } else {
-                mostrarAlerta("Error", "Credenciales incorrectas");
-            }
-        } catch (EmpleadoException e) {
-            mostrarAlerta("Error", e.getMessage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
- */
-
     @FXML
     void inicioSesionEvent(ActionEvent event) {
         String usuario = txtUser.getText();
@@ -79,7 +49,6 @@ public class LoginViewController {
 
         try {
             if (sgre.verificarAdmin(usuario, contrasenia)) {
-                //    mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
                 new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
             } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
                 mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
@@ -95,8 +64,15 @@ public class LoginViewController {
             throw new RuntimeException(e);
         }
     }
+    @FXML
+    void registrarEvent(ActionEvent event) throws IOException {
+        registrarAction();
 
+    }
 
+    private void registrarAction() throws IOException {
+
+    }
 
 
     private void mostrarAlerta(String titulo, String mensaje) {

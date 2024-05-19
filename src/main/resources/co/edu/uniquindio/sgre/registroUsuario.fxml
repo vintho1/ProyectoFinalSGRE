@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="563.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.UsuarioViewController">
+<AnchorPane fx:id="ventana" prefHeight="752.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.UsuarioViewController">
     <children>
-        <SplitPane dividerPositions="0.6007130124777184" layoutX="5.0" orientation="VERTICAL" prefHeight="563.0" prefWidth="738.0">
+        <SplitPane dividerPositions="0.6007130124777184" layoutX="5.0" orientation="VERTICAL" prefHeight="752.0" prefWidth="1124.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="736.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="752.0" prefWidth="1124.0">
                     <children>
                         <Label layoutX="138.0" layoutY="74.0" text="Nombres:" />
                         <Label layoutX="144.0" layoutY="109.0" text="Cédula:" />
@@ -36,7 +36,7 @@
                   <Label layoutX="143.0" layoutY="176.0" text="Usuario:" />
                   <Label layoutX="133.0" layoutY="211.0" text="Contraseña:" />
                     </children></AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="229.0" prefWidth="736.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="752.0" prefWidth="1124.0">
                     <children>
                         <TableView fx:id="tableUsuarios" layoutX="199.0" layoutY="14.0" prefHeight="138.0" prefWidth="308.0">
                             <columns>

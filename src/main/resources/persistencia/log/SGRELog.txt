@@ -568,3 +568,125 @@ may. 17, 2024 10:32:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarReg
 INFO: inicioSesión,Inicio de sesión,2024-05-17
 may. 17, 2024 10:50:04 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesión,Inicio de sesión,2024-05-17
+may. 18, 2024 10:03:54 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:04:21 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=5, nombre=taller4, descripcion=bueno, fecha=2024-05-20, capMax=33, empleadoAsignadoId=null],Crear evento,2024-05-18
+may. 18, 2024 10:04:28 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de evento,2024-05-18
+may. 18, 2024 10:04:28 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=5, nombre=taller4, descripcion=bueno, fecha=2024-05-20, capMax=33, empleadoAsignadoId=Empleado(id=1122, nombre=karen, email=karen@gmail.com)],Crear evento,2024-05-18
+may. 18, 2024 10:09:10 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:09:52 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=6, nombre=taller5, descripcion=buenoss, fecha=2024-05-29, capMax=3344, empleadoAsignadoId=null],Crear evento,2024-05-18
+may. 18, 2024 10:09:58 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de evento,2024-05-18
+may. 18, 2024 10:09:58 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=6, nombre=taller5, descripcion=buenoss, fecha=2024-05-29, capMax=3344, empleadoAsignadoId=Empleado(id=125454, nombre=juan, email=juab@gmail.com)],Crear evento,2024-05-18
+may. 18, 2024 10:10:19 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de evento,2024-05-18
+may. 18, 2024 10:10:19 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: Se actualizó el empleado false,Actualizar empleado,2024-05-18
+may. 18, 2024 10:13:13 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:13:37 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=7, nombre=taller6, descripcion=buenoss, fecha=2024-05-17, capMax=3344, empleadoAsignadoId=null],Crear evento,2024-05-18
+may. 18, 2024 10:13:43 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=7, nombre=taller6, descripcion=buenoss, fecha=2024-05-17, capMax=3344, empleadoAsignadoId=Empleado(id=12545445345, nombre=ana, email=ana@gmail.com)],Crear evento,2024-05-18
+may. 18, 2024 10:13:48 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de evento,2024-05-18
+may. 18, 2024 10:13:48 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=7, nombre=taller6, descripcion=buenoss, fecha=2024-05-18, capMax=3344, empleadoAsignadoId=Empleado(id=12545445345, nombre=ana, email=ana@gmail.com)],Crear evento,2024-05-18
+may. 18, 2024 10:14:24 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creo en usuario con id: 222111, nombre: jose,Crear usuario,2024-05-18
+may. 18, 2024 10:14:55 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creo en empleado EmpleadoDto[id=125444, nombre=luis, email=cam21dun@gmail.com, usuario=rrr, contrasenia=112],Crear empleado,2024-05-18
+may. 18, 2024 10:20:56 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:22:08 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:22:25 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:22:51 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creo en empleado EmpleadoDto[id=1254, nombre=camila, email=cam21dun@gmail.com, usuario=eee, contrasenia=333],Crear empleado,2024-05-18
+may. 18, 2024 10:23:00 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: Se actualizó el empleado false,Actualizar empleado,2024-05-18
+may. 18, 2024 10:38:36 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:46:55 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 10:47:08 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se busco el evento 1,Buscar evento,2024-05-18
+may. 18, 2024 10:58:23 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 11:00:05 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 18, 2024 11:06:31 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-18
+may. 19, 2024 12:14:41 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 12:16:23 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 12:20:09 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 12:22:15 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 11:06:11 A. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 12:06:10 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 12:06:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó la reserva ReservaDto[id=1, capacidad=222, eventoId=null, fecha=2024-05-13, estado=PENDIENTE],Crear reserva,2024-05-19
+may. 19, 2024 12:06:40 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de la reserva,2024-05-19
+may. 19, 2024 12:06:40 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó la reserva ReservaDto[id=1, capacidad=222, eventoId=null, fecha=2024-05-21, estado=PENDIENTE],Crear reserva,2024-05-19
+may. 19, 2024 12:08:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 12:08:54 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó la reserva ReservaDto[id=1, capacidad=66, eventoId=null, fecha=2024-05-21, estado=PENDIENTE],Crear reserva,2024-05-19
+may. 19, 2024 12:08:57 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de la reserva,2024-05-19
+may. 19, 2024 12:08:57 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó la reserva ReservaDto[id=1, capacidad=66, eventoId=Evento{id='3', nombre='taller22', descripcion='null', fecha=null, capMax='453', empleadoAsignado=null}, fecha=2024-05-21, estado=PENDIENTE],Crear reserva,2024-05-19
+may. 19, 2024 12:14:18 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 1:13:07 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 2:17:19 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 2:17:49 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creo en usuario con id: 111, nombre: ana,Crear usuario,2024-05-19
+may. 19, 2024 2:26:28 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 2:26:57 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creo en usuario con id: 111, nombre: ana,Crear usuario,2024-05-19
+may. 19, 2024 2:36:53 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 2:40:26 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 2:46:24 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 3:14:51 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 3:15:35 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 3:16:08 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=2, nombre=Taller3, descripcion=Taller práctico, fecha=2024-06-27, capMax=50, empleadoAsignadoId=null],Crear evento,2024-05-19
+may. 19, 2024 3:16:18 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de evento,2024-05-19
+may. 19, 2024 3:16:18 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=2, nombre=Taller3, descripcion=Taller práctico, fecha=2024-06-27, capMax=50, empleadoAsignadoId=Empleado(id=1254, nombre=camila, email=cam21dun@gmail.com)],Crear evento,2024-05-19
+may. 19, 2024 3:16:27 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 3:17:07 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19
+may. 19, 2024 3:17:24 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=3, nombre=Taller 3, descripcion=Taller práctico 3, fecha=2024-06-21, capMax=44, empleadoAsignadoId=null],Crear evento,2024-05-19
+may. 19, 2024 3:17:27 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se limpiaron los campos,Limpiar campos de evento,2024-05-19
+may. 19, 2024 3:17:27 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: se creó el evento EventoDto[id=3, nombre=Taller 3, descripcion=Taller práctico 3, fecha=2024-06-21, capMax=44, empleadoAsignadoId=Empleado(id=1254, nombre=camila, email=cam21dun@gmail.com)],Crear evento,2024-05-19
+may. 19, 2024 3:17:57 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2024-05-19

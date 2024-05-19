@@ -45,11 +45,11 @@ public class Persistencia {
 
         //cargar archivos empleados
         ArrayList<Empleado> empleadosCargados = cargarEmpleados();
-        if(empleadosCargados.size() > 0)
+        if (empleadosCargados.size() > 0)
             sgre.getListaEmpleados().addAll(empleadosCargados);
 
         ArrayList<Usuario> usuariosCargados = cargarUsuarios();
-        if(usuariosCargados.size() > 0)
+        if (usuariosCargados.size() > 0)
             sgre.getListaUsuarios().addAll(usuariosCargados);
 
         ArrayList<Evento> eventosCargados = cargarEventos();
@@ -60,11 +60,15 @@ public class Persistencia {
             System.out.println("No se encontraron eventos para cargar.");
         }
         ArrayList<Reserva> reservasCargadas = cargarReservas();
-        if (reservasCargadas.size() > 0)
+        if (reservasCargadas.size() > 0) {
             sgre.getListaReservas().addAll(reservasCargadas);
-
-
+            System.out.println("Reservas cargadas exitosamente: " + reservasCargadas.size());
+        } else {
+            System.out.println("No se encontraron reservas para cargar.");
+        }
     }
+
+
 
 
     /**

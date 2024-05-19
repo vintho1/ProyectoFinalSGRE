@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.sgre.controller.EmpleadoController;
 import co.edu.uniquindio.sgre.controller.EventoController;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.sgre.mapping.dto.EventoDto;
-import co.edu.uniquindio.sgre.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.Evento;
-import co.edu.uniquindio.sgre.model.Usuario;
 import co.edu.uniquindio.sgre.utils.Persistencia;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -22,7 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-public class RegistroEventoViewController {
+public class EventoViewController {
 
     EventoController eventoControllerService;
     ObservableList<EventoDto> listaEventosDto = FXCollections.observableArrayList();
@@ -81,12 +80,17 @@ public class RegistroEventoViewController {
     private AnchorPane ventana;
     @FXML
     private Button btnLimpiar;
+    @FXML
+    private Button btnBuscar;
+    @FXML
+    private TextField txtBuscar;
 
     @FXML
     void initialize() {
         eventoControllerService = new EventoController();
         empleadoControllerService = new EmpleadoController();
         intiView();
+        /*
         dateFecha.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
@@ -96,27 +100,15 @@ public class RegistroEventoViewController {
                 }
             }
         });
+
+         */
     }
 
 
     private void obtenerEmpleadosDisponibles() {
         listaEmpleadosDto.clear();
         ObservableList<EmpleadoDto> todosEmpleados = FXCollections.observableArrayList(empleadoControllerService.obtenerEmpleados());
-        ObservableList<EventoDto> todosEventos = FXCollections.observableArrayList(eventoControllerService.obtenerEventos());
-
-
-        for (EmpleadoDto empleado : todosEmpleados) {
-            boolean empleadoDisponible = true;
-            for (EventoDto evento : todosEventos) {
-                if (evento.empleadoAsignadoId() != null && evento.empleadoAsignadoId().getId().equals(empleado.id())) {
-                    empleadoDisponible = false;
-                    break;
-                }
-            }
-            if (empleadoDisponible) {
-                listaEmpleadosDto.add(empleado);
-            }
-        }
+        listaEmpleadosDto.addAll(todosEmpleados);
     }
 
 
@@ -174,13 +166,6 @@ public class RegistroEventoViewController {
         if (datosValidos(eventoDto)) {
             if (eventoControllerService.agregarEvento(eventoDto)) {
                 listaEventosDto.add(eventoDto);
-
-
-                if (empleadoSeleccionado != null) {
-                    listaEmpleadosDto.remove(empleadoSeleccionado);
-                    tablaEmpleados.refresh();
-                }
-
                 mostrarMensaje("Notificación evento", "Evento creado", "El evento se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposEvento();
             } else {
@@ -195,13 +180,16 @@ public class RegistroEventoViewController {
     private boolean datosValidos(EventoDto eventoDto) {
         String mensaje = "";
         if (eventoDto.nombre() == null || eventoDto.nombre().equals(""))
-            mensaje += "El nombre es inválido \n";
+            mensaje += "El nombre es obligatorio \n";
         if (eventoDto.id() == null || eventoDto.id().equals(""))
-            mensaje += "El id es inválido \n";
+            mensaje += "El id es obligatorio \n";
         if (eventoDto.descripcion() == null || eventoDto.descripcion().equals(""))
-            mensaje += "La descripción es inválida \n";
+            mensaje += "La descripción es obligatorio \n";
         if (eventoDto.empleadoAsignadoId() == null)
             mensaje += "Debe seleccionar un empleado \n";
+        if (eventoDto.fecha() == null || eventoDto.fecha().isBefore(LocalDate.now().plusDays(1)))
+            mensaje += "La fecha debe ser posterior al día actual \n";
+
         if (mensaje.equals("")) {
             return true;
         } else {
@@ -209,6 +197,7 @@ public class RegistroEventoViewController {
             return false;
         }
     }
+
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
         Alert aler = new Alert(alertType);
@@ -275,15 +264,15 @@ public class RegistroEventoViewController {
 
             tablaEventos.refresh();
 
-            mostrarMensaje("Notificación empleado", "Usuario actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+            mostrarMensaje("Notificación evento", "Esuario actualizado", "El evento se ha actualizado con éxito", Alert.AlertType.INFORMATION);
 
             limpiarCamposEvento();
         } else {
 
-            mostrarMensaje("Notificación empleado", "Usuario no seleccionado", "Por favor, seleccione un empleado de la lista", Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación evento", "Evento no seleccionado", "Por favor, seleccione un evento de la lista", Alert.AlertType.WARNING);
         }
 
-        registrarAccionesSistema("Actualizar empleado", 1, "Se actualizó el empleado " + eventoActualizado);
+        registrarAccionesSistema("Actualizar evento", 1, "Se actualizó el evento " + eventoActualizado);
     }
 
     @FXML
@@ -315,13 +304,40 @@ public class RegistroEventoViewController {
         } else {
             mostrarMensaje("Notificación evento", "Evento no seleccionado", "Por favor, seleccione un evento de la tabla", Alert.AlertType.WARNING);
         }
-        registrarAccionesSistema("Eliminar empleado", 1, "se elimino el empleado ");
+        registrarAccionesSistema("Eliminar evento", 1, "se elimino el evento ");
     }
 
 
     private void cancelarEventoAction() {
-        // Implementación para cancelar evento
+
     }
+
+    @FXML
+    void buscarEvent(ActionEvent event) {
+        buscarAction();
+
+    }
+
+    private void buscarAction() {
+        String filtro = txtBuscar.getText().trim();
+        if (filtro.isEmpty()) {
+            tablaEventos.setItems(listaEventosDto);
+        } else {
+            ObservableList<EventoDto> eventosFiltrados = FXCollections.observableArrayList(
+                    listaEventosDto.stream()
+                            .filter(evento ->
+                                    evento.nombre().toLowerCase().contains(filtro.toLowerCase()) ||
+                                            evento.id().toLowerCase().contains(filtro.toLowerCase()) ||
+                                            evento.capMax().toLowerCase().contains(filtro.toLowerCase()) ||
+                                            (evento.fecha() != null && evento.fecha().toString().contains(filtro))
+                            )
+                            .collect(Collectors.toList())
+            );
+            tablaEventos.setItems(eventosFiltrados);
+        }
+        registrarAccionesSistema("Buscar evento", 1, "se aplico el filtro para obtener el evento que contenga  " + filtro);
+    }
+
 
     private void mostrarInformacionEvento(EventoDto eventoSeleccionado) {
         if(eventoSeleccionado != null){

@@ -159,6 +159,7 @@ public class EmpleadoViewController {
                 txtCedula.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText()
+
         );
 
         if (empleadoSeleccionado != null) {
@@ -203,6 +204,8 @@ public class EmpleadoViewController {
         txtNombre.setPromptText("Ingrese el nombre");
         txtCedula.setPromptText("Ingrese la cedula");
         txtCorreo.setPromptText("Ingrese el correo");
+        txtUser.setPromptText("Ingrese el usuario");
+        txtContrasenia.setPromptText("Ingrese el contraseña");
     }
 
 
@@ -220,6 +223,8 @@ public class EmpleadoViewController {
         txtNombre.setText("");
         txtCedula.setText("");
         txtCorreo.setText("");
+        txtUser.setText("");
+        txtContrasenia.setText("");
     }
 
     private boolean datosValidos(EmpleadoDto empleadoDto) {
@@ -263,6 +268,8 @@ public class EmpleadoViewController {
             txtNombre.setText(empleadoSeleccionado.nombre());
             txtCedula.setText(empleadoSeleccionado.id());
             txtCorreo.setText(empleadoSeleccionado.email());
+            txtUser.setText(empleadoSeleccionado.usuario());
+            txtContrasenia.setText(empleadoSeleccionado.contrasenia());
 
         }
     }

@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="563.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.EmpleadoViewController">
+<AnchorPane prefHeight="752.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.EmpleadoViewController">
     <children>
-        <SplitPane layoutX="4.0" layoutY="8.0" orientation="VERTICAL" prefHeight="563.0" prefWidth="738.0">
+        <SplitPane layoutX="4.0" layoutY="8.0" orientation="VERTICAL" prefHeight="752.0" prefWidth="1124.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="736.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="752.0" prefWidth="1124.0">
                     <children>
                   <Label layoutX="301.0" layoutY="41.0" text="Registro de Empleado">
                      <font>

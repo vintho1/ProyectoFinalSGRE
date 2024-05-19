@@ -361,13 +361,13 @@ public class SGRE implements ISGREService, Serializable {
 
     ///////
 
-    public Reserva crearReserva(String id, Usuario usuario, Evento evento, LocalDate fecha, Estado estado) throws EmpleadoException {
+    public Reserva crearReserva(String id, String capacidad, Usuario usuario, Evento evento, LocalDate fecha, Estado estado) throws EmpleadoException {
         Reserva nuevaReserva = null;
         boolean reservaExiste = this.verificarReservaExistente(id);
         if (reservaExiste) {
             throw new EmpleadoException("La reserva con ID: " + id + " ya existe");
         } else {
-            nuevaReserva = new Reserva(id, usuario, evento, fecha, estado);
+            nuevaReserva = new Reserva(id, capacidad, usuario, evento, fecha, estado);
             this.getListaReservas().add(nuevaReserva);
             return nuevaReserva;
         }

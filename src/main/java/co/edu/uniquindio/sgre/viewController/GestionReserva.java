@@ -1,5 +1,4 @@
 package co.edu.uniquindio.sgre.viewController;
 
-public class RegistroReservaViewController {
-
+public class GestionReserva {
 }

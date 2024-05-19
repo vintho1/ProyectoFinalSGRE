@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 public class UsuarioViewController {
     UsuarioController usuarioControllerService;
@@ -66,6 +67,8 @@ public class UsuarioViewController {
 
     @FXML
     private TextField txtUsuario;
+    @FXML
+    private AnchorPane ventana;
 
     @FXML
     void initialize() {
@@ -101,11 +104,11 @@ public class UsuarioViewController {
         });
     }
     @FXML
-    void agregarUsuarioAction(ActionEvent event) {
+    void agregarUsuarioAction(ActionEvent event) throws IOException {
         crearusuario();
     }
 
-    private void crearusuario() {
+    private void crearusuario() throws IOException {
         UsuarioDto usuarioDto = construirUsuarioDto();
         if(datosValidos(usuarioDto)){
             if(usuarioControllerService.agregarUsuario(usuarioDto)){
@@ -119,6 +122,7 @@ public class UsuarioViewController {
             mostrarMensaje("Notificación usuario", "Usuario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
         registrarAccionesSistema("Crear usuario", 1, "se creo en usuario con id: " + usuarioDto.id() + ", nombre: " + usuarioDto.nombre());
+
 
     }
 
