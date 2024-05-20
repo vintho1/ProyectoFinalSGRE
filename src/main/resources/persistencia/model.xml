@@ -4,6 +4,9 @@
   <void property="listaEmpleados">
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="contrasenia">
+      <string>1</string>
+     </void>
      <void property="email">
       <string>juab@gmail.com</string>
      </void>
@@ -13,10 +16,16 @@
      <void property="nombre">
       <string>juan</string>
      </void>
+     <void property="usuario">
+      <string>emple</string>
+     </void>
     </object>
    </void>
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="contrasenia">
+      <string>12</string>
+     </void>
      <void property="email">
       <string>ana@gmail.com</string>
      </void>
@@ -26,10 +35,16 @@
      <void property="nombre">
       <string>ana</string>
      </void>
+     <void property="usuario">
+      <string>emplea</string>
+     </void>
     </object>
    </void>
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="contrasenia">
+      <string>123</string>
+     </void>
      <void property="email">
       <string>cam21dun@gmail.com</string>
      </void>
@@ -38,6 +53,22 @@
      </void>
      <void property="nombre">
       <string>camila</string>
+     </void>
+     <void property="usuario">
+      <string>empleado</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Empleado">
+     <void property="email">
+      <string>cam21dun@gmail.com</string>
+     </void>
+     <void property="id">
+      <string>111</string>
+     </void>
+     <void property="nombre">
+      <string>luisa</string>
      </void>
     </object>
    </void>
@@ -116,16 +147,16 @@
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Evento">
      <void property="capMax">
-      <string>44</string>
+      <string>6655</string>
      </void>
      <void property="descripcion">
-      <string>Taller práctico 3</string>
+      <string>Taller práctico zzz</string>
      </void>
      <void property="id">
       <string>3</string>
      </void>
      <void property="nombre">
-      <string>Taller 3</string>
+      <string>Taller </string>
      </void>
     </object>
    </void>
@@ -201,7 +232,7 @@
    <void method="add">
     <object class="co.edu.uniquindio.sgre.model.Reserva">
      <void property="estado">
-      <object class="java.lang.Enum" method="valueOf">
+      <object class="java.lang.Enum" id="Estado0" method="valueOf">
        <class>co.edu.uniquindio.sgre.model.Estado</class>
        <string>PENDIENTE</string>
       </object>
@@ -249,6 +280,19 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Reserva">
+     <void property="capacidad">
+      <string>33</string>
+     </void>
+     <void property="estado">
+      <object idref="Estado0"/>
+     </void>
+     <void property="id">
+      <string>222</string>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="listaUsuarios">
    <void method="add">
@@ -267,6 +311,25 @@
      </void>
      <void property="usuario">
       <string>edo</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.sgre.model.Usuario">
+     <void property="contrasenia">
+      <string>123</string>
+     </void>
+     <void property="email">
+      <string>camil@gmail.com</string>
+     </void>
+     <void property="id">
+      <string>222</string>
+     </void>
+     <void property="nombre">
+      <string>luu</string>
+     </void>
+     <void property="usuario">
+      <string>www</string>
      </void>
     </object>
    </void>

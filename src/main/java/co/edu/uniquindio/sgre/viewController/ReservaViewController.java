@@ -9,14 +9,13 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.sgre.controller.EmpleadoController;
 import co.edu.uniquindio.sgre.controller.EventoController;
 import co.edu.uniquindio.sgre.controller.ReservaController;
+import co.edu.uniquindio.sgre.controller.UsuarioController;
+import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.sgre.mapping.dto.EventoDto;
 import co.edu.uniquindio.sgre.mapping.dto.ReservaDto;
 import co.edu.uniquindio.sgre.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.sgre.model.Empleado;
-import co.edu.uniquindio.sgre.model.Estado;
-import co.edu.uniquindio.sgre.model.Evento;
-import co.edu.uniquindio.sgre.model.Usuario;
+import co.edu.uniquindio.sgre.model.*;
 import co.edu.uniquindio.sgre.utils.Persistencia;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -37,6 +36,12 @@ public class ReservaViewController {
     ReservaController reservaControllerService;
     ObservableList<ReservaDto> listaReservaDto = FXCollections.observableArrayList();
     ReservaDto reservaSeleccionado;
+
+
+    ///////
+
+    UsuarioController UsuarioControllerService;
+    ObservableList<UsuarioDto> listaUsuarioDto = FXCollections.observableArrayList();
 
     private UsuarioDto usuarioLogueado;
 
@@ -82,22 +87,27 @@ public class ReservaViewController {
     private TextField txtIdUsuario;
 
     @FXML
-    void reservaEvent(ActionEvent event) {
+    void reservaEvent(ActionEvent event) throws EmpleadoException {
+        ReservaDto reservaDto = construirReservaDto();
+        if (datosValidos(reservaDto)) {
 
-        ReservaDto eventoDto = construirReservaDto();
-        if (datosValidos(eventoDto)) {
-            if (reservaControllerService.agregarReserva(eventoDto)) {
-                listaReservaDto.add(eventoDto);
-                mostrarMensaje("Notificación reserva", "Reserva creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
-                limpiarCamposReserva();
-            } else {
-                mostrarMensaje("Notificación reserva", "Reserva no creada", "La reserva no se ha creado", Alert.AlertType.ERROR);
-            }
+                if (reservaControllerService.agregarReserva(reservaDto)) {
+                    listaReservaDto.add(reservaDto);
+                    mostrarMensaje("Notificación reserva", "Reserva creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
+                    limpiarCamposReserva();
+                } else {
+                    mostrarMensaje("Notificación reserva", "Reserva no creada", "La reserva no se ha creado", Alert.AlertType.ERROR);
+                }
         } else {
             mostrarMensaje("Notificación reserva", "Reserva no creada", "Los datos ingresados son inválidos", Alert.AlertType.ERROR);
         }
-        registrarAccionesSistema("Crear reserva", 1, "se creó la reserva " + eventoDto);
+        registrarAccionesSistema("Crear reserva", 1, "se creó la reserva " + reservaDto);
     }
+
+
+
+
+
 
     private boolean datosValidos(ReservaDto eventoDto) {
         String mensaje = "";

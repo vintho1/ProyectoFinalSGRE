@@ -53,7 +53,7 @@
             <PasswordField fx:id="txtContrasenia" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label layoutX="527.0" layoutY="367.0" prefHeight="20.0" prefWidth="73.0" text="Registrarse " textFill="#0b4368" underline="true">
+      <Label layoutX="527.0" layoutY="345.0" prefHeight="20.0" prefWidth="73.0" text="Registrarse " textFill="#0b4368" underline="true">
          <font>
             <Font size="14.0" />
          </font>
@@ -61,7 +61,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Button layoutX="519.0" layoutY="364.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#registrarEvent" opacity="0.0" prefHeight="25.0" prefWidth="89.0">
+      <Button layoutX="519.0" layoutY="342.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#registrarEvent" opacity="0.0" prefHeight="25.0" prefWidth="89.0">
          <effect>
             <Blend />
          </effect>

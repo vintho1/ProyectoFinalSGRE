@@ -10,19 +10,9 @@
 
 <AnchorPane fx:id="ventana" prefHeight="752.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.SGREViewController">
     <children>
-        <TabPane layoutY="64.0" prefHeight="696.0" prefWidth="1124.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tabPane" layoutY="64.0" prefHeight="696.0" prefWidth="1124.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Login">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="673.0" prefWidth="1124.0">
-                            <items>
-                                <fx:include source="login.fxml" />
-                            </items>
-                        </SplitPane>
-                    </content>
-                </Tab>
-                <Tab text="Empleado">
+                <Tab fx:id="tabEmpleado" text="Empleado">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="723.0" prefWidth="1033.0">
                             <children>
@@ -35,7 +25,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-            <Tab text="Usuario">
+            <Tab fx:id="tabUsuario" text="Usuario">
               <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                       <children>
@@ -48,7 +38,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Reseva">
+            <Tab fx:id="tabReserva" text="Reseva">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="1106.0">
@@ -58,7 +48,7 @@
                   </SplitPane>
               </content>
             </Tab>
-            <Tab text="Evento">
+            <Tab fx:id="tabEvento" text="Evento">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="1106.0">

@@ -264,15 +264,17 @@ public class EmpleadoViewController {
         }
     }
     private void mostrarInformacionEmpleado(EmpleadoDto empleadoSeleccionado) {
-        if(empleadoSeleccionado != null){
+        if (empleadoSeleccionado != null) {
+
+
             txtNombre.setText(empleadoSeleccionado.nombre());
             txtCedula.setText(empleadoSeleccionado.id());
             txtCorreo.setText(empleadoSeleccionado.email());
             txtUser.setText(empleadoSeleccionado.usuario());
             txtContrasenia.setText(empleadoSeleccionado.contrasenia());
-
         }
     }
+
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }

@@ -31,9 +31,9 @@ public class SGREMain extends Application {
     public void mostrarVentanaPrincipal() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/co/edu/uniquindio/sgre/sgre.fxml"));
+            loader.setLocation(getClass().getResource("/co/edu/uniquindio/sgre/login.fxml"));
             AnchorPane rootLayout = loader.load();
-            SGREViewController sgreViewController = loader.getController();
+            LoginViewController sgreViewController = loader.getController();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
 

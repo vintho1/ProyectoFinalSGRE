@@ -199,7 +199,21 @@ public class SGRE implements ISGREService, Serializable {
         }
     }
 
-    public Usuario obtenerUsuario(String user) {
+    public  Usuario obtenerUsuario(String user) {
+        Usuario usuarioEncontrado = null;
+        Iterator var3 = this.getListaUsuarios().iterator();
+
+        while(var3.hasNext()) {
+            Usuario usuario = (Usuario) var3.next();
+            if (usuario.getUsuario().equalsIgnoreCase(user)) {
+                usuarioEncontrado = usuario;
+                break;
+            }
+        }
+
+        return usuarioEncontrado;
+    }
+    public  Usuario obtenerUsuario3(String user) {
         Usuario usuarioEncontrado = null;
         Iterator var3 = this.getListaUsuarios().iterator();
 

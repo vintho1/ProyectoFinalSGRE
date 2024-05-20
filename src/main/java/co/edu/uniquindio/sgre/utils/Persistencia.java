@@ -129,6 +129,8 @@ public class Persistencia {
             empleado.setId(linea.split("@@")[0]);
             empleado.setNombre(linea.split("@@")[1]);
             empleado.setEmail(linea.split("@@")[2]);
+            empleado.setUsuario(linea.split("@@")[3]);
+            empleado.setContrasenia(linea.split("@@")[4]);
             empleados.add(empleado);
         }
         return empleados;

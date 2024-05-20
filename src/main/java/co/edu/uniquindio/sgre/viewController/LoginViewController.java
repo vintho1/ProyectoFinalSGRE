@@ -71,7 +71,7 @@ public class LoginViewController {
     }
 
     private void registrarAction() throws IOException {
-
+        new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
     }
 
 
