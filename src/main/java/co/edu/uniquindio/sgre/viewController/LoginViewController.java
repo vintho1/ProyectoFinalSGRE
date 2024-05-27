@@ -1,7 +1,9 @@
 package co.edu.uniquindio.sgre.viewController;
 
+import co.edu.uniquindio.sgre.SGREMain;
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
 import co.edu.uniquindio.sgre.model.SGRE;
+import com.rabbitmq.client.DeliverCallback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,11 +13,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+import static co.edu.uniquindio.sgre.SGREMain.*;
 
 public class LoginViewController {
 
     @FXML
     private Button btnInicio;
+
+    @FXML
+    private Button btnuno;
+
+    @FXML
+    private Button btnotro;
+
 
     @FXML
     private PasswordField txtContrasenia;
@@ -29,41 +41,87 @@ public class LoginViewController {
     private final SGRE sgre = SGRE.getInstance();
 
     public LoginViewController() throws EmpleadoException {
+
     }
+
     @FXML
     void inicioSesionEvent(ActionEvent event) {
         String usuario = txtUser.getText();
         String contrasenia = txtContrasenia.getText();
-
-        if (usuario.isEmpty() || contrasenia.isEmpty()) {
-            mostrarAlerta("Error", "Por favor ingresa usuario y contraseña");
-            return;
-        }
-
-        System.out.println("Usuario: " + usuario);
-        System.out.println("Contraseña: " + contrasenia);
-
         try {
-            if (sgre.verificarAdmin(usuario, contrasenia)) {
-                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
-            } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
-                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
-                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
-            } else if (sgre.verificarUser(usuario, contrasenia)){
-                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
-                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+
+            if (usuario.equals("empleado")) {
+
+                channel.exchangeDeclare(COLA_SOLICITUD_RESERVA, "fanout");
+                String queueName = channel.queueDeclare().getQueue();
+                channel.queueBind(queueName, COLA_SOLICITUD_RESERVA, "");
+
+                DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                    String message = new String(delivery.getBody(), "UTF-8");
+                    System.out.println(" [x] Received '" + message + "' por el Empleado");
+                };
+
+                channel.basicConsume(queueName, false, deliverCallback, consumerTag -> {
+                });
+
             }
-            else {
-                mostrarAlerta("Error", "Credenciales incorrectas");
+            if (usuario.equals("usuario")) {
+
+                channel.exchangeDeclare(COLA_RESERVA_VALIDADA, "direct");
+                String queueName = channel.queueDeclare().getQueue();
+                channel.queueBind(queueName, COLA_RESERVA_VALIDADA, contrasenia);
+
+                DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                    String message = new String(delivery.getBody(), "UTF-8");
+                    System.out.println(" [x] Reserva validada '" + message + "'");
+                };
+                channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
+                });
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+//        if (usuario.isEmpty() || contrasenia.isEmpty()) {
+//            mostrarAlerta("Error", "Por favor ingresa usuario y contraseña");
+//            return;
+//        }
+//
+//        System.out.println("Usuario: " + usuario);
+//        System.out.println("Contraseña: " + contrasenia);
+//
+//        try {
+//            if (sgre.verificarAdmin(usuario, contrasenia)) {
+//                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+//            } else if (sgre.verificarEmpleado(usuario, contrasenia)) {
+//                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+//                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+//            } else if (sgre.verificarUser(usuario, contrasenia)){
+//                mostrarAlerta("Inicio de sesión exitoso", "Bienvenido " + usuario);
+//                new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+//            }
+//            else {
+//                mostrarAlerta("Error", "Credenciales incorrectas");
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
+
     @FXML
     void registrarEvent(ActionEvent event) throws IOException {
         registrarAction();
 
+    }
+
+    @FXML
+    void enviarMensaje(ActionEvent event) throws IOException {
+        channel.basicPublish(COLA_SOLICITUD_RESERVA, "", null, "Solicitud de reserva".getBytes(StandardCharsets.UTF_8));
+    }
+
+    @FXML
+    void reservaValidada(ActionEvent event) throws IOException {
+        channel.basicPublish(COLA_RESERVA_VALIDADA, "q", null, "Reserva validada".getBytes(StandardCharsets.UTF_8));
     }
 
     private void registrarAction() throws IOException {

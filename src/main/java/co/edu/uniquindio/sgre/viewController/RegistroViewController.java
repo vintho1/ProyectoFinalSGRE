@@ -156,46 +156,46 @@ public class RegistroViewController {
         actualizarUsuario();
     }
     private void actualizarUsuario() throws IOException {
-        boolean usuarioActualizado = false;
-
-        Usuario usuarioActualizad = new Usuario(
-                txtCedula.getText(),
-                txtNombre.getText(),
-                txtCorreo.getText(),
-                txtUsuario.getText(),
-                txtContrasenia.getText()
-        );
-
-        if (usuarioSeleccionado != null) {
-
-            Persistencia.actualizarUsuarioBinario(usuarioSeleccionado.id(), usuarioActualizad);
-            Persistencia.actualizarUsuarioXML(usuarioSeleccionado.id(), usuarioActualizad);
-            Persistencia.actualizarUsuarioTxt(usuarioSeleccionado.id(),usuarioActualizad);
-
-
-
-            listaUsuariosDto.remove(usuarioSeleccionado);
-
-            listaUsuariosDto.add(new UsuarioDto(
-                    usuarioActualizad.getId(),
-                    usuarioActualizad.getNombre(),
-                    usuarioActualizad.getEmail(),
-                    usuarioActualizad.getUsuario(),
-                    usuarioActualizad.getContrasenia()
-            ));
-
-
-            tableUsuarios.refresh();
-
-            mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-
-            limpiarCamposUsuario();
-        } else {
-
-            mostrarMensaje("Notificación usuario", "Usuario no seleccionado", "Por favor, seleccione un usuario de la lista", Alert.AlertType.WARNING);
-        }
-
-        registrarAccionesSistema("Actualizar usuario", 1, "Se actualizó el usuario " + usuarioActualizado);
+//        boolean usuarioActualizado = false;
+//
+//        Usuario usuarioActualizad = new Usuario(
+//                txtCedula.getText(),
+//                txtNombre.getText(),
+//                txtCorreo.getText(),
+//                txtUsuario.getText(),
+//                txtContrasenia.getText()
+//        );
+//
+//        if (usuarioSeleccionado != null) {
+//
+//            Persistencia.actualizarUsuarioBinario(usuarioSeleccionado.id(), usuarioActualizad);
+//            Persistencia.actualizarUsuarioXML(usuarioSeleccionado.id(), usuarioActualizad);
+//            Persistencia.actualizarUsuarioTxt(usuarioSeleccionado.id(),usuarioActualizad);
+//
+//
+//
+//            listaUsuariosDto.remove(usuarioSeleccionado);
+//
+//            listaUsuariosDto.add(new UsuarioDto(
+//                    usuarioActualizad.getId(),
+//                    usuarioActualizad.getNombre(),
+//                    usuarioActualizad.getEmail(),
+//                    usuarioActualizad.getUsuario(),
+//                    usuarioActualizad.getContrasenia()
+//            ));
+//
+//
+//            tableUsuarios.refresh();
+//
+//            mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+//
+//            limpiarCamposUsuario();
+//        } else {
+//
+//            mostrarMensaje("Notificación usuario", "Usuario no seleccionado", "Por favor, seleccione un usuario de la lista", Alert.AlertType.WARNING);
+//        }
+//
+//        registrarAccionesSistema("Actualizar usuario", 1, "Se actualizó el usuario " + usuarioActualizado);
     }
 
     @FXML
@@ -219,7 +219,6 @@ public class RegistroViewController {
                 txtCedula.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
-                txtUsuario.getText(),
                 txtContrasenia.getText()
 
         );
@@ -273,7 +272,6 @@ public class RegistroViewController {
             txtNombre.setText(usuarioSeleccionado.nombre());
             txtCedula.setText(usuarioSeleccionado.id());
             txtCorreo.setText(usuarioSeleccionado.email());
-            txtUsuario.setText(usuarioSeleccionado.usuario());
             txtContrasenia.setText(usuarioSeleccionado.contrasenia());
 
         }

@@ -162,7 +162,6 @@ public class UsuarioViewController {
                 txtCedula.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
-                txtUsuario.getText(),
                 txtContrasenia.getText()
         );
 
@@ -180,7 +179,6 @@ public class UsuarioViewController {
                         usuarioActualizad.getId(),
                         usuarioActualizad.getNombre(),
                         usuarioActualizad.getEmail(),
-                        usuarioActualizad.getUsuario(),
                         usuarioActualizad.getContrasenia()
                 ));
 
@@ -219,7 +217,6 @@ public class UsuarioViewController {
                 txtCedula.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
-                txtUsuario.getText(),
                 txtContrasenia.getText()
 
         );
@@ -273,7 +270,6 @@ public class UsuarioViewController {
             txtNombre.setText(usuarioSeleccionado.nombre());
             txtCedula.setText(usuarioSeleccionado.id());
             txtCorreo.setText(usuarioSeleccionado.email());
-            txtUsuario.setText(usuarioSeleccionado.usuario());
             txtContrasenia.setText(usuarioSeleccionado.contrasenia());
 
         }

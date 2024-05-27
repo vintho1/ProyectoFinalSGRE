@@ -173,7 +173,6 @@ public class EmpleadoViewController {
                         empleadoActualizad.getId(),
                         empleadoActualizad.getNombre(),
                         empleadoActualizad.getEmail(),
-                        empleadoActualizad.getUsuario(),
                         empleadoActualizad.getContrasenia()
                 ));
                 tableEmpleados.refresh();
@@ -214,7 +213,6 @@ public class EmpleadoViewController {
                 txtCedula.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
-                txtUser.getText(),
                 txtContrasenia.getText()
 
         );
@@ -270,7 +268,6 @@ public class EmpleadoViewController {
             txtNombre.setText(empleadoSeleccionado.nombre());
             txtCedula.setText(empleadoSeleccionado.id());
             txtCorreo.setText(empleadoSeleccionado.email());
-            txtUser.setText(empleadoSeleccionado.usuario());
             txtContrasenia.setText(empleadoSeleccionado.contrasenia());
         }
     }

@@ -13,7 +13,7 @@ public class SGREUtils {
         empleado1.setNombre("juan");
         empleado1.setId("125454");
         empleado1.setEmail("juab@gmail.com");
-        empleado1.setUsuario("emple");
+
         empleado1.setContrasenia("1");
         sgre.getListaEmpleados().add(empleado1);
 
@@ -21,7 +21,6 @@ public class SGREUtils {
         empleado2.setNombre("ana");
         empleado2.setId("12545445345");
         empleado2.setEmail("ana@gmail.com");
-        empleado2.setUsuario("emplea");
         empleado2.setContrasenia("12");
         sgre.getListaEmpleados().add(empleado2);
 
@@ -29,7 +28,7 @@ public class SGREUtils {
         empleado3.setNombre("camila");
         empleado3.setId("1254");
         empleado3.setEmail("cam21dun@gmail.com");
-        empleado3.setUsuario("empleado");
+
         empleado3.setContrasenia("123");
         sgre.getListaEmpleados().add(empleado3);
 
@@ -37,7 +36,7 @@ public class SGREUtils {
         usuario.setNombre("camila");
         usuario.setId("125454");
         usuario.setEmail("camil@gmail.com");
-        usuario.setUsuario("edo");
+
         usuario.setContrasenia("123");
         sgre.getListaUsuarios().add(usuario);
 

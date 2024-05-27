@@ -85,7 +85,6 @@ public class Persistencia {
             contenido+= empleado.getId()+
                     "@@"+empleado.getNombre()+
                     "@@"+empleado.getEmail()+
-                    "@@"+empleado.getUsuario()+
                     "@@"+empleado.getContrasenia()+"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
@@ -98,7 +97,6 @@ public class Persistencia {
             contenido+= usuario.getId()+
                     "@@"+usuario.getNombre()+
                     "@@"+usuario.getEmail()+
-                    "@@"+usuario.getUsuario()+
                     "@@"+usuario.getContrasenia()+"\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_USUARIOS, contenido, false);
@@ -129,7 +127,6 @@ public class Persistencia {
             empleado.setId(linea.split("@@")[0]);
             empleado.setNombre(linea.split("@@")[1]);
             empleado.setEmail(linea.split("@@")[2]);
-            empleado.setUsuario(linea.split("@@")[3]);
             empleado.setContrasenia(linea.split("@@")[4]);
             empleados.add(empleado);
         }
@@ -146,7 +143,6 @@ public class Persistencia {
             empleado.setId(linea.split("@@")[0]);
             empleado.setNombre(linea.split("@@")[1]);
             empleado.setEmail(linea.split("@@")[2]);
-            empleado.setUsuario(linea.split("@@")[3]);
             empleado.setContrasenia(linea.split("@@")[4]);
             empleados.add(empleado);
         }
