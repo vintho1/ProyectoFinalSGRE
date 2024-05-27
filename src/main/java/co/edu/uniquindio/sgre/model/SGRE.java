@@ -138,7 +138,6 @@ public class SGRE implements ISGREService, Serializable {
             nuevoUsuario.setNombre(nombre);
             nuevoUsuario.setId(id);
             nuevoUsuario.setEmail(email);
-            nuevoUsuario.setUsuario(usuario);
             nuevoUsuario.setContrasenia(contrasenia);
             this.getListaUsuarios().add(nuevoUsuario);
             return nuevoUsuario;
@@ -180,7 +179,6 @@ public class SGRE implements ISGREService, Serializable {
             usuarioActual.setId(usuario.getId());
             usuarioActual.setNombre(usuario.getNombre());
             usuarioActual.setEmail(usuario.getEmail());
-            usuarioActual.setUsuario(usuario.getUsuario());
             usuarioActual.setContrasenia(usuario.getContrasenia());
             return true;
         }
@@ -205,7 +203,7 @@ public class SGRE implements ISGREService, Serializable {
 
         while(var3.hasNext()) {
             Usuario usuario = (Usuario) var3.next();
-            if (usuario.getUsuario().equalsIgnoreCase(user)) {
+            if (usuario.getEmail().equalsIgnoreCase(user)) {
                 usuarioEncontrado = usuario;
                 break;
             }
@@ -219,7 +217,7 @@ public class SGRE implements ISGREService, Serializable {
 
         while(var3.hasNext()) {
             Usuario usuario = (Usuario) var3.next();
-            if (usuario.getUsuario().equalsIgnoreCase(user)) {
+            if (usuario.getEmail().equalsIgnoreCase(user)) {
                 usuarioEncontrado = usuario;
                 break;
             }
@@ -234,7 +232,7 @@ public class SGRE implements ISGREService, Serializable {
 
         while(var3.hasNext()) {
             Usuario usuario = (Usuario) var3.next();
-            if (usuario.getUsuario().equalsIgnoreCase(nombreUsuario)) {
+            if (usuario.getEmail().equalsIgnoreCase(nombreUsuario)) {
                 usuarioEncontrado = usuario;
                 break;
             }
@@ -290,7 +288,7 @@ public class SGRE implements ISGREService, Serializable {
 
     public boolean verificarUser(String usuario, String contrasenia) {
         for (Usuario user : listaUsuarios) {
-            if (user.getUsuario().equals(usuario) && user.getContrasenia().equals(contrasenia)) {
+            if (user.getEmail().equals(usuario) && user.getContrasenia().equals(contrasenia)) {
                 return true;
             }
         }
@@ -299,7 +297,7 @@ public class SGRE implements ISGREService, Serializable {
 
     public boolean verificarEmpleado(String usuario, String contrasenia) {
         for (Empleado empleado : listaEmpleados) {
-            if (empleado.getUsuario().equals(usuario) && empleado.getContrasenia().equals(contrasenia)) {
+            if (empleado.getEmail().equals(usuario) && empleado.getContrasenia().equals(contrasenia)) {
                 return true;
             }
         }
@@ -320,7 +318,7 @@ public class SGRE implements ISGREService, Serializable {
 
     ////
 
-    public Evento crearEvento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado) {
+    public Evento crearEvento(String id, String nombre, String descripcion, LocalDate fecha, int capMax, Empleado empleadoAsignado) {
         Evento nuevoEvento = new Evento(id, nombre, descripcion, fecha, capMax, empleadoAsignado);
         this.getListaEventos().add(nuevoEvento);
         return nuevoEvento;
@@ -345,7 +343,7 @@ public class SGRE implements ISGREService, Serializable {
             eventoActual.setNombre(evento.getNombre());
             eventoActual.setDescripcion(evento.getDescripcion());
             eventoActual.setFecha(evento.getFecha());
-            eventoActual.setCapMax(evento.getCapMax());
+            eventoActual.setCapMax(String.valueOf(evento.getCapMax()));
             eventoActual.setEmpleadoAsignado(evento.getEmpleadoAsignado());
             return true;
         }
@@ -381,7 +379,7 @@ public class SGRE implements ISGREService, Serializable {
         if (reservaExiste) {
             throw new EmpleadoException("La reserva con ID: " + id + " ya existe");
         } else {
-            nuevaReserva = new Reserva(id, capacidad, usuario, evento, fecha, estado);
+            nuevaReserva = new Reserva(id,  usuario, evento, fecha, estado);
             this.getListaReservas().add(nuevaReserva);
             return nuevaReserva;
         }

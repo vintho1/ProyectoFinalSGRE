@@ -7,12 +7,12 @@ public class Admin implements Serializable {
     private String usuario;
     private String contrasenia;
 
-    public Admin() {
-    }
-
     public Admin(String usuario, String contrasenia) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
+    }
+
+    public Admin() {
     }
 
     public String getUsuario() {

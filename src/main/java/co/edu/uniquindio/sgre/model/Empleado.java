@@ -3,6 +3,7 @@ package co.edu.uniquindio.sgre.model;
 //import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /*@Getter
 @Setter
@@ -18,19 +19,27 @@ public class Empleado implements Serializable {
     private String id;
     private String nombre;
     private String email;
-    private String usuario;
     private String contrasenia;
-    private Evento evento;
     private RolEmpleado rolEmpleado;
+    private ArrayList<Evento> listaEventos;
 
-    public Empleado(String id, String nombre, String email, String usuario, String contrasenia, Evento evento, RolEmpleado rolEmpleado) {
+
+    public Empleado(String id, String nombre, String email,  String contrasenia, RolEmpleado rolEmpleado) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
-        this.usuario = usuario;
         this.contrasenia = contrasenia;
-        this.evento = evento;
         this.rolEmpleado = rolEmpleado;
+        listaEventos = new ArrayList<Evento>();
+    }
+
+    public Empleado(String id, String nombre, String email) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+    }
+
+    public Empleado() {
     }
 
     public static EmpleadoBuilder builder() {
@@ -69,37 +78,12 @@ public class Empleado implements Serializable {
         this.email = email;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    }
-
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }
-
-    public Empleado(String id, String nombre, String email) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-    }
-
-    public Empleado() {
     }
 
     public String toString() {

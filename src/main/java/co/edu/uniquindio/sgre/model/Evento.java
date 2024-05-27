@@ -21,28 +21,28 @@ public class Evento implements Serializable {
     private String nombre;
     private String descripcion;
     private LocalDate fecha;
-    private String capMax;
+    private int capMax;
     private Empleado empleadoAsignado;
-   // ArrayList<Reserva> listaReservas = new ArrayList();
+    private ArrayList<Reserva> listaReservas;
 
-    public Evento() {
-    }
-
-    public Evento(String id, String nombre, String descripcion, LocalDate fecha, String capMax, Empleado empleadoAsignado) {
+    public Evento(String id, String nombre, String descripcion, LocalDate fecha, int capMax, Empleado empleadoAsignado) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.capMax = capMax;
         this.empleadoAsignado = empleadoAsignado;
-    //    this.listaReservas = listaReservas;
+       listaReservas = new ArrayList<Reserva>();
     }
 
     public Evento(String id, String nombre, String capMax) {
         this.id = id;
         this.nombre = nombre;
-        this.capMax = capMax;
+        this.capMax = 0 ;
 
+    }
+
+    public Evento() {
     }
 
     public String getId() {
@@ -77,12 +77,12 @@ public class Evento implements Serializable {
         this.fecha = fecha;
     }
 
-    public String getCapMax() {
+    public int getCapMax() {
         return capMax;
     }
 
     public void setCapMax(String capMax) {
-        this.capMax = capMax;
+        this.capMax = 0 ;
     }
 
     public Empleado getEmpleadoAsignado() {

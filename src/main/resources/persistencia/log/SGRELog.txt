@@ -768,3 +768,11 @@ may. 19, 2024 10:40:22 P.�M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarReg
 INFO: se cre� el evento EventoDto[id=3, nombre=Taller , descripcion=Taller pr�ctico zzz, fecha=2024-06-28, capMax=6655, empleadoAsignadoId=Empleado(id=125454, nombre=juan, email=juab@gmail.com)],Crear evento,2024-05-19
 may. 19, 2024 10:40:44 P.�M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesi�n,Inicio de sesi�n,2024-05-19
+may. 26, 2024 6:49:33 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-26
+may. 26, 2024 6:59:52 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-26
+may. 26, 2024 7:00:54 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-26
+may. 26, 2024 7:01:11 P. M. co.edu.uniquindio.sgre.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2024-05-26

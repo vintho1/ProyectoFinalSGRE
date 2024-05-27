@@ -242,7 +242,7 @@ public class EventoViewController {
                 txtNombre.getText(),
                 txtDescripcion.getText(),
                 dateFecha.getValue(),
-                txtCapMax.getText(),
+                Integer.parseInt(txtCapMax.getText()),
                 empleadoSeleccionado != null ? new Empleado(empleadoSeleccionado.id(), empleadoSeleccionado.nombre(), empleadoSeleccionado.email()) : null
         );
 
@@ -257,7 +257,7 @@ public class EventoViewController {
                     eventoActualizad.getNombre(),
                     eventoActualizad.getDescripcion(),
                     eventoActualizad.getFecha(),
-                    eventoActualizad.getCapMax(),
+                    String.valueOf(eventoActualizad.getCapMax()),
                     eventoActualizad.getEmpleadoAsignado()
             ));
 

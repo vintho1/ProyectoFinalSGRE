@@ -17,31 +17,24 @@ public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String id;
-    private String capacidad;
     private Usuario usuario;
     private Evento evento;
     private LocalDate fecha;
     private Estado estado;
 
-    public Reserva() {
-    }
-
-    public Reserva(String id, String capacidad, Usuario usuario, Evento evento, LocalDate fecha, Estado estado) {
+    public Reserva(String id,  Usuario usuario, Evento evento, LocalDate fecha, Estado estado) {
         this.id = id;
-        this.capacidad = capacidad;
+
         this.usuario = usuario;
         this.evento = evento;
         this.fecha = fecha;
         this.estado = estado;
     }
 
-    public String getCapacidad() {
-        return capacidad;
+    public Reserva() {
     }
 
-    public void setCapacidad(String capacidad) {
-        this.capacidad = capacidad;
-    }
+
 
     public String getId() {
         return id;
@@ -87,7 +80,6 @@ public class Reserva implements Serializable {
     public String toString() {
         return "Reserva{" +
                 "id='" + id + '\'' +
-                ", capacidad='" + capacidad + '\'' +
                 ", usuario=" + usuario +
                 ", evento=" + evento +
                 ", fecha=" + fecha +

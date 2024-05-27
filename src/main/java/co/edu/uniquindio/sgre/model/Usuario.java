@@ -10,10 +10,20 @@ public class Usuario implements Serializable {
     private String id;
     private String nombre;
     private String email;
-    private String usuario;
     private String contrasenia;
     ArrayList<Reserva> listaReservas = new ArrayList();
 
+
+    public Usuario(String id, String nombre, String email, String contrasenia) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+
+        this.contrasenia = contrasenia;
+    }
+
+    public Usuario() {
+    }
 
     public String getId() {
         return this.id;
@@ -39,13 +49,7 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
 
     public String getContrasenia() {
         return contrasenia;
@@ -63,24 +67,12 @@ public class Usuario implements Serializable {
         this.listaReservas = listaReservas;
     }
 
-    public Usuario(String id, String nombre, String email, String usuario, String contrasenia) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
-    }
-
-    public Usuario() {
-    }
-
     @Override
     public String toString() {
         return "Usuario{" +
                 "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
-                ", usuario='" + usuario + '\'' +
                 ", contrasenia='" + contrasenia + '\'' +
                 '}';
     }

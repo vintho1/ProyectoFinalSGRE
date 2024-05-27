@@ -1,11 +1,7 @@
 package co.edu.uniquindio.sgre.viewController;
 
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
-import co.edu.uniquindio.sgre.model.Admin;
-import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.SGRE;
-import co.edu.uniquindio.sgre.model.Usuario;
-import co.edu.uniquindio.sgre.viewController.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -71,7 +67,7 @@ public class LoginViewController {
     }
 
     private void registrarAction() throws IOException {
-        new ViewController(ventana, "/co/edu/uniquindio/sgre/sgre.fxml");
+        new ViewController(ventana, "registro.fxml");
     }
 
 
