@@ -1,10 +1,10 @@
 package co.edu.uniquindio.sgre.viewController;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import co.edu.uniquindio.sgre.controller.EmpleadoController;
 import co.edu.uniquindio.sgre.controller.EventoController;
@@ -24,8 +24,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
-public class ReservaViewController {
+import static co.edu.uniquindio.sgre.SGREMain.*;
+
+public class ReservaViewController implements EstadoAplicacion {
+
+    @FXML
+    public GridPane creacionGridPane;
+    @FXML
+    public Button btnReservar;
+    @FXML
+    public Button btnActualizar;
+    @FXML
+    public TextField txtId;
+    @FXML
+    public ComboBox<String> txtEstado;
 
     EventoController eventoControllerService;
     ObservableList<EventoDto> listaEventosDto = FXCollections.observableArrayList();
@@ -88,37 +102,35 @@ public class ReservaViewController {
 
     @FXML
     void reservaEvent(ActionEvent event) throws EmpleadoException {
+
         ReservaDto reservaDto = construirReservaDto();
         if (datosValidos(reservaDto)) {
-
-                if (reservaControllerService.agregarReserva(reservaDto)) {
-                    listaReservaDto.add(reservaDto);
-                    mostrarMensaje("Notificación reserva", "Reserva creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
-                    limpiarCamposReserva();
-                } else {
-                    mostrarMensaje("Notificación reserva", "Reserva no creada", "La reserva no se ha creado", Alert.AlertType.ERROR);
-                }
+            if (reservaControllerService.agregarReserva(reservaDto)) {
+                listaReservaDto.add(reservaDto);
+                mostrarMensaje("Notificación reserva", "Reserva creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCamposReserva();
+            } else {
+                mostrarMensaje("Notificación reserva", "Reserva no creada", "La reserva no se ha creado", Alert.AlertType.ERROR);
+            }
         } else {
             mostrarMensaje("Notificación reserva", "Reserva no creada", "Los datos ingresados son inválidos", Alert.AlertType.ERROR);
         }
         registrarAccionesSistema("Crear reserva", 1, "se creó la reserva " + reservaDto);
+        try {
+            channel.basicPublish(COLA_SOLICITUD_RESERVA, "", null, "Solicitud de reserva".getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
-
-
-
 
     private boolean datosValidos(ReservaDto eventoDto) {
         String mensaje = "";
         if (eventoDto.capacidad() == null || eventoDto.capacidad().equals(""))
             mensaje += "La capacidad es obligatoria \n";
-        if (eventoDto.id() == null || eventoDto.id().equals(""))
-            mensaje += "Ingrese su identificacion \n";
-        if (eventoDto.fecha() == null || eventoDto.fecha().isBefore(LocalDate.now().plusDays(1)))
+        if (eventoDto.fecha() == null || LocalDate.parse(eventoDto.fecha()).isBefore(LocalDate.now().plusDays(1)))
             mensaje += "La fecha debe ser posterior al día actual \n";
         if (eventoDto.eventoId() == null)
-            mensaje += "Debe seleccionar un empleado \n";
+            mensaje += "Debe seleccionar un evento \n";
         if (mensaje.equals("")) {
             return true;
         } else {
@@ -132,15 +144,88 @@ public class ReservaViewController {
 
     }
 
+    @FXML
+    void actualizarReserva(ActionEvent event) {
+        boolean usuarioActualizado = false;
 
+        if (eventoSeleccionado == null) {
+            mostrarMensaje("Notificación reserva", "Reserva creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
+            return;
+        }
+
+        Reserva reservaActualizad = new Reserva(
+                txtId.getText(),
+                new Usuario(getUsuario(), "", "", ""),
+                new Evento(eventoSeleccionado.id(), eventoSeleccionado.nombre(), eventoSeleccionado.descripcion(), eventoSeleccionado.fecha(), Integer.parseInt(eventoSeleccionado.capMax()), null),
+                dateFecha.getValue().toString(),
+                Estado.valueOf(txtEstado.getValue())
+        );
+
+        try {
+            Persistencia.actualizarReserva(reservaActualizad.getId(), reservaActualizad);
+
+            listaReservaDto.removeIf(usuarioDto -> usuarioDto.id().equals(reservaActualizad.getId()));
+
+            listaReservaDto.add(new ReservaDto(
+                    reservaActualizad.getId(),
+                    txtcapacidad.getText(),
+                    reservaActualizad.getUsuario().getId(),
+                    reservaActualizad.getEvento(),
+                    reservaActualizad.getFecha(),
+                    reservaActualizad.getEstado()
+            ));
+            tablaReservas.refresh();
+
+            mostrarMensaje("Notificación reserva", "Reserva creada", "La reserva se ha creado con éxito", Alert.AlertType.INFORMATION);
+
+            limpiarCamposReserva();
+
+            registrarAccionesSistema("Actualizar usuario", 1, "Se actualizó el usuario " + usuarioActualizado);
+
+            intiView();
+
+
+            try {
+                channel.basicPublish(COLA_RESERVA_VALIDADA, reservaActualizad.getUsuario().getEmail(), null, "Solicitud de reserva Actualizada:".getBytes(StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     void initialize() {
         eventoControllerService = new EventoController();
         reservaControllerService = new ReservaController();
         intiView();
-
+        txtIdUsuario.setDisable(true);
+        if (getTipoUsuario() == 0) {
+            txtIdUsuario.setText(getUsuario());
+            creacionGridPane.setVisible(false);
+            btnReservar.setVisible(false);
+            btnActualizar.setVisible(false);
+        }
+        if (getTipoUsuario() == 1) {
+            txtIdUsuario.setDisable(true);
+            txtIdUsuario.setText(getUsuario());
+            creacionGridPane.setVisible(true);
+            btnReservar.setVisible(false);
+            btnActualizar.setVisible(true);
+            txtcapacidad.setDisable(true);
+            dateFecha.setValue(null);
+        }
+        if (getTipoUsuario() == 2) {
+            txtIdUsuario.setDisable(true);
+            txtIdUsuario.setText(getUsuario());
+            btnReservar.setVisible(true);
+            btnActualizar.setVisible(false);
+            txtcapacidad.setDisable(false);
+        }
     }
+
     private void intiView() {
         initDataBinding();
         obtenerReservas();
@@ -151,7 +236,13 @@ public class ReservaViewController {
         tablaReservas.getItems().clear();
         tablaReservas.setItems(listaReservaDto);
         listenerSelection();
+        ObservableList<String> combo = FXCollections.observableArrayList();
+        combo.add(Estado.APROBADA.name());
+        combo.add(Estado.PENDIENTE.name());
+        combo.add(Estado.RECHAZADA.name());
+        txtEstado.setItems(combo);
     }
+
     private void obtenerEventoDisponibles() {
         listaEventosDto.clear();
         ObservableList<EventoDto> todosEventos = FXCollections.observableArrayList(eventoControllerService.obtenerEventos());
@@ -166,8 +257,9 @@ public class ReservaViewController {
         columCapReserva.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().capacidad()));
         columEstadoReserva.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().estado()));
         columIdReserva.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().id()));
-        columFecha.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().fecha()));
+        columFecha.setCellValueFactory(cellData -> new SimpleObjectProperty<>(LocalDate.parse(cellData.getValue().fecha())));
     }
+
     private void obtenerReservas() {
         listaReservaDto.clear();
         List<ReservaDto> todasReservas = reservaControllerService.obtenerReservas();
@@ -178,6 +270,7 @@ public class ReservaViewController {
     private void obtenerEvento() {
         listaEventosDto.addAll(eventoControllerService.obtenerEventos());
     }
+
     private void listenerSelection() {
 
         tablaReservas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -186,18 +279,18 @@ public class ReservaViewController {
         });
         tablaEventos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             eventoSeleccionado = newSelection;
-
         });
 
     }
+
     private ReservaDto construirReservaDto() {
         return new ReservaDto(
-                txtIdUsuario.getText(),
+                UUID.randomUUID().toString(),
                 txtcapacidad.getText(),
+                txtIdUsuario.getText(),
                 eventoSeleccionado != null ? new Evento(eventoSeleccionado.id(), eventoSeleccionado.nombre(), eventoSeleccionado.capMax()) : null,
-                dateFecha.getValue(),
+                dateFecha.getValue().toString(),
                 Estado.PENDIENTE
-
         );
     }
 
@@ -206,22 +299,16 @@ public class ReservaViewController {
         txtIdUsuario.setText("");
         txtcapacidad.setText("");
         dateFecha.setValue(null);
-        eventoSeleccionado = null;
         registrarAccionesSistema("Limpiar campos de la reserva", 1, "se limpiaron los campos");
     }
+
     private void mostrarInformacionEvento(ReservaDto reservaSeleccionado) {
-        if(reservaSeleccionado != null){
+        if (reservaSeleccionado != null) {
+            txtId.setText(reservaSeleccionado.id());
             txtcapacidad.setText(reservaSeleccionado.capacidad());
-            txtIdUsuario.setText(reservaSeleccionado.id());
-            dateFecha.setValue(reservaSeleccionado.fecha());
+            txtIdUsuario.setText(reservaSeleccionado.usuarioId());
+            dateFecha.setValue(LocalDate.parse(reservaSeleccionado.fecha()));
         }
-    }
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
     }
 
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {

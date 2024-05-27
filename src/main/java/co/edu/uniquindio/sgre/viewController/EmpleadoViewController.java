@@ -3,6 +3,8 @@ package co.edu.uniquindio.sgre.viewController;
 import co.edu.uniquindio.sgre.controller.EmpleadoController;
 import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.sgre.model.Empleado;
+import co.edu.uniquindio.sgre.model.Estado;
+import co.edu.uniquindio.sgre.model.RolEmpleado;
 import co.edu.uniquindio.sgre.utils.Persistencia;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,44 +27,34 @@ public class EmpleadoViewController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private Button btnActualizar;
-
     @FXML
     private Button btnAgregar;
-
     @FXML
     private Button btnEliminar;
-
     @FXML
     private Button btnNuevo;
-
+    @FXML
+    private ComboBox<String> comboBox;
     @FXML
     private TableView<EmpleadoDto> tableEmpleados;
-
     @FXML
     private TableColumn<EmpleadoDto, String> tcCedula;
-
     @FXML
     private TableColumn<EmpleadoDto, String> tcCorreo;
-
     @FXML
     private TableColumn<EmpleadoDto, String> tcNombre;
-
+    @FXML
+    private TableColumn<EmpleadoDto, String> tcRol;
     @FXML
     private TextField txtCedula;
-
     @FXML
     private TextField txtCorreo;
-
     @FXML
     private TextField txtNombre;
-    @FXML
-    private TextField txtUser;
     @FXML
     private TextField txtContrasenia;
 
@@ -79,6 +71,11 @@ public class EmpleadoViewController {
         tableEmpleados.getItems().clear();
         tableEmpleados.setItems(listaEmpleadosDto);
         listenerSelection();
+
+        ObservableList<String> combo = FXCollections.observableArrayList();
+        combo.add(RolEmpleado.COORDINADOR.name());
+        combo.add(RolEmpleado.TECNICO.name());
+        comboBox.setItems(combo);
     }
 
     private void initDataBinding() {
@@ -87,8 +84,10 @@ public class EmpleadoViewController {
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().id()));
         tcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().email()));
+        tcRol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().rol()));
 
     }
+
 
     private void obtenerEmpleados() {
         listaEmpleadosDto.addAll(empleadoControllerService.obtenerEmpleados());
@@ -153,26 +152,30 @@ public class EmpleadoViewController {
         actualizarEmpleado();
     }
     private void actualizarEmpleado() {
+
         boolean empleadoActualizado = false;
 
         Empleado empleadoActualizad = new Empleado(
                 txtCedula.getText(),
                 txtNombre.getText(),
-                txtCorreo.getText()
-
+                txtCorreo.getText(),
+                txtContrasenia.getText(),
+                RolEmpleado.valueOf(comboBox.getValue())
         );
 
-        if (empleadoSeleccionado != null) {
+
             try {
 
-                Persistencia.actualizarEmpleadoBinario(empleadoSeleccionado.id(), empleadoActualizad);
-                Persistencia.actualizarEmpleadoXML(empleadoSeleccionado.id(), empleadoActualizad);
-                Persistencia.actualizarEmpleadoTxt(empleadoSeleccionado.id(),empleadoActualizad);
-                listaEmpleadosDto.remove(empleadoSeleccionado);
+                Persistencia.actualizarEmpleadoBinario(empleadoActualizad.getId(), empleadoActualizad);
+                Persistencia.actualizarEmpleadoXML(empleadoActualizad.getId(), empleadoActualizad);
+                Persistencia.actualizarEmpleadoTxt(empleadoActualizad.getId(),empleadoActualizad);
+
+                listaEmpleadosDto.removeIf(empleadoDto ->  empleadoDto.id().equals(empleadoActualizad.getId()));
                 listaEmpleadosDto.add(new EmpleadoDto(
                         empleadoActualizad.getId(),
                         empleadoActualizad.getNombre(),
                         empleadoActualizad.getEmail(),
+                        empleadoActualizad.getRolEmpleado().toString(),
                         empleadoActualizad.getContrasenia()
                 ));
                 tableEmpleados.refresh();
@@ -185,10 +188,11 @@ public class EmpleadoViewController {
 
                 mostrarMensaje("Notificación empleado", "Empleado no actualizado", "El empleado no se ha actualizado correctamente", Alert.AlertType.ERROR);
             }
-        } else {
+
+
 
             mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Por favor, seleccione un empleado de la lista", Alert.AlertType.WARNING);
-        }
+
        
         registrarAccionesSistema("Actualizar empleado", 1, "Se actualizó el empleado " + empleadoActualizado);
     }
@@ -203,7 +207,6 @@ public class EmpleadoViewController {
         txtNombre.setPromptText("Ingrese el nombre");
         txtCedula.setPromptText("Ingrese la cedula");
         txtCorreo.setPromptText("Ingrese el correo");
-        txtUser.setPromptText("Ingrese el usuario");
         txtContrasenia.setPromptText("Ingrese el contraseña");
     }
 
@@ -213,6 +216,7 @@ public class EmpleadoViewController {
                 txtCedula.getText(),
                 txtNombre.getText(),
                 txtCorreo.getText(),
+                comboBox.getItems().toString(),
                 txtContrasenia.getText()
 
         );
@@ -221,7 +225,6 @@ public class EmpleadoViewController {
         txtNombre.setText("");
         txtCedula.setText("");
         txtCorreo.setText("");
-        txtUser.setText("");
         txtContrasenia.setText("");
     }
 

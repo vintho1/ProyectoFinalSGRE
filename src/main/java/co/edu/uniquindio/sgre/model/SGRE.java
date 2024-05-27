@@ -3,12 +3,16 @@ package co.edu.uniquindio.sgre.model;
 import co.edu.uniquindio.sgre.exceptions.EmpleadoException;
 import co.edu.uniquindio.sgre.exceptions.UsuarioException;
 import co.edu.uniquindio.sgre.model.services.ISGREService;
+import co.edu.uniquindio.sgre.utils.Persistencia;
+import co.edu.uniquindio.sgre.utils.SGREUtils;
 import co.edu.uniquindio.sgre.viewController.SessionManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static co.edu.uniquindio.sgre.utils.SGREUtils.inicializarDatos;
 
@@ -21,9 +25,6 @@ public class SGRE implements ISGREService, Serializable {
     ArrayList<Reserva> listaReservas = new ArrayList();
     ArrayList<Admin> listaAdmins = new ArrayList();
 
-
-
-
     public SGRE() {
         listaAdmins = new ArrayList<>();
         listaAdmins.add(new Admin("Camila", "123"));
@@ -33,8 +34,19 @@ public class SGRE implements ISGREService, Serializable {
     public static SGRE getInstance() throws EmpleadoException {
         if (sgre == null) {
             sgre = inicializarDatos();
+            sgre.setListaEmpleados(Persistencia.cargarEmpleados());
+            sgre.setListaUsuarios(Persistencia.cargarUsuarios());
+            sgre.setListaEventos(Persistencia.cargarEventos());
+            sgre.setListaReservas(Persistencia.cargarReservas());
         }
         return sgre;
+    }
+
+    public void actualizarEstado(){
+        sgre.setListaEmpleados(Persistencia.cargarEmpleados());
+        sgre.setListaUsuarios(Persistencia.cargarUsuarios());
+        sgre.setListaEventos(Persistencia.cargarEventos());
+        sgre.setListaReservas(Persistencia.cargarReservas());
     }
 
 
@@ -154,6 +166,11 @@ public class SGRE implements ISGREService, Serializable {
         } else {
             return false;
         }
+    }
+
+    public List<Reserva> obtenerReservasUsuario(String cedula){
+
+        return  listaReservas.stream().filter(reserva -> reserva.getId().equals(cedula)).collect(Collectors.toList());
     }
 
     public boolean usuarioExiste(String id) {
@@ -277,9 +294,9 @@ public class SGRE implements ISGREService, Serializable {
 
  */
 
-    public boolean verificarAdmin(String usuario, String contrasenia) {
+    public boolean verificarAdmin(String correo, String contrasenia) {
         for (Admin admin : listaAdmins) {
-            if (admin.getUsuario().equals(usuario) && admin.getContrasenia().equals(contrasenia)) {
+            if (admin.getCorreo().equals(correo) && admin.getContrasenia().equals(contrasenia)) {
                 return true;
             }
         }
@@ -311,14 +328,14 @@ public class SGRE implements ISGREService, Serializable {
 
     public Admin obtenerAdministrador(String user) {
         return listaAdmins.stream()
-                .filter(admin -> admin.getUsuario().equals(user))
+                .filter(admin -> admin.getCorreo().equals(user))
                 .findFirst()
                 .orElse(null);
     }
 
     ////
 
-    public Evento crearEvento(String id, String nombre, String descripcion, LocalDate fecha, int capMax, Empleado empleadoAsignado) {
+    public Evento crearEvento(String id, String nombre, String descripcion, String fecha, int capMax, Empleado empleadoAsignado) {
         Evento nuevoEvento = new Evento(id, nombre, descripcion, fecha, capMax, empleadoAsignado);
         this.getListaEventos().add(nuevoEvento);
         return nuevoEvento;
@@ -373,7 +390,7 @@ public class SGRE implements ISGREService, Serializable {
 
     ///////
 
-    public Reserva crearReserva(String id, String capacidad, Usuario usuario, Evento evento, LocalDate fecha, Estado estado) throws EmpleadoException {
+    public Reserva crearReserva(String id, String capacidad, Usuario usuario, Evento evento, String fecha, Estado estado) throws EmpleadoException {
         Reserva nuevaReserva = null;
         boolean reservaExiste = this.verificarReservaExistente(id);
         if (reservaExiste) {

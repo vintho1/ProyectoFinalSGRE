@@ -19,10 +19,10 @@ public class Reserva implements Serializable {
     private String id;
     private Usuario usuario;
     private Evento evento;
-    private LocalDate fecha;
+    private String fecha;
     private Estado estado;
 
-    public Reserva(String id,  Usuario usuario, Evento evento, LocalDate fecha, Estado estado) {
+    public Reserva(String id,  Usuario usuario, Evento evento, String fecha, Estado estado) {
         this.id = id;
 
         this.usuario = usuario;
@@ -60,11 +60,11 @@ public class Reserva implements Serializable {
         this.evento = evento;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

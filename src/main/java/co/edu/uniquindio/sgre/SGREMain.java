@@ -11,6 +11,7 @@ import com.rabbitmq.client.DeliverCallback;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -29,22 +30,22 @@ public class SGREMain extends Application {
 
     public static Channel channel;
 
+
+
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
         this.primaryStage.setTitle("SGRE");
         Image icon = new Image(getClass().getResourceAsStream("/persistencia/imagenes/logo.jpg"));
         stage.getIcons().add(icon);
-        stage.setResizable(false);
         mostrarVentanaPrincipal();
     }
 
     public void mostrarVentanaPrincipal() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/co/edu/uniquindio/sgre/login.fxml"));
+            loader.setLocation(getClass().getResource("login.fxml"));
             AnchorPane rootLayout = loader.load();
-            LoginViewController sgreViewController = loader.getController();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
 

@@ -8,9 +8,9 @@ import java.time.LocalDate;
 public record ReservaDto (
         String id,
         String capacidad,
-    //    String usuarioId,
+        String usuarioId,
         Evento eventoId,
-        LocalDate fecha,
+        String fecha,
         Estado estado) {
 
         }

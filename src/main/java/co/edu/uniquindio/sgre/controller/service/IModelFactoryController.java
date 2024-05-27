@@ -25,6 +25,8 @@ public interface IModelFactoryController {
 
     boolean actualizarUsuario(String cedulaActual, UsuarioDto empleadoDto);
 
+    List<ReservaDto> obtenerReservasUsuario(String cedula);
+
     List<UsuarioDto> obtenerUsuario();
 
 

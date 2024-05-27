@@ -20,12 +20,12 @@ public class Evento implements Serializable {
     private String id;
     private String nombre;
     private String descripcion;
-    private LocalDate fecha;
+    private String fecha;
     private int capMax;
     private Empleado empleadoAsignado;
     private ArrayList<Reserva> listaReservas;
 
-    public Evento(String id, String nombre, String descripcion, LocalDate fecha, int capMax, Empleado empleadoAsignado) {
+    public Evento(String id, String nombre, String descripcion, String fecha, int capMax, Empleado empleadoAsignado) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -69,11 +69,11 @@ public class Evento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

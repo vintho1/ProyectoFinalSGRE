@@ -16,6 +16,7 @@ import co.edu.uniquindio.sgre.utils.SGREUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ModelFactoryController implements IModelFactoryController {
 
@@ -38,14 +39,14 @@ public class ModelFactoryController implements IModelFactoryController {
     public ModelFactoryController() {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
-       //cargarDatosBase();
-      // salvarDatosPrueba();
+        //cargarDatosBase();
+        // salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
         cargarDatosDesdeArchivos();
 
         //3. Guardar y Cargar el recurso serializable binario
-	    //cargarResourceBinario();
+        //cargarResourceBinario();
         guardarResourceBinario();
 
         guardarResourceBinarioEventos();
@@ -53,14 +54,15 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //4. Guardar y Cargar el recurso serializable XML
         //   cargarResourceXML();
-		//guardarResourceXML();
+        //guardarResourceXML();
 
-        if(sgre == null){
+        if (sgre == null) {
             cargarDatosBase();
-         //  guardarResourceXML();
+            //  guardarResourceXML();
         }
         registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
     }
+
     private void cargarDatosDesdeArchivos() {
         sgre = new SGRE();
         try {
@@ -83,8 +85,6 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-
-
     private void cargarDatosBase() {
         sgre = SGREUtils.inicializarDatos();
     }
@@ -99,13 +99,13 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<EmpleadoDto> obtenerEmpleados() {
-        return  mapper.getEmpleadosDto(sgre.getListaEmpleados());
+        return mapper.getEmpleadosDto(sgre.getListaEmpleados());
     }
 
     @Override
     public boolean agregarEmpleado(EmpleadoDto empleadoDto) {
-        try{
-            if(!sgre.verificarEmpleadoExistente(empleadoDto.id())) {
+        try {
+            if (!sgre.verificarEmpleadoExistente(empleadoDto.id())) {
                 Empleado empleado = mapper.empleadoDtoToEmpleado(empleadoDto);
                 getSGRE().agregarEmpleado(empleado);
                 guardarResourceBinario();
@@ -113,10 +113,10 @@ public class ModelFactoryController implements IModelFactoryController {
                 guardarListaEmpleados(getSGRE().getListaEmpleados());
             }
             return true;
-        }catch (EmpleadoException e){
+        } catch (EmpleadoException e) {
             e.getMessage();
             return false;
-        }catch (IOException e2){
+        } catch (IOException e2) {
             e2.getMessage();
             return false;
         }
@@ -154,13 +154,13 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<UsuarioDto> obtenerUsuario() {
-        return  mapper.getUsuariosDto(sgre.getListaUsuarios());
+        return mapper.getUsuariosDto(sgre.getListaUsuarios());
     }
 
     @Override
     public boolean agregarUsuario(UsuarioDto usuarioDto) {
-        try{
-            if(!sgre.verificarUsuarioExistente(usuarioDto.id())) {
+        try {
+            if (!sgre.verificarUsuarioExistente(usuarioDto.id())) {
                 Usuario usuario = mapper.usuarioToUsuarioDto(usuarioDto);
                 getSGRE().agregarUsuario(usuario);
                 guardarResourceBinario();
@@ -168,7 +168,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 guardarListaUsuario(getSGRE().getListaUsuarios());
             }
             return true;
-        }catch (IOException e2){
+        } catch (IOException e2) {
             e2.getMessage();
             return false;
         } catch (UsuarioException e) {
@@ -202,6 +202,13 @@ public class ModelFactoryController implements IModelFactoryController {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<ReservaDto> obtenerReservasUsuario(String cedula) {
+
+
+        return sgre.obtenerReservasUsuario(cedula).stream().map(reserva -> new ReservaDto(reserva.getId(), null, reserva.getUsuario().getId(), reserva.getEvento(), reserva.getFecha(), reserva.getEstado())).collect(Collectors.toList());
     }
 
     ////////////////
@@ -258,7 +265,6 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-
     private void guardarResourceBinarioEventos() {
         try {
             Persistencia.guardarEventos(getSGRE().getListaEventos());
@@ -266,6 +272,7 @@ public class ModelFactoryController implements IModelFactoryController {
             e.printStackTrace();
         }
     }
+
     private void guardarResourceBinarioReservas() {
         try {
             Persistencia.guardarReservas(getSGRE().getListaReservas());
@@ -332,7 +339,6 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-
     private void cargarResourceXML() {
         sgre = Persistencia.cargarRecursoBancoXML();
     }
@@ -355,14 +361,14 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-
-    private void guardarListaEmpleados(ArrayList<Empleado> listaEmpleados) throws  IOException{
+    private void guardarListaEmpleados(ArrayList<Empleado> listaEmpleados) throws IOException {
         Persistencia.guardarEmpleados(listaEmpleados);
     }
 
-    private void guardarListaUsuario(ArrayList<Usuario> listaUsuario) throws  IOException{
+    private void guardarListaUsuario(ArrayList<Usuario> listaUsuario) throws IOException {
         Persistencia.guardarUsuarios(listaUsuario);
     }
+
     private void guardarListaEventos(ArrayList<Evento> listaEventos) throws IOException {
         Persistencia.guardarEventos(listaEventos);
     }
@@ -373,8 +379,6 @@ public class ModelFactoryController implements IModelFactoryController {
 
 
     // Usuario
-
-
 
 
 }

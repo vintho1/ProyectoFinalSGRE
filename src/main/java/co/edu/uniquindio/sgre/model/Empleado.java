@@ -33,12 +33,6 @@ public class Empleado implements Serializable {
         listaEventos = new ArrayList<Evento>();
     }
 
-    public Empleado(String id, String nombre, String email) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-    }
-
     public Empleado() {
     }
 
@@ -95,6 +89,10 @@ public class Empleado implements Serializable {
         private String id;
         private String nombre;
         private String email;
+        private RolEmpleado rol;
+        private String contrasenia;
+
+
 
         EmpleadoBuilder() {
         }
@@ -114,8 +112,18 @@ public class Empleado implements Serializable {
             return this;
         }
 
+        public EmpleadoBuilder contrasenia(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public EmpleadoBuilder rol(String email) {
+            this.email = email;
+            return this;
+        }
+
         public Empleado build() {
-            return new Empleado(this.id, this.nombre, this.email);
+            return new Empleado(this.id, this.nombre, this.email,this.contrasenia, this.rol);
         }
 
         public String toString() {

@@ -12,7 +12,9 @@ import co.edu.uniquindio.sgre.mapping.dto.EmpleadoDto;
 import co.edu.uniquindio.sgre.mapping.dto.EventoDto;
 import co.edu.uniquindio.sgre.model.Empleado;
 import co.edu.uniquindio.sgre.model.Evento;
+import co.edu.uniquindio.sgre.model.RolEmpleado;
 import co.edu.uniquindio.sgre.utils.Persistencia;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +22,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
-public class EventoViewController {
+import javax.swing.*;
+
+public class EventoViewController implements EstadoAplicacion{
+
+    @FXML
+    public AnchorPane anchorPaneEmpleados;
+    @FXML
+    public Button btnAgregar;
+    @FXML
+    public GridPane gridpane1;
+    @FXML
+    public GridPane gridPane2;
 
     EventoController eventoControllerService;
     ObservableList<EventoDto> listaEventosDto = FXCollections.observableArrayList();
@@ -41,41 +55,41 @@ public class EventoViewController {
     private URL location;
 
     @FXML
-    private TableColumn<EventoDto, String> columCapEvento;
+    private Button btnActualizar;
+    @FXML
+    private Button btnCancelar;
 
     @FXML
-    private TableColumn<EmpleadoDto, String> columIdEmpleado;
+    private Button btnEliminar;
 
     @FXML
-    private TableColumn<EventoDto, String> columIdEvento;
+    private Label dispo;
 
-    @FXML
-    private TableColumn<EmpleadoDto, String> columNombreEmpleado;
-
-    @FXML
-    private TableColumn<EventoDto, String> columNombreEvento;
-
-    @FXML
-    private DatePicker dateFecha;
-
-    @FXML
-    private TableView<EmpleadoDto> tablaEmpleados;
 
     @FXML
     private TableView<EventoDto> tablaEventos;
-
+    @FXML
+    private TableColumn<EventoDto, String> columCapEvento;
+    @FXML
+    private TableColumn<EventoDto, String> columIdEvento;
+    @FXML
+    private TableColumn<EventoDto, String> columNombreEvento;
+    @FXML
+    private TableView<EmpleadoDto> tablaEmpleados;
+    @FXML
+    private TableColumn<EmpleadoDto, String> columIdEmpleado;
+    @FXML
+    private TableColumn<EmpleadoDto, String> columNombreEmpleado;
+    @FXML
+    private DatePicker dateFecha;
     @FXML
     private TextField txtCapMax;
-
     @FXML
     private TextField txtDescripcion;
-
     @FXML
     private TextField txtId;
-
     @FXML
     private TextField txtNombre;
-
     @FXML
     private AnchorPane ventana;
     @FXML
@@ -102,6 +116,51 @@ public class EventoViewController {
         });
 
          */
+
+        if (getTipoUsuario() == 0) {
+            gridpane1.setVisible(true);
+            gridPane2.setVisible(true);
+            btnAgregar.setVisible(true);
+            btnLimpiar.setVisible(true);
+            btnBuscar.setVisible(true);
+            tablaEmpleados.setVisible(true);
+            btnActualizar.setVisible(true);
+            btnCancelar.setVisible(true);
+            btnEliminar.setVisible(true);
+            txtBuscar.setVisible(true);
+            dispo.setVisible(true);
+
+
+            tablaEmpleados.setVisible(true);
+        }
+        if (getTipoUsuario() == 1) {
+            gridpane1.setVisible(true);
+            gridPane2.setVisible(true);
+            btnAgregar.setVisible(true);
+            btnLimpiar.setVisible(true);
+            btnBuscar.setVisible(true);
+            tablaEmpleados.setVisible(true);
+            btnActualizar.setVisible(true);
+            btnCancelar.setVisible(true);
+            btnEliminar.setVisible(true);
+            txtBuscar.setVisible(true);
+            dispo.setVisible(true);
+        }
+        if (getTipoUsuario() == 2) {
+            gridpane1.setVisible(false);
+            gridPane2.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnLimpiar.setVisible(false);
+            btnBuscar.setVisible(false);
+            tablaEmpleados.setVisible(false);
+            btnActualizar.setVisible(false);
+            btnCancelar.setVisible(false);
+            btnEliminar.setVisible(false);
+            txtBuscar.setVisible(false);
+            dispo.setVisible(false);
+
+
+        }
     }
 
 
@@ -187,7 +246,7 @@ public class EventoViewController {
             mensaje += "La descripción es obligatorio \n";
         if (eventoDto.empleadoAsignadoId() == null)
             mensaje += "Debe seleccionar un empleado \n";
-        if (eventoDto.fecha() == null || eventoDto.fecha().isBefore(LocalDate.now().plusDays(1)))
+        if (eventoDto.fecha() == null || LocalDate.parse(eventoDto.fecha()).isBefore(LocalDate.now().plusDays(1)))
             mensaje += "La fecha debe ser posterior al día actual \n";
 
         if (mensaje.equals("")) {
@@ -198,23 +257,14 @@ public class EventoViewController {
         }
     }
 
-
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
-    }
-
     private EventoDto construirEventoDto() {
         return new EventoDto(
                 txtId.getText(),
                 txtNombre.getText(),
                 txtDescripcion.getText(),
-                dateFecha.getValue(),
+                dateFecha.getValue().toString(),
                 txtCapMax.getText(),
-                empleadoSeleccionado != null ? new Empleado(empleadoSeleccionado.id(), empleadoSeleccionado.nombre(), empleadoSeleccionado.email()) : null
+                empleadoSeleccionado != null ? new Empleado(empleadoSeleccionado.id(), empleadoSeleccionado.nombre(), empleadoSeleccionado.email(), empleadoSeleccionado.contrasenia(), RolEmpleado.valueOf(empleadoSeleccionado.rol())) : null
         );
     }
 
@@ -241,9 +291,9 @@ public class EventoViewController {
                 txtId.getText(),
                 txtNombre.getText(),
                 txtDescripcion.getText(),
-                dateFecha.getValue(),
+                dateFecha.getValue().toString(),
                 Integer.parseInt(txtCapMax.getText()),
-                empleadoSeleccionado != null ? new Empleado(empleadoSeleccionado.id(), empleadoSeleccionado.nombre(), empleadoSeleccionado.email()) : null
+                empleadoSeleccionado != null ? new Empleado(empleadoSeleccionado.id(), empleadoSeleccionado.nombre(), empleadoSeleccionado.email(), empleadoSeleccionado.contrasenia(), RolEmpleado.valueOf(empleadoSeleccionado.rol())) : null
         );
 
         if (eventoSeleccionado != null) {
@@ -346,11 +396,25 @@ public class EventoViewController {
             txtCapMax.setText(eventoSeleccionado.capMax());
             txtDescripcion.setText(eventoSeleccionado.descripcion());
           //  txtEmpleado.setText(eventoSeleccionado.empleadoAsignadoId() != null ? eventoSeleccionado.empleadoAsignadoId().getNombre() : "");
-            dateFecha.setValue(eventoSeleccionado.fecha());
+            dateFecha.setValue(LocalDate.parse(eventoSeleccionado.fecha()));
         }
     }
 
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
+    }
+
+    @Override
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                Alert aler = new Alert(alertType);
+                aler.setTitle(titulo);
+                aler.setHeaderText(header);
+                aler.setContentText(contenido);
+                aler.showAndWait();
+            }
+        });
     }
 }

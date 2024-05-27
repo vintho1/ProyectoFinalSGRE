@@ -6,6 +6,7 @@ module co.edu.uniquindio.sgre {
     requires java.logging;
     requires java.desktop;
     requires com.rabbitmq.client;
+    requires org.slf4j;
 
     opens co.edu.uniquindio.sgre to javafx.fxml;
     exports co.edu.uniquindio.sgre;

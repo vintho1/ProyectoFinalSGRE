@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="ventana" prefHeight="752.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sgre.viewController.EventoViewController">
    <children>
-      <GridPane layoutX="61.0" layoutY="69.0" prefHeight="180.0" prefWidth="254.0">
+      <GridPane fx:id="gridpane1" layoutX="61.0" layoutY="69.0" prefHeight="180.0" prefWidth="254.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,18 +46,22 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaEmpleados" layoutX="412.0" layoutY="97.0" prefHeight="125.0" prefWidth="204.0">
-         <columns>
-            <TableColumn fx:id="columNombreEmpleado" prefWidth="75.0" text="Nombre" />
-            <TableColumn fx:id="columIdEmpleado" prefWidth="128.0" text="Id" />
-         </columns>
-      </TableView>
-      <Button layoutX="268.0" layoutY="257.0" mnemonicParsing="false" onAction="#agregarEvent" text="Agregar" />
-      <Label layoutX="448.0" layoutY="59.0" text="Empleados disponibles ">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <AnchorPane fx:id="anchorPaneEmpleados" layoutX="412.0" layoutY="59.0">
+         <children>
+            <TableView fx:id="tablaEmpleados" layoutY="38.0" prefHeight="125.0" prefWidth="204.0">
+               <columns>
+                  <TableColumn fx:id="columNombreEmpleado" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="columIdEmpleado" prefWidth="128.0" text="Id" />
+               </columns>
+            </TableView>
+            <Label fx:id="dispo" layoutX="36.0" text="Empleados disponibles ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnAgregar" layoutX="268.0" layoutY="257.0" mnemonicParsing="false" onAction="#agregarEvent" text="Agregar" />
       <Separator layoutX="61.0" layoutY="302.0" prefHeight="5.0" prefWidth="606.0" />
       <TableView fx:id="tablaEventos" layoutX="80.0" layoutY="373.0" prefHeight="163.0" prefWidth="323.0">
         <columns>
@@ -66,7 +70,7 @@
             <TableColumn fx:id="columCapEvento" prefWidth="69.0" text="capacidad" />
         </columns>
       </TableView>
-      <GridPane layoutX="505.0" layoutY="365.0" prefHeight="134.0" prefWidth="76.0">
+      <GridPane fx:id="gridPane2" layoutX="505.0" layoutY="365.0" prefHeight="134.0" prefWidth="76.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -76,9 +80,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#ActualizarEvent" text="Actualizar" />
-            <Button mnemonicParsing="false" onAction="#EliminarEvent" text="Eliminar" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#CancelarEvent" text="Cancelar" GridPane.rowIndex="1" />
+            <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#ActualizarEvent" text="Actualizar" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#EliminarEvent" text="Eliminar" GridPane.rowIndex="2" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#CancelarEvent" text="Cancelar" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="btnLimpiar" layoutX="61.0" layoutY="257.0" mnemonicParsing="false" onAction="#limpiarEvent" text="Limpiar" />

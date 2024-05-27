@@ -18,6 +18,10 @@ public class ReservaController implements IReservaControllerService {
     }
 
     @Override
+    public List<ReservaDto> obtenerReservasUsuario(String cedula) {return modelFactoryController.obtenerReservasUsuario(cedula);
+    }
+
+    @Override
     public boolean agregarReserva(ReservaDto reservaDto) {
         return modelFactoryController.agregarReserva(reservaDto);
     }

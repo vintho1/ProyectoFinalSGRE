@@ -7,6 +7,8 @@ import java.util.List;
 public interface IReservaControllerService {
     List<ReservaDto> obtenerReservas();
 
+    List<ReservaDto> obtenerReservasUsuario(String cedula);
+
     boolean agregarReserva(ReservaDto reservaDto);
 
     boolean eliminarReserva(String id);

@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class Admin implements Serializable {
     private static final long serialVersioUID = 1L;
-    private String usuario;
+    private String correo;
     private String contrasenia;
 
-    public Admin(String usuario, String contrasenia) {
-        this.usuario = usuario;
+    public Admin(String correo, String contrasenia) {
+        this.correo = correo;
         this.contrasenia = contrasenia;
     }
 
     public Admin() {
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getContrasenia() {
@@ -34,7 +34,7 @@ public class Admin implements Serializable {
     @Override
     public String toString() {
         return "Admin{" +
-                "usuario='" + usuario + '\'' +
+                "correo='" + correo + '\'' +
                 ", contrasenia='" + contrasenia + '\'' +
                 '}';
     }

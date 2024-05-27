@@ -13,7 +13,6 @@ public class SGREUtils {
         empleado1.setNombre("juan");
         empleado1.setId("125454");
         empleado1.setEmail("juab@gmail.com");
-
         empleado1.setContrasenia("1");
         sgre.getListaEmpleados().add(empleado1);
 
@@ -44,7 +43,7 @@ public class SGREUtils {
         evento1.setId("1");
         evento1.setNombre("Conferencia de Tecnología");
         evento1.setDescripcion("Conferencia sobre los últimos avances en tecnología.");
-        evento1.setFecha(LocalDate.now().plusDays(7));
+        evento1.setFecha(LocalDate.now().plusDays(7).toString());
         evento1.setCapMax("100");
         evento1.setEmpleadoAsignado(empleado1);
         sgre.getListaEventos().add(evento1);
@@ -53,7 +52,7 @@ public class SGREUtils {
         evento2.setId("2");
         evento2.setNombre("Taller de Programación");
         evento2.setDescripcion("Taller práctico sobre programación en Java.");
-        evento2.setFecha(LocalDate.now().plusMonths(1));
+        evento2.setFecha(LocalDate.now().plusMonths(1).toString());
         evento2.setCapMax("50");
         evento2.setEmpleadoAsignado(empleado2);
         sgre.getListaEventos().add(evento2);
@@ -63,7 +62,7 @@ public class SGREUtils {
         reserva1.setId("11");
         reserva1.setEvento(evento1);
         reserva1.setUsuario(usuario);
-        reserva1.setFecha(LocalDate.now());
+        reserva1.setFecha(LocalDate.now().toString());
         reserva1.setEstado(Estado.APROBADA);
        // evento1.getListaReservas().add(reserva1);
         sgre.getListaReservas().add(reserva1);
@@ -72,18 +71,18 @@ public class SGREUtils {
         reserva2.setId("22");
         reserva2.setEvento(evento2);
         reserva2.setUsuario(usuario);
-        reserva2.setFecha(LocalDate.now().plusDays(1));
+        reserva2.setFecha(LocalDate.now().plusDays(1).toString());
         reserva2.setEstado(Estado.PENDIENTE);
        // evento2.getListaReservas().add(reserva2);
         sgre.getListaReservas().add(reserva2);
 
         Admin admin1 = new Admin();
-        admin1.setUsuario("1");
+        admin1.setCorreo("1");
         admin1.setContrasenia("1");
         sgre.getListaAdmins().add(admin1);
 
         Admin admin2 = new Admin();
-        admin2.setUsuario("camila");
+        admin2.setCorreo("camila");
         admin2.setContrasenia("321");
         sgre.getListaAdmins().add(admin2);
 

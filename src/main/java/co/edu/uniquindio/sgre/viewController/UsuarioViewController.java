@@ -2,13 +2,17 @@ package co.edu.uniquindio.sgre.viewController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.sgre.controller.ReservaController;
 import co.edu.uniquindio.sgre.controller.UsuarioController;
+import co.edu.uniquindio.sgre.mapping.dto.ReservaDto;
 import co.edu.uniquindio.sgre.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.sgre.model.Usuario;
 import co.edu.uniquindio.sgre.utils.Persistencia;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,12 +21,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-public class UsuarioViewController {
+public class UsuarioViewController implements EstadoAplicacion {
+
     UsuarioController usuarioControllerService;
+    ReservaController reservaControllerService;
     ObservableList<UsuarioDto> listaUsuariosDto = FXCollections.observableArrayList();
     UsuarioDto usuarioSeleccionado;
 
-
+    @FXML
+    public Button btnEditar;
+    @FXML
+    public Button btnCancelar;
+    @FXML
+    public Button btnGuardar;
     @FXML
     private ResourceBundle resources;
 
@@ -30,28 +41,35 @@ public class UsuarioViewController {
     private URL location;
 
     @FXML
-    private Button btnActualizar;
-
-    @FXML
-    private Button btnAgregar;
-
-    @FXML
     private Button btnEliminar;
 
     @FXML
-    private Button btnNuevo;
+    private TableView<ReservaDto> tblReservasus;
+
+    @FXML
+    private TableColumn<ReservaDto, String> colEstado;
+
+    @FXML
+    private TableColumn<ReservaDto, String> colEvento;
+
+    @FXML
+    private TableColumn<ReservaDto, String> colFecha;
+
+    @FXML
+    private TableColumn<ReservaDto, String> colId;
+
 
     @FXML
     private TableView<UsuarioDto> tableUsuarios;
 
     @FXML
-    private TableColumn<UsuarioDto,String> tcCedula;
+    private TableColumn<UsuarioDto, String> tcCedula;
 
     @FXML
-    private TableColumn<UsuarioDto,String> tcCorreo;
+    private TableColumn<UsuarioDto, String> tcCorreo;
 
     @FXML
-    private TableColumn<UsuarioDto,String> tcNombre;
+    private TableColumn<UsuarioDto, String> tcNombre;
 
     @FXML
     private TextField txtCedula;
@@ -73,7 +91,44 @@ public class UsuarioViewController {
     @FXML
     void initialize() {
         usuarioControllerService = new UsuarioController();
+        reservaControllerService = new ReservaController();
         intiView();
+
+        txtContrasenia.setDisable(true);
+        txtContrasenia.setVisible(false);
+        txtNombre.setDisable(true);
+        txtCorreo.setDisable(true);
+        if (getTipoUsuario() == 0) {
+            btnEditar.setVisible(false);
+            tblReservasus.setVisible(true);
+            tableUsuarios.setVisible(true);
+            btnEliminar.setVisible(true);
+
+        }
+        if (getTipoUsuario() == 1) {
+            btnEditar.setVisible(false);
+            ventana.setVisible(false);
+        }
+        if (getTipoUsuario() == 2) {
+            btnEditar.setVisible(true);
+            tblReservasus.setVisible(true);
+            tableUsuarios.setVisible(false);
+            btnEliminar.setVisible(false);
+
+            Optional<UsuarioDto> usuario = listaUsuariosDto.stream().filter(usuarioDto -> usuarioDto.email().equals(getUsuario())).findFirst();
+
+            usuario.ifPresent(usuarioDto -> {
+                txtCedula.setText(usuarioDto.id());
+                txtNombre.setText(usuarioDto.nombre());
+                txtCorreo.setText(usuarioDto.email());
+                txtContrasenia.setText(usuarioDto.contrasenia());
+                List<ReservaDto> us = reservaControllerService.obtenerReservasUsuario(usuarioDto.id());
+                ObservableList<ReservaDto> temp = FXCollections.observableArrayList(us);
+                tblReservasus.getItems().clear();
+                tblReservasus.setItems(temp);
+
+            });
+        }
     }
 
     private void intiView() {
@@ -85,11 +140,14 @@ public class UsuarioViewController {
     }
 
     private void initDataBinding() {
-
-
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().id()));
         tcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().email()));
+
+        colEvento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().eventoId().getNombre()));
+        colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fecha().toString()));
+        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estado().toString()));
+        colId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().id()));
 
     }
 
@@ -103,6 +161,7 @@ public class UsuarioViewController {
             mostrarInformacionusuario(usuarioSeleccionado);
         });
     }
+
     @FXML
     void agregarUsuarioAction(ActionEvent event) throws IOException {
         crearusuario();
@@ -110,15 +169,15 @@ public class UsuarioViewController {
 
     private void crearusuario() throws IOException {
         UsuarioDto usuarioDto = construirUsuarioDto();
-        if(datosValidos(usuarioDto)){
-            if(usuarioControllerService.agregarUsuario(usuarioDto)){
+        if (datosValidos(usuarioDto)) {
+            if (usuarioControllerService.agregarUsuario(usuarioDto)) {
                 listaUsuariosDto.add(usuarioDto);
                 mostrarMensaje("Notificación usuario", "Usuario creado", "El usuario se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposUsuario();
-            }else{
+            } else {
                 mostrarMensaje("Notificación usuario", "Usuario no creado", "El usuario no se ha creado con éxito", Alert.AlertType.ERROR);
             }
-        }else{
+        } else {
             mostrarMensaje("Notificación usuario", "Usuario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
         registrarAccionesSistema("Crear usuario", 1, "se creo en usuario con id: " + usuarioDto.id() + ", nombre: " + usuarioDto.nombre());
@@ -130,6 +189,7 @@ public class UsuarioViewController {
     void eliminarUsuarioAction(ActionEvent event) throws IOException {
         eliminarUsuario();
     }
+
     private void eliminarUsuario() throws IOException {
         boolean usuarioEliminado = false;
         if (usuarioSeleccionado != null) {
@@ -137,7 +197,6 @@ public class UsuarioViewController {
             Persistencia.eliminarUsuario(usuarioSeleccionado.id());
             Persistencia.eliminarUsuarioBinario(usuarioSeleccionado.id());
             Persistencia.eliminarUsuarioXML(usuarioSeleccionado.id());
-
 
 
             listaUsuariosDto.remove(usuarioSeleccionado);
@@ -153,9 +212,6 @@ public class UsuarioViewController {
 
     @FXML
     void actualizarUsuarioAction(ActionEvent event) throws IOException {
-        actualizarUsuario();
-    }
-    private void actualizarUsuario() throws IOException {
         boolean usuarioActualizado = false;
 
         Usuario usuarioActualizad = new Usuario(
@@ -165,35 +221,43 @@ public class UsuarioViewController {
                 txtContrasenia.getText()
         );
 
-        if (usuarioSeleccionado != null) {
+        Persistencia.actualizarUsuarioBinario(usuarioActualizad.getId(), usuarioActualizad);
+        Persistencia.actualizarUsuarioXML(usuarioActualizad.getId(), usuarioActualizad);
+        Persistencia.actualizarUsuarioTxt(usuarioActualizad.getId(), usuarioActualizad);
 
-                            Persistencia.actualizarUsuarioBinario(usuarioSeleccionado.id(), usuarioActualizad);
-                            Persistencia.actualizarUsuarioXML(usuarioSeleccionado.id(), usuarioActualizad);
-                            Persistencia.actualizarUsuarioTxt(usuarioSeleccionado.id(),usuarioActualizad);
+        listaUsuariosDto.removeIf(usuarioDto -> usuarioDto.id().equals(usuarioActualizad.getId()));
 
+        listaUsuariosDto.add(new UsuarioDto(
+                usuarioActualizad.getId(),
+                usuarioActualizad.getNombre(),
+                usuarioActualizad.getEmail(),
+                usuarioActualizad.getContrasenia()
+        ));
+        tableUsuarios.refresh();
 
+        mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito", Alert.AlertType.INFORMATION);
 
-            listaUsuariosDto.remove(usuarioSeleccionado);
-
-                listaUsuariosDto.add(new UsuarioDto(
-                        usuarioActualizad.getId(),
-                        usuarioActualizad.getNombre(),
-                        usuarioActualizad.getEmail(),
-                        usuarioActualizad.getContrasenia()
-                ));
-
-
-            tableUsuarios.refresh();
-
-            mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-
-            limpiarCamposUsuario();
-        } else {
-
-            mostrarMensaje("Notificación usuario", "Usuario no seleccionado", "Por favor, seleccione un usuario de la lista", Alert.AlertType.WARNING);
-        }
+        limpiarCamposUsuario();
+        txtNombre.setDisable(true);
+        txtCorreo.setDisable(true);
 
         registrarAccionesSistema("Actualizar usuario", 1, "Se actualizó el usuario " + usuarioActualizado);
+    }
+
+    @FXML
+    public void editarAction(ActionEvent actionEvent) {
+        btnGuardar.setVisible(true);
+        btnCancelar.setVisible(true);
+        txtNombre.setDisable(false);
+        txtCorreo.setDisable(false);
+    }
+
+    @FXML
+    public void cancelarAction(ActionEvent actionEvent) {
+        btnGuardar.setVisible(false);
+        btnCancelar.setVisible(false);
+        txtNombre.setDisable(true);
+        txtCorreo.setDisable(true);
     }
 
     @FXML
@@ -218,39 +282,30 @@ public class UsuarioViewController {
                 txtNombre.getText(),
                 txtCorreo.getText(),
                 txtContrasenia.getText()
-
         );
     }
+
     private void limpiarCamposUsuario() {
         txtNombre.setText("");
         txtCedula.setText("");
         txtCorreo.setText("");
-        txtUsuario.setText("");
         txtContrasenia.setText("");
     }
 
     private boolean datosValidos(UsuarioDto usuarioDto) {
         String mensaje = "";
-        if(usuarioDto.nombre() == null || usuarioDto.nombre().equals(""))
-            mensaje += "El nombre es obligatorio \n" ;
-        if(usuarioDto.id() == null || usuarioDto.id() .equals(""))
-            mensaje += "El id es obligatorio \n" ;
-        if(usuarioDto.email() == null || usuarioDto.email().equals(""))
-            mensaje += "El email es obligatorio \n" ;
-        if(mensaje.equals("")){
+        if (usuarioDto.nombre() == null || usuarioDto.nombre().equals(""))
+            mensaje += "El nombre es obligatorio \n";
+        if (usuarioDto.id() == null || usuarioDto.id().equals(""))
+            mensaje += "El id es obligatorio \n";
+        if (usuarioDto.email() == null || usuarioDto.email().equals(""))
+            mensaje += "El email es obligatorio \n";
+        if (mensaje.equals("")) {
             return true;
-        }else{
-            mostrarMensaje("Notificación cliente","Datos invalidos",mensaje, Alert.AlertType.WARNING);
+        } else {
+            mostrarMensaje("Notificación cliente", "Datos invalidos", mensaje, Alert.AlertType.WARNING);
             return false;
         }
-    }
-
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
     }
 
     private boolean mostrarMensajeConfirmacion(String mensaje) {
@@ -265,8 +320,9 @@ public class UsuarioViewController {
             return false;
         }
     }
+
     private void mostrarInformacionusuario(UsuarioDto usuarioSeleccionado) {
-        if(usuarioSeleccionado != null){
+        if (usuarioSeleccionado != null) {
             txtNombre.setText(usuarioSeleccionado.nombre());
             txtCedula.setText(usuarioSeleccionado.id());
             txtCorreo.setText(usuarioSeleccionado.email());
@@ -274,11 +330,22 @@ public class UsuarioViewController {
 
         }
     }
+
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
-    
-    
-    
 
+    @Override
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                Alert aler = new Alert(alertType);
+                aler.setTitle(titulo);
+                aler.setHeaderText(header);
+                aler.setContentText(contenido);
+                aler.showAndWait();
+            }
+        });
+    }
 }
